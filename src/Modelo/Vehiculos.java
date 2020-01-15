@@ -10,13 +10,16 @@ public class Vehiculos {
     private double PesoMaximo;
     private double VolumenMaximo;
     private Vehiculos siguienteVehiculo;
-
+    
+    public Vehiculos(){
+        
+    }
     
     //Constructor
     public Vehiculos(String placa, String marca, String modelo, double peso, double volumen){
         this.Placa=placa;
         this.Marca=marca;
-        this.Modelo=Modelo;
+        this.Modelo=modelo;
         this.PesoMaximo=peso;
         this.VolumenMaximo=volumen;
         this.siguienteVehiculo=null;

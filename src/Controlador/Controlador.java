@@ -70,6 +70,9 @@ public class Controlador implements ActionListener{
         viewCrud.btnBuscar.addActionListener(this);
         viewCrud.btnModificar.addActionListener(this);
         viewCrud.btnEliminar.addActionListener(this);
+        viewCrud.btnAtras.addActionListener(this);
+        viewCrud.btnConsultar.addActionListener(this);
+        
         //Fin de los botones de viewCRUD
         
         //ActionListener para la Ventana de ingreso de datos de la Ciudad
@@ -90,6 +93,10 @@ public class Controlador implements ActionListener{
         
         //ActionListener para la Ventana de ingreso de datos de los Productos
         miViewIngresoProd.btnIngresarProd.addActionListener(this);
+        miViewIngresoProd.btnOkProd.addActionListener(this);
+        miViewIngresoProd.btnOkProd.setVisible(false);
+        miViewIngresoProd.btnCancelarProd.addActionListener(this);
+        
         //Fin Productos
         
         //ActionListener para la Ventana de ingreso de datos de los Contratos
@@ -112,6 +119,17 @@ public class Controlador implements ActionListener{
     //Metodo para las acciones(Depende del boton Seleccionado)
             @Override
  public void actionPerformed(ActionEvent e) {
+        
+        //********************boton atras 
+            if(viewCrud.btnAtras==e.getSource()){
+                miViewPrincipal.setVisible(true);
+                viewCrud.setVisible(false);
+            }
+        
+        //****** fin btnAtras
+     
+     
+     
      
         //*********Solo para Empresa
         if(e.getSource()==miViewPrincipal.btnEmpresa){
@@ -147,6 +165,8 @@ public class Controlador implements ActionListener{
         //*********Solo Conductores
         if(e.getSource()==miViewPrincipal.btnConductores){
                viewCrud.setVisible(true);
+               ocultar();
+               mostrarConductores();
                miViewPrincipal.setVisible(false);
                casoB=4;
             }
@@ -165,7 +185,7 @@ public class Controlador implements ActionListener{
         //*********Solo caracteristicas especiales
         if(e.getSource()==miViewPrincipal.btnCaracteristicas){
                viewCrud.setVisible(true);
-              
+               
                miViewPrincipal.setVisible(false);
                casoB=5;
             
@@ -199,10 +219,11 @@ public class Controlador implements ActionListener{
         
         //*********Solo Productos
         if(e.getSource()==miViewPrincipal.btnProducto){
-                viewCrud.setVisible(true);
-              
-                miViewPrincipal.setVisible(false);
-               casoB=6;
+             viewCrud.setVisible(true);
+             hacerVisible();
+             mostrarProductos();
+             miViewPrincipal.setVisible(false);
+             casoB=6;
             
             }
             if(viewCrud.btnCrear==e.getSource()&&casoB==6){
@@ -213,8 +234,8 @@ public class Controlador implements ActionListener{
             if(miViewIngresoProd.btnIngresarProd==e.getSource() && casoB==6 && casoModificar!=6){
               miEmpresas.agregarProducto(miViewIngresoProd.txtNombProd.getText(), miViewIngresoProd.txtUnidad.getText(), Double.parseDouble(miViewIngresoProd.txtPeso.getText()),Double.parseDouble(miViewIngresoProd.txtVolum.getText()));
               mostrarProductos();
-              System.out.println("  si otra vez");
-              miVentanaIngreso.setVisible(false);
+              
+              miViewIngresoProd.setVisible(false);
               viewCrud.setVisible(true);
             }
 
@@ -232,15 +253,11 @@ public class Controlador implements ActionListener{
             }
  
             if(viewCrud.btnModificar==e.getSource()&& casoB==6){
-               String value =(String) viewCrud.listCrud.getSelectedValue();
-               System.out.println("---"+value);
+              
                miViewIngresoProd.setVisible(true);
-               Productos miProd=new Productos();
-               miProd=miEmpresas.consultarProducto(value);
-               miViewIngresoProd.txtNombProd.setText(miProd.getNombreProducto());
-               miViewIngresoProd.txtUnidad.setText(miProd.getUnidad());
-               miViewIngresoProd.txtVolum.setText(String.valueOf(miProd.getVolumen()));
-               miViewIngresoProd.txtPeso.setText(String.valueOf(miProd.getPeso()));
+               String value =(String) viewCrud.listCrud.getSelectedValue();
+               actualizarEnVentanaProductos(value);
+               
                miViewIngresoProd.setVisible(true);
                viewCrud.setVisible(false);
                casoModificar=6; 
@@ -252,7 +269,37 @@ public class Controlador implements ActionListener{
                 mostrarProductos();
                 casoModificar=0;
             }
-        //Fin Productos
+            if(viewCrud.btnEliminar==e.getSource() && casoB==6){
+                miEmpresas.eliminarProducto(viewCrud.listCrud.getSelectedValue().toString());
+                viewCrud.setVisible(true);
+                mostrarProductos();    
+            }
+            //consultar
+            if(viewCrud.btnConsultar==e.getSource()){
+                String value =(String) viewCrud.listCrud.getSelectedValue();
+                actualizarEnVentanaProductos(value);
+                miViewIngresoProd.btnOkProd.setVisible(true);
+                miViewIngresoProd.setVisible(true);
+                inahbiltarTextProductos();
+            
+            }
+            if(miViewIngresoProd.btnOkProd==e.getSource()){
+               viewCrud.setVisible(true);
+               miViewIngresoProd.setVisible(false);
+               miViewIngresoProd.btnOkProd.setVisible(false);
+               habilitarTextProducto();
+            }
+            
+            if(miViewIngresoProd.btnCancelarProd==e.getSource()){
+               viewCrud.setVisible(true);
+               miViewIngresoProd.setVisible(false);
+               habilitarTextProducto();
+               miViewIngresoProd.btnOkProd.setVisible(false);
+            }
+            
+
+
+    //Fin Productos
         
         //*********Solo Contratos
         if(e.getSource()==miViewPrincipal.btnContratos){
@@ -266,7 +313,8 @@ public class Controlador implements ActionListener{
         //*********Solo clientes
         if(e.getSource()==miViewPrincipal.btnClientes){
                 viewCrud.setVisible(true);
-                
+                hacerVisible();
+                mostrarClientes();
                 miViewPrincipal.setVisible(false);
                casoB=8;
                 
@@ -297,6 +345,7 @@ public class Controlador implements ActionListener{
                     JOptionPane.showMessageDialog(null,"Elemento no encontrado");
                }
             }
+            
         //Fin clientes
          
 }
@@ -316,6 +365,20 @@ public class Controlador implements ActionListener{
      }
      viewCrud.listCrud.setModel(modelo);
     }
+ private void ocultar(){
+    viewCrud.btnEliminar.setVisible(false);
+    viewCrud.btnModificar.setVisible(false);
+    viewCrud.btnBuscar.setVisible(false);
+    viewCrud.txtBuscar.setVisible(false);
+ 
+ }
+ private void hacerVisible(){
+    viewCrud.btnEliminar.setVisible(true);
+    viewCrud.btnModificar.setVisible(true);
+    viewCrud.btnBuscar.setVisible(true);
+    viewCrud.txtBuscar.setVisible(true);
+ 
+ }
  
  private void mostrarClientes(){
       
@@ -359,6 +422,46 @@ public class Controlador implements ActionListener{
         viewCrud.listCrud.setModel(modelo);
     }
  //Fin Funciones para mostrar
+    
+    //poner los datos recuperados en las ventanas
+    private void actualizarEnVentanaProductos(String value){
+        
+        Productos miProd=new Productos();
+        miProd=miEmpresas.consultarProducto(value);
+        miViewIngresoProd.txtNombProd.setText(miProd.getNombreProducto());
+        miViewIngresoProd.txtUnidad.setText(miProd.getUnidad());
+        miViewIngresoProd.txtVolum.setText(String.valueOf(miProd.getVolumen()));
+        miViewIngresoProd.txtPeso.setText(String.valueOf(miProd.getPeso()));
+        
+    }
+    
+    //hacer que las ventnas de ingreso no sean editables
+     private void inahbiltarTextProductos(){
+        miViewIngresoProd.txtNombProd.setEditable(false);
+        miViewIngresoProd.txtNombProd.setEnabled(false);
+        miViewIngresoProd.txtUnidad.setEditable(false);
+        miViewIngresoProd.txtUnidad.setEnabled(false);
+        miViewIngresoProd.txtVolum.setEditable(false);
+        miViewIngresoProd.txtVolum.setEnabled(false);
+        miViewIngresoProd.txtPeso.setEditable(false);
+        miViewIngresoProd.txtPeso.setEnabled(false);
+     
+     }
+     
+     private void habilitarTextProducto(){
+         miViewIngresoProd.txtNombProd.setEditable(true);
+        miViewIngresoProd.txtNombProd.setEnabled(true);
+        miViewIngresoProd.txtUnidad.setEditable(true);
+        miViewIngresoProd.txtUnidad.setEnabled(true);
+        miViewIngresoProd.txtVolum.setEditable(true);
+        miViewIngresoProd.txtVolum.setEnabled(true);
+        miViewIngresoProd.txtPeso.setEditable(true);
+        miViewIngresoProd.txtPeso.setEnabled(true);
+     
+     
+     }
+    
+    
  }
 
     

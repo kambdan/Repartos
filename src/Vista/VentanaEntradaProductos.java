@@ -39,6 +39,8 @@ public class VentanaEntradaProductos extends javax.swing.JFrame {
         jLabelVolumenUnidad = new javax.swing.JLabel();
         txtVolum = new javax.swing.JTextField();
         btnIngresarProd = new javax.swing.JButton();
+        btnCancelarProd = new javax.swing.JButton();
+        btnOkProd = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -68,6 +70,10 @@ public class VentanaEntradaProductos extends javax.swing.JFrame {
 
         btnIngresarProd.setText("Ingresar");
 
+        btnCancelarProd.setText("Cancelar");
+
+        btnOkProd.setText("ok");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -91,9 +97,13 @@ public class VentanaEntradaProductos extends javax.swing.JFrame {
                     .addComponent(jLabelDatosProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(181, 654, Short.MAX_VALUE)
+                .addGap(188, 188, 188)
                 .addComponent(btnIngresarProd)
-                .addGap(155, 155, 155))
+                .addGap(159, 159, 159)
+                .addComponent(btnOkProd)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 202, Short.MAX_VALUE)
+                .addComponent(btnCancelarProd)
+                .addGap(135, 135, 135))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,11 +130,12 @@ public class VentanaEntradaProductos extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabelVolumenUnidad)
                     .addComponent(txtVolum, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 142, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnIngresarProd)
-                .addGap(61, 61, 61))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnIngresarProd)
+                    .addComponent(btnCancelarProd)
+                    .addComponent(btnOkProd))
+                .addGap(53, 53, 53))
         );
 
         pack();
@@ -174,7 +185,9 @@ public class VentanaEntradaProductos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton btnCancelarProd;
     public javax.swing.JButton btnIngresarProd;
+    public javax.swing.JButton btnOkProd;
     private javax.swing.JLabel jLabelCaracteristicasEspecialesProductos;
     private javax.swing.JLabel jLabelDatosProductos;
     private javax.swing.JLabel jLabelNombreProducto;

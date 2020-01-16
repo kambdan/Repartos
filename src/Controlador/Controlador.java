@@ -364,14 +364,17 @@ public class Controlador implements ActionListener{
          
      }
      viewCrud.listCrud.setModel(modelo);
-    }
- private void ocultar(){
+}
+  
+  
+private void ocultar(){
     viewCrud.btnEliminar.setVisible(false);
     viewCrud.btnModificar.setVisible(false);
     viewCrud.btnBuscar.setVisible(false);
     viewCrud.txtBuscar.setVisible(false);
  
- }
+}
+
  private void hacerVisible(){
     viewCrud.btnEliminar.setVisible(true);
     viewCrud.btnModificar.setVisible(true);

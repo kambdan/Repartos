@@ -731,8 +731,7 @@ public class Controlador implements ActionListener{
         miViewVehiculos.txtVolumneMaximoVehiculo.setEditable(true); 
         miViewVehiculos.txtVolumneMaximoVehiculo.setEnabled(true); 
      }
-     //Fin de las funciones para Habilitar
-    
+     //Fin de las funciones para Habilitar    
  }
 
     

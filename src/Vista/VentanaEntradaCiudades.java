@@ -34,14 +34,17 @@ public class VentanaEntradaCiudades extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         txtNombreCiudad = new javax.swing.JTextField();
         txtCordenadaX = new javax.swing.JTextField();
-        txtCiudadEnlaza = new javax.swing.JTextField();
         txtTiempo = new javax.swing.JTextField();
+        txtCiudadAEnlazar = new javax.swing.JTextField();
         btnAceptarCiudad = new javax.swing.JButton();
         btnOkCiudad = new javax.swing.JButton();
         btnCancelarCiudad = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         txtCordenadaY = new javax.swing.JTextField();
+        ButtonSICiudad = new javax.swing.JRadioButton();
+        ButtonNoCiudad = new javax.swing.JRadioButton();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -51,13 +54,13 @@ public class VentanaEntradaCiudades extends javax.swing.JFrame {
 
         jLabel3.setText("NOMBRE");
 
-        jLabel4.setText("CIUDAD A LA QUE SE ENLAZA");
+        jLabel4.setText("CIUDADES A ENLAZAR");
 
         jLabel5.setText("TIEMPO");
 
-        txtCiudadEnlaza.addActionListener(new java.awt.event.ActionListener() {
+        txtTiempo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCiudadEnlazaActionPerformed(evt);
+                txtTiempoActionPerformed(evt);
             }
         });
 
@@ -70,6 +73,12 @@ public class VentanaEntradaCiudades extends javax.swing.JFrame {
         jLabel6.setText("CORDENADA X: ");
 
         jLabel7.setText("CORDENADA Y:");
+
+        ButtonSICiudad.setText("Si");
+
+        ButtonNoCiudad.setText("No");
+
+        jLabel8.setText("CIUDAD: ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -85,29 +94,37 @@ public class VentanaEntradaCiudades extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 272, Short.MAX_VALUE)
                         .addComponent(btnCancelarCiudad))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(33, 33, 33)
-                        .addComponent(txtTiempo))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel6)
                             .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtCordenadaX, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtCordenadaY, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtCiudadEnlaza)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(35, 35, 35)
+                                .addComponent(ButtonSICiudad)
+                                .addGap(18, 18, 18)
+                                .addComponent(ButtonNoCiudad)
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
-                        .addComponent(txtNombreCiudad)))
+                        .addComponent(txtNombreCiudad))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel5))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtTiempo)
+                            .addComponent(txtCiudadAEnlazar))
+                        .addGap(314, 314, 314)))
                 .addGap(32, 32, 32))
             .addGroup(layout.createSequentialGroup()
                 .addGap(336, 336, 336)
@@ -131,15 +148,20 @@ public class VentanaEntradaCiudades extends javax.swing.JFrame {
                     .addComponent(txtCordenadaX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
                     .addComponent(txtCordenadaY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(txtCiudadEnlaza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(67, 67, 67)
+                    .addComponent(ButtonSICiudad)
+                    .addComponent(ButtonNoCiudad))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCiudadAEnlazar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(83, 83, 83)
+                .addGap(104, 104, 104)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAceptarCiudad)
                     .addComponent(btnOkCiudad)
@@ -150,9 +172,9 @@ public class VentanaEntradaCiudades extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtCiudadEnlazaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCiudadEnlazaActionPerformed
+    private void txtTiempoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTiempoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtCiudadEnlazaActionPerformed
+    }//GEN-LAST:event_txtTiempoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -190,9 +212,11 @@ public class VentanaEntradaCiudades extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAceptarCiudad;
-    private javax.swing.JButton btnCancelarCiudad;
-    private javax.swing.JButton btnOkCiudad;
+    public javax.swing.JRadioButton ButtonNoCiudad;
+    public javax.swing.JRadioButton ButtonSICiudad;
+    public javax.swing.JButton btnAceptarCiudad;
+    public javax.swing.JButton btnCancelarCiudad;
+    public javax.swing.JButton btnOkCiudad;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -200,7 +224,8 @@ public class VentanaEntradaCiudades extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    public javax.swing.JTextField txtCiudadEnlaza;
+    private javax.swing.JLabel jLabel8;
+    public javax.swing.JTextField txtCiudadAEnlazar;
     public javax.swing.JTextField txtCordenadaX;
     public javax.swing.JTextField txtCordenadaY;
     public javax.swing.JTextField txtNombreCiudad;

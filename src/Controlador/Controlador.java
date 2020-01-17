@@ -10,6 +10,7 @@ import Modelo.ListaProductos;
 import Modelo.Productos;
 import Modelo.Vehiculos;
 import Vista.VentanaEntradaCaracteristicas;
+import Vista.VentanaEntradaCiudades;
 import Vista.VentanaEntradaConductores;
 import Vista.VentanaEntradaProductos;
 import Vista.VentanaEntradaVehiculos;
@@ -37,6 +38,7 @@ public class Controlador implements ActionListener, KeyListener{
     private VentanaEntradaCaracteristicas miViewCaracteristicas;
     private VentanaEntradaConductores miViewIngresoConductores;
     private VentanaEntradaVehiculos miViewVehiculos;
+    private VentanaEntradaCiudades miViewCiudades;
     //Fin de las variables para las ventanas
     
     private Empresas miEmpresas;//Variable para acceder a los metodos y listas que se encuentran en la clase Empresas
@@ -52,6 +54,7 @@ public class Controlador implements ActionListener, KeyListener{
         miViewCaracteristicas=new VentanaEntradaCaracteristicas();
         miViewIngresoConductores=new VentanaEntradaConductores();
         miViewVehiculos=new VentanaEntradaVehiculos();
+        miViewCiudades=new VentanaEntradaCiudades();
         this.miEmpresas=miEmpresas;
         init();
        
@@ -90,8 +93,16 @@ public class Controlador implements ActionListener, KeyListener{
         viewCrud.btnConsultar.addActionListener(this);
         //Fin de los botones de viewCRUD
         
-        //ActionListener para la Ventana de ingreso de datos de la Ciudad
+        //ActionListener  y KeyListener para la Ventana de ingreso de datos de la Ciudad
         
+        miViewCiudades.btnAceptarCiudad.addActionListener(this);
+        miViewCiudades.btnCancelarCiudad.addActionListener(this);
+        miViewCiudades.ButtonSICiudad.addActionListener(this);
+        miViewCiudades.ButtonNoCiudad.addActionListener(this);
+        miViewCiudades.btnOkCiudad.addActionListener(this);
+        miViewCiudades.txtCordenadaX.addKeyListener(this);
+        miViewCiudades.txtCordenadaY.addKeyListener(this );
+        miViewCiudades.txtTiempo.addKeyListener(this);
         //Fin Ciudad
         
         //ActionListener y KeyListener para la Ventana de ingreso de datos de los Vehiculos
@@ -839,16 +850,40 @@ public class Controlador implements ActionListener, KeyListener{
             mostrarCaracteristicas();
         }
     }
+    
+    //Anadir el evento para las ciudades y los pedidos
+    
+    public void validarVacioCiudades(){
+        
+        
+        if(miViewCiudades.txtNombreCiudad.getText().length()==0 || miViewCiudades.txtCordenadaX.getText().length()==0 || miViewCiudades.txtCordenadaY.getText().length()==0){
+        
+        }else{
+            //AQUI VA AGREGAR CIUDAD
+            miViewIngresoProd.setVisible(false);
+            viewCrud.setVisible(true);
+            //AQUI VA MOSTRAR CIUDADES
+        }
+    
+        
+        
+    }
+    
+    public void validarVacioViajes(){
+    
+    }
+    
+    
     @Override
     public void keyTyped(KeyEvent e) {   
         char tecla;
         if(miViewVehiculos.txtPesoMaximoVehiculo==e.getSource()|| miViewVehiculos.txtVolumneMaximoVehiculo==e.getSource() || miViewIngresoConductores.txtCedulaConductor==e.getSource() || miViewIngresoProd.txtPeso==e.getSource() || 
-                miViewIngresoProd.txtVolum==e.getSource() || miVentanaIngresoClientes.txtTelefonoCliente==e.getSource()){
+            miViewIngresoProd.txtVolum==e.getSource() || miVentanaIngresoClientes.txtTelefonoCliente==e.getSource() || miViewCiudades.txtCordenadaX==e.getSource() || miViewCiudades.txtCordenadaY==e.getSource() || miViewCiudades.txtTiempo==e.getSource()){
             tecla=e.getKeyChar();
             if(!Character.isDigit(tecla) && tecla!=KeyEvent.VK_BACK_SPACE){     
             e.consume();
             JOptionPane.showMessageDialog(null,"Caracter no permitido");
-           }
+            }
         }    
     }    
 

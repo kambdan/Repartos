@@ -30,7 +30,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelBase1 = new Vista.panelBase();
         btnVehiculos = new javax.swing.JButton();
         btnCiudad = new javax.swing.JButton();
         btnEmpresa = new javax.swing.JButton();
@@ -42,17 +41,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         btnCaracteristicas = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         label1 = new java.awt.Label();
-
-        javax.swing.GroupLayout panelBase1Layout = new javax.swing.GroupLayout(panelBase1);
-        panelBase1.setLayout(panelBase1Layout);
-        panelBase1Layout.setHorizontalGroup(
-            panelBase1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        panelBase1Layout.setVerticalGroup(
-            panelBase1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -250,6 +238,5 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     public javax.swing.JButton btnViajar;
     private javax.swing.JButton jButton1;
     private java.awt.Label label1;
-    private Vista.panelBase panelBase1;
     // End of variables declaration//GEN-END:variables
 }

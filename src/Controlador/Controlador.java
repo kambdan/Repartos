@@ -21,6 +21,7 @@ import Vista.VentanaEntradaViajes;
 import Vista.ventanaCRUD;
 import Vista.VentanaPrincipal;
 import Vista.ventanaEntradaClientes;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -943,12 +944,20 @@ public class Controlador implements ActionListener, KeyListener{
     }
   
     public void dibujar(){
+        
         Dibujos elemento = new Dibujos();
         elemento.setMiLista(miEmpresas.getMiListaCiudades());
         elemento.setPreferredSize(miViewDibujo.getSize());
-        JPanel panel = new JPanel();   
-        panel.add(elemento);
-        miViewDibujo.setContentPane(panel);
+        JPanel panel = new JPanel();  
+        
+        miViewDibujo.getContentPane().setLayout(new FlowLayout());
+
+       // panel.add(elemento);
+       // panel.add(miViewDibujo.btnAtrasDib);
+       // miViewDibujo.setContentPane(panel);
+        miViewDibujo.getContentPane().add(miViewDibujo.btnAtrasDib);
+        miViewDibujo.getContentPane().add(elemento);
+        
         miViewDibujo.setVisible(true);
     
     

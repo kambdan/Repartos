@@ -28,13 +28,13 @@ public class VentanaDibujo extends javax.swing.JFrame {
     private void initComponents() {
 
         label1 = new java.awt.Label();
-        jButton1 = new javax.swing.JButton();
+        btnAtrasDib = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         label1.setText("label1");
 
-        jButton1.setText("jButton1");
+        btnAtrasDib.setText("Atras");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -47,15 +47,15 @@ public class VentanaDibujo extends javax.swing.JFrame {
                         .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(149, 149, 149)
-                        .addComponent(jButton1)))
-                .addContainerGap(174, Short.MAX_VALUE))
+                        .addComponent(btnAtrasDib)))
+                .addContainerGap(190, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 242, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(btnAtrasDib)
                 .addContainerGap())
         );
 
@@ -99,7 +99,7 @@ public class VentanaDibujo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    public javax.swing.JButton btnAtrasDib;
     private java.awt.Label label1;
     // End of variables declaration//GEN-END:variables
 }

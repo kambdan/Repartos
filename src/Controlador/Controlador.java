@@ -218,7 +218,17 @@ public class Controlador implements ActionListener, KeyListener{
             }
 
         }
-        
+       if(miViewCiudades.ButtonNoCiudad.isSelected()){
+            miViewCiudades.txtCiudadAEnlazar.setEnabled(false);
+            miViewCiudades.txtTiempo.setEnabled(false);
+            miViewCiudades.txtTiempo.setText(String.valueOf(0));
+        }else{
+              if(miViewCiudades.ButtonSICiudad==e.getSource()){
+              miViewCiudades.txtCiudadAEnlazar.setEnabled(true);
+              miViewCiudades.txtTiempo.setEnabled(true);
+              
+         }
+       }
         
         //Fin Ciudad
         
@@ -593,7 +603,7 @@ public class Controlador implements ActionListener, KeyListener{
  
  
  //Funciones para Mostrar
-  private void mostrarProductos(){
+ private void mostrarProductos(){
       DefaultListModel modelo = new DefaultListModel();
       Productos miProducto=new Productos();
       miProducto=miEmpresas.getMiListaProduc().getHeadProducto();
@@ -934,7 +944,7 @@ public class Controlador implements ActionListener, KeyListener{
 //            }   
         }else{
             //AQUI VA AGREGAR CIUDAD
-            miEmpresas.agregarCiudad(miViewCiudades.txtNombreCiudad.getText(),Integer.parseInt(miViewCiudades.txtCordenadaX.getText()),Integer.parseInt(miViewCiudades.txtCordenadaY.getText()),miViewCiudades.txtCiudadAEnlazar.getText(), casoB);
+            miEmpresas.agregarCiudad(miViewCiudades.txtNombreCiudad.getText(),Integer.parseInt(miViewCiudades.txtCordenadaX.getText()),Integer.parseInt(miViewCiudades.txtCordenadaY.getText()),miViewCiudades.txtCiudadAEnlazar.getText(), Double.parseDouble(miViewCiudades.txtTiempo.getText()));
            
         
             miViewCiudades.setVisible(false);

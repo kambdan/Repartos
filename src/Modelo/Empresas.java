@@ -3,6 +3,7 @@
 package Modelo;
 
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 public class Empresas {
     
@@ -16,7 +17,15 @@ public class Empresas {
     private ListaVehiculos miListaVehic;
     private ListaCaracteristicasEspeciales miListaCarac;
     private ListaConductores miListaconductores;
+    private ListaCiudades miListaCiudades;
 
+    public ListaCiudades getMiListaCiudades() {
+        return miListaCiudades;
+    }
+
+    public void setMiListaCiudades(ListaCiudades miListaCiudades) {
+        this.miListaCiudades = miListaCiudades;
+    }
     
    
     public Empresas() {
@@ -26,6 +35,7 @@ public class Empresas {
         this.miListaProduc = new ListaProductos();
         this.miListaVehic = new ListaVehiculos();
         this.miListaCarac = new ListaCaracteristicasEspeciales();
+        this.miListaCiudades=new ListaCiudades();
         miListaconductores=new ListaConductores();
     }
     public ListaConductores getMiListaconductores() {
@@ -382,4 +392,90 @@ public class Empresas {
     }
     //Fin Clientes
 
+    
+    
+    
+    // ********FUNCIONES CIUDADES
+     public void agregarCiudad(String nombre,int x,int y,String otraCiudad,double tiempo){
+        NodoCiudad miNodo=new NodoCiudad(nombre, x, y, otraCiudad);
+        if(miListaCiudades.getHeadNodo()==null){
+            miListaCiudades.setHeadNodo(miNodo);
+            miListaCiudades.setTailNodo(miNodo);
+            
+        }else{
+            miListaCiudades.getTailNodo().setSigNodo(miNodo);
+            
+            
+            //si es diferente de null  quiere decir que se trata de un grafo
+            miListaCiudades.setTailNodo(miNodo);
+            if(miListaCiudades.getTailNodo()!=null){
+                ConectarCiudades(miNodo, tiempo);
+            }
+        
+        }
+    }
+    
+     public NodoCiudad consultarCiudad(String nombreCiudad){
+        
+       
+        NodoCiudad miNodo;
+        miNodo=miListaCiudades.getHeadNodo();
+        while(miNodo!=null && !miNodo.getNombre().equals(nombreCiudad)){
+          miNodo=miNodo.getSigNodo();
+        }
+        if(miNodo==null){
+            return miNodo;
+        }else{
+            System.out.println("producto: "+miNodo.getNombre());
+            return miNodo;
+        }
+    }
+     
+     
+     //aqui me recibe el nodo de la ciudad con la que se conecta
+     public void ConectarCiudades(NodoCiudad miNodo,double tiempo){
+         String ciudadEnlace=miNodo.getCiudadEnlace();
+         if(ciudadEnlace!=null){
+                //llamar a una funcion que me consulte el nodo , y en ese momento me conecte
+                NodoCiudad nodAux;
+                //este me va a devolver el nodo consultado
+                nodAux=consultarCiudad(ciudadEnlace);
+                //esta añade las listas horizontales
+                //ListaCiudadConectadas miLista=new ListaCiudadConectadas();
+                //miLista=miNodo.getMiListaConectada();
+                
+               nodAux.getMiListaConectada().agregarCiudadesConectadas(miNodo,tiempo);
+               ///miNodo.getMiListaConectada().agregarCiudadesConectadas(nodAux, tiempo);
+               // nodAux.getMiListaConectada().agregarCiudadesConectadas(miNodo, tiempo);
+                //agregarCiudadesConectadas(nodAux, tiempo);
+            }
+     
+     
+     }
+     
+     
+     public void mostrarCiudadesConectadas(ListaCiudades miLista){
+         NodoCiudad nodAux=new NodoCiudad();
+         nodAux=miLista.getHeadNodo();
+         while(nodAux!=null){
+             //System.out.println("Punto: "+nodAux.getNombre());
+             NodoCiudad aux=nodAux.getMiListaConectada().getHeadVetice();
+             System.out.print(" "+nodAux.getNombre());
+             while(aux!=null){
+                 System.out.print("-->"+aux.getNombre()+"("+aux.getDistancia().getTiempo()+")");
+                 //System.out.println("tiempo: "+aux.getDistancia().getTiempo());
+                 aux=aux.getSigVertice();
+             }
+             System.out.println(" ");
+             nodAux=nodAux.getSigNodo();
+         
+         }
+     
+     }
+     
+     
+     
+
+    
+    
 }

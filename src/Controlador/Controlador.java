@@ -4,25 +4,31 @@ package CONTROLADOR;
 import Modelo.CaracteristicasEspeciales;
 import Modelo.Clientes;
 import Modelo.Conductores;
+import Modelo.Dibujos;
 import Modelo.Empresas;
 import Modelo.ListaClientes;
 import Modelo.ListaProductos;
+import Modelo.NodoCiudad;
 import Modelo.Productos;
 import Modelo.Vehiculos;
+import Vista.VentanaDibujo;
 import Vista.VentanaEntradaCaracteristicas;
 import Vista.VentanaEntradaCiudades;
 import Vista.VentanaEntradaConductores;
 import Vista.VentanaEntradaProductos;
 import Vista.VentanaEntradaVehiculos;
+import Vista.VentanaEntradaViajes;
 import Vista.ventanaCRUD;
 import Vista.VentanaPrincipal;
 import Vista.ventanaEntradaClientes;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import sun.tools.jar.resources.jar;
 
 public class Controlador implements ActionListener, KeyListener{
@@ -39,6 +45,12 @@ public class Controlador implements ActionListener, KeyListener{
     private VentanaEntradaConductores miViewIngresoConductores;
     private VentanaEntradaVehiculos miViewVehiculos;
     private VentanaEntradaCiudades miViewCiudades;
+
+    private VentanaDibujo miViewDibujo;
+    
+
+    private VentanaEntradaViajes miViewViajes;
+
     //Fin de las variables para las ventanas
     
     private Empresas miEmpresas;//Variable para acceder a los metodos y listas que se encuentran en la clase Empresas
@@ -55,19 +67,15 @@ public class Controlador implements ActionListener, KeyListener{
         miViewIngresoConductores=new VentanaEntradaConductores();
         miViewVehiculos=new VentanaEntradaVehiculos();
         miViewCiudades=new VentanaEntradaCiudades();
+        miViewDibujo=new VentanaDibujo();
+        miViewViajes=new VentanaEntradaViajes();
+
         this.miEmpresas=miEmpresas;
         init();
-       
-             
     }
     
-    
-    
     private void init(){
-        
-        
-        
-        
+            
         //Aqui son los action listener de todos los botones de la Ventana Principal
         miViewPrincipal.btnClientes.addActionListener(this);
         miViewPrincipal.btnCaracteristicas.addActionListener(this);
@@ -78,6 +86,7 @@ public class Controlador implements ActionListener, KeyListener{
         miViewPrincipal.btnProducto.addActionListener(this);
         miViewPrincipal.btnVehiculos.addActionListener(this);
         miViewPrincipal.btnViajar.addActionListener(this);
+        miViewPrincipal.btnMapa.addActionListener(this);
         //Fin de los botones de la VENTANA principal
           
         
@@ -136,8 +145,11 @@ public class Controlador implements ActionListener, KeyListener{
         miViewIngresoProd.txtVolum.addKeyListener(this);
         //Fin Productos
         
-        //ActionListener para la Ventana de ingreso de datos de los Contratos
-        
+        //ActionListener y KeyListener para la Ventana de ingreso de datos de los Contratos
+        miViewViajes.btnAceptarViaje.addActionListener(this);
+        miViewViajes.btnCancelarViaje.addActionListener(this);
+        miViewViajes.rbtnNoProducto.addKeyListener(this);
+        miViewViajes.rbtnSIProducto.addKeyListener(this);
         //Fin contratos
         
         //ActionListener y KeyListener para la Ventana de ingreso de datos de los clientes
@@ -191,6 +203,23 @@ public class Controlador implements ActionListener, KeyListener{
                casoB=2;
             
             }
+
+        if(e.getSource()==viewCrud.btnCrear && casoB==2){
+            viewCrud.setVisible(false);
+            miViewCiudades.setVisible(true);
+        }
+        
+       if(miViewCiudades.btnAceptarCiudad==e.getSource()){
+            validarVacioCiudades(miViewCiudades.txtNombreCiudad.getText(),miViewCiudades.txtCordenadaX.getText(),miViewCiudades.txtCordenadaY.getText());
+        }else{
+            if(miViewCiudades.btnCancelarCiudad==e.getSource()){
+                miViewCiudades.setVisible(false);
+                viewCrud.setVisible(true);
+            }
+
+        }
+        
+        
         //Fin Ciudad
         
         //*********Solo para Vehiculos(Segun el Texto solo tiene crear y consultar)
@@ -455,11 +484,24 @@ public class Controlador implements ActionListener, KeyListener{
         
         //*********Solo Contratos
         if(e.getSource()==miViewPrincipal.btnContratos){
-               viewCrud.setVisible(true);
-              
-               miViewPrincipal.setVisible(false);
-               casoB=7;
+            viewCrud.setVisible(true);  
+            miViewPrincipal.setVisible(false);
+            casoB=7;
         }
+        if(viewCrud.btnCrear==e.getSource() && casoB==7){
+            viewCrud.setVisible(false);
+            miViewViajes.setVisible(true);
+        }
+        if(miViewViajes.btnAceptarViaje==e.getSource()){
+            validarVacioViajes(miViewViajes.txtClienteConViaje.getText(),miViewViajes.txtCiudadOrigen.getText(),miViewViajes.txtCiudadDestino.getText());
+        }else{
+            if(miViewViajes.btnCancelarViaje==e.getSource()){
+                miViewViajes.setVisible(false);
+                viewCrud.setVisible(true);
+            }
+        }
+        
+        
         //Fin contratos
         
         //*********Solo clientes
@@ -537,6 +579,15 @@ public class Controlador implements ActionListener, KeyListener{
                miVentanaIngresoClientes.btnOkCliente.setVisible(false);
             }
         //Fin clientes
+        
+        // *************************solo mapas
+        if(miViewPrincipal.btnMapa==e.getSource()){
+            dibujar();
+        
+        }
+        
+        
+        
          
 }
  
@@ -554,9 +605,14 @@ public class Controlador implements ActionListener, KeyListener{
          
      }
      viewCrud.listCrud.setModel(modelo);
-    }
+
+}
+  
+  
+
   
   private void mostrarClientes(){
+
       
      Clientes miCliente=new Clientes();
      miCliente=miEmpresas.getMiListaClientes().getHeadCliente();
@@ -853,24 +909,77 @@ public class Controlador implements ActionListener, KeyListener{
     
     //Anadir el evento para las ciudades y los pedidos
     
-    public void validarVacioCiudades(){
+    public void validarVacioCiudades(String ciudad,String coorX, String coorY){
+        ciudad=miViewCiudades.txtNombreCiudad.getText();
+        coorX=miViewCiudades.txtCordenadaX.getText();
+        coorY=miViewCiudades.txtCordenadaY.getText();
         
-        
-        if(miViewCiudades.txtNombreCiudad.getText().length()==0 || miViewCiudades.txtCordenadaX.getText().length()==0 || miViewCiudades.txtCordenadaY.getText().length()==0){
-        
+        if(ciudad.length()==0 || coorX.length()==0 || coorY.length()==0){   
+            JOptionPane.showMessageDialog(null, "Campos incompletos");
+            miViewCiudades.setVisible(true);
+            viewCrud.setVisible(false);
+//            //if(miViewCiudades.ButtonNoCiudad==e.getSource()){
+//                miViewCiudades.txtNombreCiudad.setEnabled(false);
+//                miViewCiudades.txtNombreCiudad.setEnabled(false);
+//            }else{
+//                //if(miViewCiudades.ButtonSICiudad==e.getSource()){
+//                    miViewCiudades.txtNombreCiudad.setEnabled(true);
+//                    miViewCiudades.txtNombreCiudad.setEnabled(true);
+//                }
+//                if(miViewCiudades.txtNombreCiudad.getText().length()==0 || miViewCiudades.txtTiempo.getText().length()==0){
+//                    JOptionPane.showMessageDialog(null, "Campos incompletos");
+//                    miViewCiudades.setVisible(true);
+//                    viewCrud.setVisible(false);
+//                }
+//            }   
         }else{
             //AQUI VA AGREGAR CIUDAD
-            miViewIngresoProd.setVisible(false);
+            miEmpresas.agregarCiudad(miViewCiudades.txtNombreCiudad.getText(),Integer.parseInt(miViewCiudades.txtCordenadaX.getText()),Integer.parseInt(miViewCiudades.txtCordenadaY.getText()),miViewCiudades.txtCiudadAEnlazar.getText(), casoB);
+           
+        
+            miViewCiudades.setVisible(false);
             viewCrud.setVisible(true);
             //AQUI VA MOSTRAR CIUDADES
         }
+    }
+  
+    public void dibujar(){
+        
+        Dibujos elemento = new Dibujos();
+        elemento.setMiLista(miEmpresas.getMiListaCiudades());
+        elemento.setPreferredSize(miViewDibujo.getSize());
+        JPanel panel = new JPanel();  
+        
+        miViewDibujo.getContentPane().setLayout(new FlowLayout());
+
+       // panel.add(elemento);
+       // panel.add(miViewDibujo.btnAtrasDib);
+       // miViewDibujo.setContentPane(panel);
+        miViewDibujo.getContentPane().add(miViewDibujo.btnAtrasDib);
+        miViewDibujo.getContentPane().add(elemento);
+        
+        miViewDibujo.setVisible(true);
     
-        
-        
+    
     }
     
-    public void validarVacioViajes(){
     
+    public void validarVacioViajes(String cliente, String ciudadO, String ciudadD){
+        
+        cliente=miViewViajes.txtClienteConViaje.getText();
+        ciudadO=miViewViajes.txtClienteConViaje.getText();
+        ciudadD=miViewViajes.txtCiudadDestino.getText();
+        
+        if(cliente.length()==0 || ciudadO.length()==0 || ciudadD.length()==0){
+            JOptionPane.showMessageDialog(null, "Campos incompletos");
+            miViewViajes.setVisible(true);
+            viewCrud.setVisible(false);
+        }else{
+            //AQUI VA AGREGAR VIAJE
+            miViewViajes.setVisible(false);
+            viewCrud.setVisible(true);
+            //AQUI VA MOSTRAR VIAJE
+        }
     }
     
     

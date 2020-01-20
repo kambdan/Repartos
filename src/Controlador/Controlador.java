@@ -161,18 +161,10 @@ public class Controlador implements ActionListener, KeyListener{
         miVentanaIngresoClientes.txtTelefonoCliente.addKeyListener(this);
         //Fin clientes
 
-    }
-    
-   
-        
+    }       
     public void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        System.out.println("Holala");
-    
     }                                           
-    
-    
-    
-    
+   
     //Metodo para las acciones(Depende del boton Seleccionado)
             @Override
  public void actionPerformed(ActionEvent e) {
@@ -212,6 +204,7 @@ public class Controlador implements ActionListener, KeyListener{
             miViewCiudades.txtCiudadAEnlazar.setEnabled(false);
             miViewCiudades.txtTiempo.setEnabled(false); 
             miViewCiudades.txtNombreCiudad.setEnabled(true);
+            limpiarTextoCiudades();
         }
         
         ButtonGroup grupo=new ButtonGroup();
@@ -225,7 +218,6 @@ public class Controlador implements ActionListener, KeyListener{
                 miViewCiudades.txtCiudadAEnlazar.setEnabled(true);
                 miViewCiudades.txtTiempo.setEnabled(true);
             }
-
         }
         
        if(miViewCiudades.btnAceptarCiudad==e.getSource()){
@@ -241,19 +233,18 @@ public class Controlador implements ActionListener, KeyListener{
                 miViewCiudades.setVisible(false);
                 viewCrud.setVisible(true);
             }
-
         }
+        
        if(miViewCiudades.ButtonNoCiudad.isSelected()){
             miViewCiudades.txtCiudadAEnlazar.setEnabled(false);
             miViewCiudades.txtTiempo.setEnabled(false);
             miViewCiudades.txtTiempo.setText(String.valueOf(0));
         }else{
-              if(miViewCiudades.ButtonSICiudad==e.getSource()){
-              miViewCiudades.txtCiudadAEnlazar.setEnabled(true);
-              miViewCiudades.txtTiempo.setEnabled(true);
-              
-         }
-       }
+            if(miViewCiudades.ButtonSICiudad==e.getSource()){
+            miViewCiudades.txtCiudadAEnlazar.setEnabled(true);
+            miViewCiudades.txtTiempo.setEnabled(true);       
+            }
+        }
         
         //Fin Ciudad
         
@@ -274,9 +265,7 @@ public class Controlador implements ActionListener, KeyListener{
             if(viewCrud.btnCrear==e.getSource() && casoB==3){
                 miViewVehiculos.setVisible(true);
                 viewCrud.setVisible(false);
-                
-                //keyTyped((miViewVehiculos.txtPesoMaximoVehiculo)e.getSource());
-                
+                limpiarTextoVehiculos();               
             }
             
             if(miViewVehiculos.btnAceptarVehiculo==e.getSource()){
@@ -288,8 +277,6 @@ public class Controlador implements ActionListener, KeyListener{
                 } 
             }   
            
-             
-            
             if(viewCrud.btnBuscar==e.getSource() && casoB==3){
                 Vehiculos miVehiculo=new Vehiculos();
                 miVehiculo=miEmpresas.consultarVehiculos(viewCrud.txtBuscar.getText());
@@ -349,50 +336,52 @@ public class Controlador implements ActionListener, KeyListener{
         if(viewCrud.btnCrear==e.getSource() && casoB==4){
             miViewIngresoConductores.setVisible(true);
             viewCrud.setVisible(false);
+            limpiarTextoConductores();
         }
         if(miViewIngresoConductores.btnAceptarConductor==e.getSource() && casoB==4){
             validarVacioConductores(miViewIngresoConductores.TxtNombreConductor.getText(), miViewIngresoConductores.txtCedulaConductor.getText(), miViewIngresoConductores.txtCiudadReside.getText());
         }
         else{
-        if(miViewIngresoConductores.btnCancelarConductor==e.getSource() && casoB==4){
-            viewCrud.setVisible(true);
-            miViewIngresoConductores.setVisible(false);          
-        }
+            if(miViewIngresoConductores.btnCancelarConductor==e.getSource() && casoB==4){
+                viewCrud.setVisible(true);
+                miViewIngresoConductores.setVisible(false);          
+            }
         }
             
         //Fin Conductores
         
         //*********Solo caracteristicas especiales
         if(e.getSource()==miViewPrincipal.btnCaracteristicas){
-               viewCrud.setVisible(true);
-               hacerVisible();
-               mostrarCaracteristicas();
-               miViewPrincipal.setVisible(false);
-               casoB=5;
+            viewCrud.setVisible(true);
+            hacerVisible();
+            mostrarCaracteristicas();
+            miViewPrincipal.setVisible(false);
+            casoB=5;
             
-            }
+        }
         if(viewCrud.btnCrear==e.getSource()&& casoB==5){
-                miViewCaracteristicas.setVisible(true);
-                viewCrud.setVisible(false);
-            
-            }
-           if(miViewCaracteristicas.btnAceptarCaract==e.getSource() &&casoB==5 &&casoModificar!=5){
-               validarVacioCaracteristicas(miViewCaracteristicas.txtNombreCaracterisitca.getText(), miViewCaracteristicas.txtDescripcionCaract.getText());
-           }
-           if(viewCrud.btnBuscar==e.getSource() && casoB==5){
+            miViewCaracteristicas.setVisible(true);
+            viewCrud.setVisible(false);
+            limpiarTextoCaracteristicas();
+        }
+        
+        if(miViewCaracteristicas.btnAceptarCaract==e.getSource() &&casoB==5 &&casoModificar!=5){
+            validarVacioCaracteristicas(miViewCaracteristicas.txtNombreCaracterisitca.getText(), miViewCaracteristicas.txtDescripcionCaract.getText());
+        }
+        
+        if(viewCrud.btnBuscar==e.getSource() && casoB==5){
                
-              CaracteristicasEspeciales miCaract=new CaracteristicasEspeciales();
-              miCaract=miEmpresas.consultarCaracteristica(viewCrud.txtBuscar.getText());
-              DefaultListModel modelo = new DefaultListModel();
-              if(miCaract!=null){
-                   modelo.addElement(miCaract.getCaracteristicas());
-                   viewCrud.listCrud.setModel(modelo);
-               }else{
-                   //vemtana mergente no esta el producto
-                   JOptionPane.showMessageDialog(null,"Elemento no encontrado");
-               }
-           
-           }
+            CaracteristicasEspeciales miCaract=new CaracteristicasEspeciales();
+            miCaract=miEmpresas.consultarCaracteristica(viewCrud.txtBuscar.getText());
+            DefaultListModel modelo = new DefaultListModel();
+            if(miCaract!=null){
+                modelo.addElement(miCaract.getCaracteristicas());
+                viewCrud.listCrud.setModel(modelo);
+            }else{
+                //vemtana mergente no esta el producto
+                JOptionPane.showMessageDialog(null,"Elemento no encontrado");
+            }  
+        }
            
            //Modificar
            if(viewCrud.btnModificar==e.getSource()&& casoB==5){
@@ -442,17 +431,17 @@ public class Controlador implements ActionListener, KeyListener{
         
         //*********Solo Productos
         if(e.getSource()==miViewPrincipal.btnProducto){
-             viewCrud.setVisible(true);
-             hacerVisible();
-             mostrarProductos();
-             miViewPrincipal.setVisible(false);
-             casoB=6;
+            viewCrud.setVisible(true);
+            hacerVisible();
+            mostrarProductos();
+            miViewPrincipal.setVisible(false);
+            casoB=6;
             
-            }
+        }
             if(viewCrud.btnCrear==e.getSource()&&casoB==6){
                 miViewIngresoProd.setVisible(true);
                 viewCrud.setVisible(false);
-                     
+                limpiarTextoProductos();
             }
             if(miViewIngresoProd.btnIngresarProd==e.getSource() && casoB==6 && casoModificar!=6){
                 validarVacioProductos(miViewIngresoProd.txtNombProd.getText(), miViewIngresoProd.txtUnidad.getText(), miViewIngresoProd.txtPeso.getText(), miViewIngresoProd.txtVolum.getText());
@@ -526,7 +515,14 @@ public class Controlador implements ActionListener, KeyListener{
         if(viewCrud.btnCrear==e.getSource() && casoB==7){
             viewCrud.setVisible(false);
             miViewViajes.setVisible(true);
+            limpiarTextoContratos();
         }
+        
+        
+        
+        
+        
+        
         if(miViewViajes.btnAceptarViaje==e.getSource()){
             validarVacioViajes(miViewViajes.txtClienteConViaje.getText(),miViewViajes.txtCiudadOrigen.getText(),miViewViajes.txtCiudadDestino.getText());
         }else{
@@ -552,6 +548,7 @@ public class Controlador implements ActionListener, KeyListener{
             if(viewCrud.btnCrear==e.getSource()&&casoB==8){
                 miVentanaIngresoClientes.setVisible(true);
                 viewCrud.setVisible(false);
+                limpiarTextoClientes();
             }
             
             if(miVentanaIngresoClientes.btnIngresarCliente==e.getSource() && casoB==8 && casoModificar!=8){
@@ -956,10 +953,6 @@ public class Controlador implements ActionListener, KeyListener{
     //Anadir el evento para las ciudades y los pedidos
     
     public void validarVacioCiudades(String ciudad,String coorX, String coorY,String nombreCiudad,String Tiempo){
-        
-
-
-        
         ciudad=miViewCiudades.txtNombreCiudad.getText();
         coorX=miViewCiudades.txtCordenadaX.getText();
         coorY=miViewCiudades.txtCordenadaY.getText();
@@ -979,7 +972,6 @@ public class Controlador implements ActionListener, KeyListener{
         }else{
             //AQUI VA AGREGAR CIUDAD
             miEmpresas.agregarCiudad(miViewCiudades.txtNombreCiudad.getText(),Integer.parseInt(miViewCiudades.txtCordenadaX.getText()),Integer.parseInt(miViewCiudades.txtCordenadaY.getText()),miViewCiudades.txtCiudadAEnlazar.getText(), Double.parseDouble(miViewCiudades.txtTiempo.getText()));
-
             miViewCiudades.setVisible(false);
             viewCrud.setVisible(true);
             //AQUI VA MOSTRAR CIUDADES
@@ -1007,10 +999,7 @@ public class Controlador implements ActionListener, KeyListener{
     
     
     }
-    
-    
     public void validarVacioViajes(String cliente, String ciudadO, String ciudadD){
-        
         cliente=miViewViajes.txtClienteConViaje.getText();
         ciudadO=miViewViajes.txtClienteConViaje.getText();
         ciudadD=miViewViajes.txtCiudadDestino.getText();
@@ -1027,12 +1016,76 @@ public class Controlador implements ActionListener, KeyListener{
         }
     }
     
+    //Funciones para limpiar texto en cada ventana
+    
+    //******CIUDADES
+    public void limpiarTextoCiudades(){
+        miViewCiudades.txtNombreCiudad.setText("");
+        miViewCiudades.txtCordenadaX.setText("");
+        miViewCiudades.txtCordenadaY.setText("");
+        miViewCiudades.txtCiudadAEnlazar.setText("");
+        miViewCiudades.txtTiempo.setText("");
+    }
+    
+    //******VEHICULOS
+    public void limpiarTextoVehiculos(){
+        miViewVehiculos.txtPlacaVehiculo.setText("");
+        miViewVehiculos.txtMarcaVehiculo.setText("");
+        miViewVehiculos.txtModeloVehiculo.setText("");
+        miViewVehiculos.txtPesoMaximoVehiculo.setText("");
+        miViewVehiculos.txtVolumneMaximoVehiculo.setText("");
+    }
+    
+    //******CONDUCTORES
+    public void limpiarTextoConductores(){
+        miViewIngresoConductores.TxtNombreConductor.setText("");
+        miViewIngresoConductores.txtCedulaConductor.setText("");
+        miViewIngresoConductores.txtCiudadReside.setText("");
+    }
+    
+    //******CARACTERISTICAS
+    public void limpiarTextoCaracteristicas(){
+        miViewCaracteristicas.txtNombreCaracterisitca.setText("");
+        miViewCaracteristicas.txtDescripcionCaract.setText("");
+    }
+    
+    //******PRODUCTOS
+    public void limpiarTextoProductos(){
+        miViewIngresoProd.txtNombProd.setText("");
+        miViewIngresoProd.txtCaract.setText("");
+        miViewIngresoProd.txtPeso.setText("");
+        miViewIngresoProd.txtUnidad.setText("");
+        miViewIngresoProd.txtVolum.setText("");
+    }
+    
+    //******CONTRATOS
+    public void limpiarTextoContratos(){
+        miViewViajes.txtCantidadProductosViajes.setText("");
+        miViewViajes.txtCiudadDestino.setText("");
+        miViewViajes.txtCiudadOrigen.setText("");
+        miViewViajes.txtClienteConViaje.setText("");
+        miViewViajes.txtDiaViaje.setText("");
+        miViewViajes.txtMesViaje.setText("");
+        miViewViajes.txtAnioViaje.setText("");
+    }
+
+    //******CLIENTES
+    public void limpiarTextoClientes(){
+        miVentanaIngresoClientes.txtCorreoCliente.setText("");
+        miVentanaIngresoClientes.txtDireccionCliente.setText("");
+        miVentanaIngresoClientes.txtNombreCliente.setText("");
+        miVentanaIngresoClientes.txtTelefonoCliente.setText("");
+    }
+    
+    //Fin de funciones de limpiar texto
+    
     
     @Override
     public void keyTyped(KeyEvent e) {   
         char tecla;
         if(miViewVehiculos.txtPesoMaximoVehiculo==e.getSource()|| miViewVehiculos.txtVolumneMaximoVehiculo==e.getSource() || miViewIngresoConductores.txtCedulaConductor==e.getSource() || miViewIngresoProd.txtPeso==e.getSource() || 
-            miViewIngresoProd.txtVolum==e.getSource() || miVentanaIngresoClientes.txtTelefonoCliente==e.getSource() || miViewCiudades.txtCordenadaX==e.getSource() || miViewCiudades.txtCordenadaY==e.getSource() || miViewCiudades.txtTiempo==e.getSource()){
+            miViewIngresoProd.txtVolum==e.getSource() || miVentanaIngresoClientes.txtTelefonoCliente==e.getSource() || miViewCiudades.txtCordenadaX==e.getSource() || miViewCiudades.txtCordenadaY==e.getSource() || miViewCiudades.txtTiempo==e.getSource() || 
+                miViewViajes.txtDiaViaje==e.getSource() || miViewViajes.txtMesViaje==e.getSource() || miViewViajes.txtAnioViaje==e.getSource()){
             tecla=e.getKeyChar();
             if(!Character.isDigit(tecla) && tecla!=KeyEvent.VK_BACK_SPACE){     
             e.consume();

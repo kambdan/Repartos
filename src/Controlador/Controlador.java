@@ -454,8 +454,9 @@ public class Controlador implements ActionListener, KeyListener{
                 viewCrud.setVisible(false);
                      
             }
-            if(miViewIngresoProd.btnIngresarProd==e.getSource() && casoB==6 && casoModificar!=6){
+            if(miViewIngresoProd.btnIngresarProd==e.getSource()  && casoModificar!=6){
                 validarVacioProductos(miViewIngresoProd.txtNombProd.getText(), miViewIngresoProd.txtUnidad.getText(), miViewIngresoProd.txtPeso.getText(), miViewIngresoProd.txtVolum.getText());
+                mostrarProductos();
             }
 
             if(viewCrud.btnBuscar==e.getSource()&&casoB==6){

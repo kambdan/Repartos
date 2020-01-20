@@ -9,6 +9,7 @@ public class Vehiculos {
     private String Modelo;
     private double PesoMaximo;
     private double VolumenMaximo;
+    private ListaCaracteristicasEspeciales CaracteristicasVehiculo;
     private Vehiculos siguienteVehiculo;
     
     public Vehiculos(){
@@ -23,6 +24,7 @@ public class Vehiculos {
         this.PesoMaximo=peso;
         this.VolumenMaximo=volumen;
         this.siguienteVehiculo=null;
+        this.CaracteristicasVehiculo=new ListaCaracteristicasEspeciales();
     }
     
     public String getPlaca() {
@@ -73,5 +75,11 @@ public class Vehiculos {
         this.siguienteVehiculo = siguienteVehiculo;
     }
     
-    
+    public ListaCaracteristicasEspeciales getCaracteristicasVehiculo() {
+        return CaracteristicasVehiculo;
+    }
+
+    public void setCaracteristicasVehiculo(ListaCaracteristicasEspeciales CaracteristicasVehiculo) {
+        this.CaracteristicasVehiculo = CaracteristicasVehiculo;
+    }
 }

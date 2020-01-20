@@ -31,7 +31,19 @@ public class ListaCaracteristicasEspeciales {
         this.tailCaracteristica = tailCaracterisitca;
     }
     
-    
+    public ListaCaracteristicasEspeciales agregarCaracteristica(ListaCaracteristicasEspeciales miListaCarac,String caracteristica,String descripcion){
+        
+        CaracteristicasEspeciales nuevaCaracteristica=new CaracteristicasEspeciales(caracteristica,descripcion);
+        if(miListaCarac.getHeadCaracteristica()==null){
+            miListaCarac.setHeadCaracteristica(nuevaCaracteristica);
+            miListaCarac.setTailCaracterisitca(nuevaCaracteristica);
+        }else{
+            miListaCarac.getTailCaracterisitca().setSiguienteCaracteristica(nuevaCaracteristica);
+            
+            miListaCarac.setTailCaracterisitca(nuevaCaracteristica);
+        } 
+        return miListaCarac;
+    }
     
       
 }

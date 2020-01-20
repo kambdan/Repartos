@@ -75,6 +75,11 @@ public class VentanaEntradaCiudades extends javax.swing.JFrame {
         jLabel7.setText("CORDENADA Y:");
 
         ButtonSICiudad.setText("Si");
+        ButtonSICiudad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonSICiudadActionPerformed(evt);
+            }
+        });
 
         ButtonNoCiudad.setText("No");
 
@@ -175,6 +180,10 @@ public class VentanaEntradaCiudades extends javax.swing.JFrame {
     private void txtTiempoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTiempoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTiempoActionPerformed
+
+    private void ButtonSICiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonSICiudadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ButtonSICiudadActionPerformed
 
     /**
      * @param args the command line arguments

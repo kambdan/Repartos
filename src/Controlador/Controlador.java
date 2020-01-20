@@ -26,6 +26,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -168,7 +169,10 @@ public class Controlador implements ActionListener, KeyListener{
         System.out.println("Holala");
     
     }                                           
-
+    
+    
+    
+    
     //Metodo para las acciones(Depende del boton Seleccionado)
             @Override
  public void actionPerformed(ActionEvent e) {
@@ -180,10 +184,8 @@ public class Controlador implements ActionListener, KeyListener{
             }
         
         //****** fin btnAtras
-     
-     
-     
-     
+
+        
         //*********Solo para Empresa
         if(e.getSource()==miViewPrincipal.btnEmpresa){
                 viewCrud.setVisible(true);
@@ -207,10 +209,33 @@ public class Controlador implements ActionListener, KeyListener{
         if(e.getSource()==viewCrud.btnCrear && casoB==2){
             viewCrud.setVisible(false);
             miViewCiudades.setVisible(true);
+            miViewCiudades.txtCiudadAEnlazar.setEnabled(false);
+            miViewCiudades.txtTiempo.setEnabled(false); 
+            miViewCiudades.txtNombreCiudad.setEnabled(true);
+        }
+        
+        ButtonGroup grupo=new ButtonGroup();
+        grupo.add(miViewCiudades.ButtonSICiudad);
+        grupo.add(miViewCiudades.ButtonNoCiudad);
+        if(miViewCiudades.ButtonNoCiudad.isSelected()){
+            miViewCiudades.txtCiudadAEnlazar.setEnabled(false);
+            miViewCiudades.txtTiempo.setEnabled(false); 
+        }else{
+            if(miViewCiudades.ButtonSICiudad.isSelected()){
+                miViewCiudades.txtCiudadAEnlazar.setEnabled(true);
+                miViewCiudades.txtTiempo.setEnabled(true);
+            }
+
         }
         
        if(miViewCiudades.btnAceptarCiudad==e.getSource()){
-            validarVacioCiudades(miViewCiudades.txtNombreCiudad.getText(),miViewCiudades.txtCordenadaX.getText(),miViewCiudades.txtCordenadaY.getText());
+            if(miViewCiudades.txtNombreCiudad.getText().length()==0 || miViewCiudades.txtTiempo.getText().length()==0){
+                JOptionPane.showMessageDialog(null, "Campos incompletos");
+                miViewCiudades.setVisible(true);
+                viewCrud.setVisible(false);
+            } 
+            validarVacioCiudades(miViewCiudades.txtNombreCiudad.getText(),miViewCiudades.txtCordenadaX.getText(),miViewCiudades.txtCordenadaY.getText(),
+                    miViewCiudades.txtCiudadAEnlazar.getText(),miViewCiudades.txtTiempo.getText());
         }else{
             if(miViewCiudades.btnCancelarCiudad==e.getSource()){
                 miViewCiudades.setVisible(false);
@@ -676,6 +701,17 @@ public class Controlador implements ActionListener, KeyListener{
         viewCrud.listCrud.setModel(modelo);
     }
  
+    private void mostrarCiudades() {
+        
+        NodoCiudad miCiudad=new NodoCiudad();
+        miCiudad=miEmpresas.getMiListaCiudades().getHeadNodo();
+        DefaultListModel modelo = new DefaultListModel();
+        while(miCiudad!=null){
+            modelo.addElement(miCiudad.getNombre());
+            miCiudad=miCiudad.getSigNodo(); 
+        }
+        viewCrud.listCrud.setModel(modelo);
+    }
  //Fin Funciones para mostrar
     
     
@@ -919,37 +955,36 @@ public class Controlador implements ActionListener, KeyListener{
     
     //Anadir el evento para las ciudades y los pedidos
     
-    public void validarVacioCiudades(String ciudad,String coorX, String coorY){
+    public void validarVacioCiudades(String ciudad,String coorX, String coorY,String nombreCiudad,String Tiempo){
+        
+
+
+        
         ciudad=miViewCiudades.txtNombreCiudad.getText();
         coorX=miViewCiudades.txtCordenadaX.getText();
         coorY=miViewCiudades.txtCordenadaY.getText();
+        nombreCiudad=miViewCiudades.txtCiudadAEnlazar.getText();
+        Tiempo=miViewCiudades.txtTiempo.getText();
+        
+            if(miViewCiudades.ButtonNoCiudad.isSelected()){
+                miViewCiudades.txtNombreCiudad.setEnabled(false);
+                miViewCiudades.txtTiempo.setEnabled(false); 
+            }
+        
         
         if(ciudad.length()==0 || coorX.length()==0 || coorY.length()==0){   
             JOptionPane.showMessageDialog(null, "Campos incompletos");
             miViewCiudades.setVisible(true);
-            viewCrud.setVisible(false);
-//            //if(miViewCiudades.ButtonNoCiudad==e.getSource()){
-//                miViewCiudades.txtNombreCiudad.setEnabled(false);
-//                miViewCiudades.txtNombreCiudad.setEnabled(false);
-//            }else{
-//                //if(miViewCiudades.ButtonSICiudad==e.getSource()){
-//                    miViewCiudades.txtNombreCiudad.setEnabled(true);
-//                    miViewCiudades.txtNombreCiudad.setEnabled(true);
-//                }
-//                if(miViewCiudades.txtNombreCiudad.getText().length()==0 || miViewCiudades.txtTiempo.getText().length()==0){
-//                    JOptionPane.showMessageDialog(null, "Campos incompletos");
-//                    miViewCiudades.setVisible(true);
-//                    viewCrud.setVisible(false);
-//                }
-//            }   
+            viewCrud.setVisible(false);   
         }else{
             //AQUI VA AGREGAR CIUDAD
             miEmpresas.agregarCiudad(miViewCiudades.txtNombreCiudad.getText(),Integer.parseInt(miViewCiudades.txtCordenadaX.getText()),Integer.parseInt(miViewCiudades.txtCordenadaY.getText()),miViewCiudades.txtCiudadAEnlazar.getText(), Double.parseDouble(miViewCiudades.txtTiempo.getText()));
-           
-        
+
             miViewCiudades.setVisible(false);
             viewCrud.setVisible(true);
             //AQUI VA MOSTRAR CIUDADES
+            mostrarCiudades();
+            
         }
     }
   

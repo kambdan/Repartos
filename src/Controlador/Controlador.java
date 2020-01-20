@@ -4,11 +4,14 @@ package CONTROLADOR;
 import Modelo.CaracteristicasEspeciales;
 import Modelo.Clientes;
 import Modelo.Conductores;
+import Modelo.Dibujos;
 import Modelo.Empresas;
 import Modelo.ListaClientes;
 import Modelo.ListaProductos;
+import Modelo.NodoCiudad;
 import Modelo.Productos;
 import Modelo.Vehiculos;
+import Vista.VentanaDibujo;
 import Vista.VentanaEntradaCaracteristicas;
 import Vista.VentanaEntradaCiudades;
 import Vista.VentanaEntradaConductores;
@@ -23,6 +26,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import sun.tools.jar.resources.jar;
 
 public class Controlador implements ActionListener, KeyListener{
@@ -39,6 +43,8 @@ public class Controlador implements ActionListener, KeyListener{
     private VentanaEntradaConductores miViewIngresoConductores;
     private VentanaEntradaVehiculos miViewVehiculos;
     private VentanaEntradaCiudades miViewCiudades;
+    private VentanaDibujo miViewDibujo;
+    
     //Fin de las variables para las ventanas
     
     private Empresas miEmpresas;//Variable para acceder a los metodos y listas que se encuentran en la clase Empresas
@@ -55,6 +61,7 @@ public class Controlador implements ActionListener, KeyListener{
         miViewIngresoConductores=new VentanaEntradaConductores();
         miViewVehiculos=new VentanaEntradaVehiculos();
         miViewCiudades=new VentanaEntradaCiudades();
+        miViewDibujo=new VentanaDibujo();
         this.miEmpresas=miEmpresas;
         init();
        
@@ -191,6 +198,24 @@ public class Controlador implements ActionListener, KeyListener{
                casoB=2;
             
             }
+        if(e.getSource()==viewCrud.btnCrear && casoB==2){
+            viewCrud.setVisible(false);
+            miViewCiudades.setVisible(true);
+        }
+        if(e.getSource()==miViewCiudades.btnAceptarCiudad){
+            
+            miEmpresas.agregarCiudad(miViewCiudades.txtNombreCiudad.getText(),Integer.parseInt(miViewCiudades.txtCordenadaX.getText()),Integer.parseInt(miViewCiudades.txtCordenadaY.getText()),miViewCiudades.txtCiudadAEnlazar.getText(), casoB);
+            Dibujos elemento = new Dibujos();
+            elemento.setMiLista(miEmpresas.getMiListaCiudades());
+            elemento.setPreferredSize(miViewDibujo.getSize());
+            JPanel panel = new JPanel();   
+            panel.add(elemento);
+            miViewDibujo.setContentPane(panel);
+            miViewDibujo.setVisible(true);
+            
+        }
+        
+        
         //Fin Ciudad
         
         //*********Solo para Vehiculos(Segun el Texto solo tiene crear y consultar)

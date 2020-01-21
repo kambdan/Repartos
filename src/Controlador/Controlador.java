@@ -819,7 +819,17 @@ private void mostrarCiudades(){
 
 
  //Fin Funciones para mostrar
+// Funciones para añadir items al JCombo
+    private void addCOmbo(){
+        
     
+    
+    }
+
+
+
+
+
     
 //Funciones para Ocultar o hacer visibles uns Botones
      private void ocultar(){

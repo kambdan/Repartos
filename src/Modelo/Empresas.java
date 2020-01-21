@@ -18,6 +18,7 @@ public class Empresas {
     private ListaCaracteristicasEspeciales miListaCarac;
     private ListaConductores miListaconductores;
     private ListaCiudades miListaCiudades;
+    
 
     public ListaCiudades getMiListaCiudades() {
         return miListaCiudades;
@@ -313,6 +314,31 @@ public class Empresas {
     //Fin Productos
     
     //*********Funciones Contratos
+    
+    
+    
+    
+    
+    
+    
+    
+    public void agregarContrato(String ciudad, int dia, int mes, int ano,ListaProductos miLista){
+    
+        Contratos nuevoContrato=new Contratos(ciudad,dia,mes,ano,miLista);
+        
+        if(miListaContratos.getHeadContratos()==null){
+            
+            miListaContratos.setHeadContratos(nuevoContrato);
+            miListaContratos.setTailContratos(nuevoContrato);
+            
+        }else{
+            
+           miListaContratos.getTailContratos().setSiguienteContrato(nuevoContrato);
+           miListaContratos.setTailContratos(nuevoContrato);
+        }
+
+    }
+    
     
     //Fin Contratos
     

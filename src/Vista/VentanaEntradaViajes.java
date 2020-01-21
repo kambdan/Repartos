@@ -34,12 +34,10 @@ public class VentanaEntradaViajes extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         txtClienteConViaje = new javax.swing.JTextField();
-        txtCiudadOrigen = new javax.swing.JTextField();
-        txtCiudadDestino = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         txtCantidadProductosViajes = new javax.swing.JTextField();
         comboProductos = new javax.swing.JComboBox();
-        jLabel8 = new javax.swing.JLabel();
+        jSeleccionar = new javax.swing.JLabel();
         rbtnSIProducto = new javax.swing.JRadioButton();
         rbtnNoProducto = new javax.swing.JRadioButton();
         btnAceptarViaje = new javax.swing.JButton();
@@ -51,6 +49,9 @@ public class VentanaEntradaViajes extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         txtAnioViaje = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
+        btnAgregarProducto = new javax.swing.JButton();
+        comboCiudadOrigen = new javax.swing.JComboBox<>();
+        comboCiudadDestino = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -81,7 +82,7 @@ public class VentanaEntradaViajes extends javax.swing.JFrame {
             }
         });
 
-        jLabel8.setText("Desea Seleccionar Otro producto");
+        jSeleccionar.setText("Desea Seleccionar Otro producto");
 
         rbtnSIProducto.setText("SI");
 
@@ -111,6 +112,12 @@ public class VentanaEntradaViajes extends javax.swing.JFrame {
 
         jLabel12.setText("Elejir producto:");
 
+        btnAgregarProducto.setText("AgregarProd");
+
+        comboCiudadOrigen.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        comboCiudadDestino.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -127,26 +134,31 @@ public class VentanaEntradaViajes extends javax.swing.JFrame {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(47, 47, 47)
-                        .addComponent(jLabel8)
+                        .addComponent(jSeleccionar)
                         .addGap(18, 18, 18)
                         .addComponent(rbtnSIProducto)
                         .addGap(18, 18, 18)
-                        .addComponent(rbtnNoProducto))
+                        .addComponent(rbtnNoProducto)
+                        .addGap(44, 44, 44)
+                        .addComponent(btnAgregarProducto))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel4)
                             .addComponent(jLabel5)
                             .addComponent(jLabel2))
-                        .addGap(40, 40, 40)
+                        .addGap(43, 43, 43)
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtDiaViaje, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCiudadDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCiudadOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtClienteConViaje, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtClienteConViaje, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(comboCiudadOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(41, 41, 41)
+                                .addComponent(jLabel4)
+                                .addGap(42, 42, 42)
+                                .addComponent(comboCiudadDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(119, 119, 119)
                         .addComponent(btnAceptarViaje)
@@ -166,8 +178,9 @@ public class VentanaEntradaViajes extends javax.swing.JFrame {
                                         .addComponent(jLabel11)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtCantidadProductosViajes, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtAnioViaje, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(txtAnioViaje, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtCantidadProductosViajes, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(10, 10, 10))
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,12 +202,10 @@ public class VentanaEntradaViajes extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(txtCiudadOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(comboCiudadOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
-                    .addComponent(txtCiudadDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(comboCiudadDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(60, 60, 60)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -216,10 +227,11 @@ public class VentanaEntradaViajes extends javax.swing.JFrame {
                             .addComponent(jLabel12))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
+                            .addComponent(jSeleccionar)
                             .addComponent(rbtnSIProducto)
-                            .addComponent(rbtnNoProducto))
-                        .addGap(46, 194, Short.MAX_VALUE))
+                            .addComponent(rbtnNoProducto)
+                            .addComponent(btnAgregarProducto))
+                        .addGap(46, 188, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -284,7 +296,10 @@ public class VentanaEntradaViajes extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnAceptarViaje;
+    public javax.swing.JButton btnAgregarProducto;
     public javax.swing.JButton btnCancelarViaje;
+    public javax.swing.JComboBox<String> comboCiudadDestino;
+    public javax.swing.JComboBox<String> comboCiudadOrigen;
     public javax.swing.JComboBox comboProductos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -296,14 +311,12 @@ public class VentanaEntradaViajes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    public javax.swing.JLabel jSeleccionar;
     public javax.swing.JRadioButton rbtnNoProducto;
     public javax.swing.JRadioButton rbtnSIProducto;
     public javax.swing.JTextField txtAnioViaje;
     public javax.swing.JTextField txtCantidadProductosViajes;
-    public javax.swing.JTextField txtCiudadDestino;
-    public javax.swing.JTextField txtCiudadOrigen;
     public javax.swing.JTextField txtClienteConViaje;
     public javax.swing.JTextField txtDiaViaje;
     public javax.swing.JTextField txtMesViaje;

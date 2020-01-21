@@ -14,13 +14,22 @@ public class Contratos {
     private String ciudadDestino;
     private int dia,mes,ano;
     private Contratos siguienteContrato;
+    private ListaProductos miLista;
+
+    public ListaProductos getMiLista() {
+        return miLista;
+    }
+
+    public void setMiLista(ListaProductos miLista) {
+        this.miLista = miLista;
+    }
     
-    
-    public Contratos(String ciudadDestino, int dia, int mes, int ano) {
+    public Contratos(String ciudadDestino, int dia, int mes, int ano,ListaProductos miLista) {
         this.ciudadDestino = ciudadDestino;
         this.dia = dia;
         this.mes = mes;
         this.ano = ano;
+        this.miLista=miLista;
         this.siguienteContrato=null;
     }
     

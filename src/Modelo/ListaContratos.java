@@ -30,19 +30,7 @@ public class ListaContratos {
         this.tailContratos = tailContratos;
     }
     
-    public void agregarContrato(String ciudad, int dia, int mes, int ano){
     
-        Contratos nuevoContrato=new Contratos(ciudad,dia,mes,ano);
-        
-        if(headContratos==null){
-            headContratos=nuevoContrato;
-            tailContratos=nuevoContrato;
-        }else{
-            tailContratos.setSiguienteContrato(nuevoContrato);
-            tailContratos=nuevoContrato;
-        }
-
-    }
     
     
     

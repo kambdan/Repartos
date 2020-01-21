@@ -49,10 +49,11 @@ public class Controlador implements ActionListener, KeyListener{
     private VentanaEntradaCiudades miViewCiudades;
 
     private VentanaDibujo miViewDibujo;
+    private ListaProductos miLista;
     
 
     private VentanaEntradaViajes miViewViajes;
-
+    
     //Fin de las variables para las ventanas
     
     private Empresas miEmpresas;//Variable para acceder a los metodos y listas que se encuentran en la clase Empresas
@@ -71,7 +72,6 @@ public class Controlador implements ActionListener, KeyListener{
         miViewCiudades=new VentanaEntradaCiudades();
         miViewDibujo=new VentanaDibujo();
         miViewViajes=new VentanaEntradaViajes();
-
         this.miEmpresas=miEmpresas;
         init();
     }
@@ -90,10 +90,7 @@ public class Controlador implements ActionListener, KeyListener{
         miViewPrincipal.btnViajar.addActionListener(this);
         miViewPrincipal.btnMapa.addActionListener(this);
         //Fin de los botones de la VENTANA principal
-          
-        
-        
-        
+
         //****Action listener para los botones de la ventana viewCRUD
         viewCrud.btnCrear.addActionListener(this);
         viewCrud.btnCrear.setActionCommand("Crear");
@@ -105,7 +102,6 @@ public class Controlador implements ActionListener, KeyListener{
         //Fin de los botones de viewCRUD
         
         //ActionListener  y KeyListener para la Ventana de ingreso de datos de la Ciudad
-        
         miViewCiudades.btnAceptarCiudad.addActionListener(this);
         miViewCiudades.btnCancelarCiudad.addActionListener(this);
         miViewCiudades.ButtonSICiudad.addActionListener(this);
@@ -114,6 +110,8 @@ public class Controlador implements ActionListener, KeyListener{
         miViewCiudades.txtCordenadaX.addKeyListener(this);
         miViewCiudades.txtCordenadaY.addKeyListener(this );
         miViewCiudades.txtTiempo.addKeyListener(this);
+        miViewCiudades.txtCoordX.addKeyListener(this);
+        miViewCiudades.txtCoordY.addKeyListener(this);
         //Fin Ciudad
         
         //ActionListener y KeyListener para la Ventana de ingreso de datos de los Vehiculos
@@ -150,8 +148,13 @@ public class Controlador implements ActionListener, KeyListener{
         //ActionListener y KeyListener para la Ventana de ingreso de datos de los Contratos
         miViewViajes.btnAceptarViaje.addActionListener(this);
         miViewViajes.btnCancelarViaje.addActionListener(this);
-        miViewViajes.rbtnNoProducto.addKeyListener(this);
-        miViewViajes.rbtnSIProducto.addKeyListener(this);
+        miViewViajes.rbtnNoProducto.addActionListener(this);
+        miViewViajes.rbtnSIProducto.addActionListener(this);
+        miViewViajes.btnAgregarProducto.addActionListener(this);
+        miViewViajes.txtCantidadProductosViajes.addKeyListener(this);
+        miViewViajes.txtDiaViaje.addKeyListener(this);
+        miViewViajes.txtMesViaje.addKeyListener(this);
+        miViewViajes.txtAnioViaje.addKeyListener(this);
         //Fin contratos
         
         //ActionListener y KeyListener para la Ventana de ingreso de datos de los clientes
@@ -205,28 +208,38 @@ public class Controlador implements ActionListener, KeyListener{
             miViewCiudades.txtCiudadAEnlazar.setEnabled(false);
             miViewCiudades.txtTiempo.setEnabled(false); 
             miViewCiudades.txtNombreCiudad.setEnabled(true);
+            miViewCiudades.txtCoordX.setEnabled(false);
+            miViewCiudades.txtCoordY.setEnabled(false);
             limpiarTextoCiudades();
         }
         
         ButtonGroup grupo=new ButtonGroup();
         grupo.add(miViewCiudades.ButtonSICiudad);
         grupo.add(miViewCiudades.ButtonNoCiudad);
+        
         if(miViewCiudades.ButtonNoCiudad.isSelected()){
             miViewCiudades.txtCiudadAEnlazar.setEnabled(false);
-            miViewCiudades.txtTiempo.setEnabled(false); 
+            miViewCiudades.txtTiempo.setEnabled(false);
+            miViewCiudades.txtTiempo.setText(String.valueOf(0));
+            miViewCiudades.txtCoordX.setEnabled(false);
+            miViewCiudades.txtCoordY.setEnabled(false);
         }else{
             if(miViewCiudades.ButtonSICiudad.isSelected()){
                 miViewCiudades.txtCiudadAEnlazar.setEnabled(true);
                 miViewCiudades.txtTiempo.setEnabled(true);
+                miViewCiudades.txtCoordX.setEnabled(true);
+                miViewCiudades.txtCoordY.setEnabled(true);
             }
         }
         
        if(miViewCiudades.btnAceptarCiudad==e.getSource()){
-            if(miViewCiudades.txtNombreCiudad.getText().length()==0 || miViewCiudades.txtTiempo.getText().length()==0){
-                JOptionPane.showMessageDialog(null, "Campos incompletos");
-                miViewCiudades.setVisible(true);
-                viewCrud.setVisible(false);
-            } 
+            if(miViewCiudades.ButtonSICiudad.isSelected()){
+                if(miViewCiudades.txtCoordX.getText().length()==0 || miViewCiudades.txtCoordY.getText().length()==0){
+                    JOptionPane.showMessageDialog(null, "Campos incompletos");
+                    miViewCiudades.setVisible(true);
+                    viewCrud.setVisible(false);
+                }
+            }
             validarVacioCiudades(miViewCiudades.txtNombreCiudad.getText(),miViewCiudades.txtCordenadaX.getText(),miViewCiudades.txtCordenadaY.getText(),
                     miViewCiudades.txtCiudadAEnlazar.getText(),miViewCiudades.txtTiempo.getText());
         }else{
@@ -236,16 +249,6 @@ public class Controlador implements ActionListener, KeyListener{
             }
         }
         
-       if(miViewCiudades.ButtonNoCiudad.isSelected()){
-            miViewCiudades.txtCiudadAEnlazar.setEnabled(false);
-            miViewCiudades.txtTiempo.setEnabled(false);
-            miViewCiudades.txtTiempo.setText(String.valueOf(0));
-        }else{
-            if(miViewCiudades.ButtonSICiudad==e.getSource()){
-            miViewCiudades.txtCiudadAEnlazar.setEnabled(true);
-            miViewCiudades.txtTiempo.setEnabled(true);       
-            }
-        }
         
         //Fin Ciudad
         
@@ -256,8 +259,8 @@ public class Controlador implements ActionListener, KeyListener{
                viewCrud.btnModificar.setVisible(false);
                viewCrud.btnEliminar.setVisible(false);
                casoB=3;
-               
             }
+            
             if(viewCrud.btnAtras==e.getSource()&&casoB==3){
                viewCrud.btnModificar.setVisible(true);
                viewCrud.btnEliminar.setVisible(true);
@@ -331,8 +334,6 @@ public class Controlador implements ActionListener, KeyListener{
                habilitarTextVehiculos();
                miViewVehiculos.btnOkVehiculo.setVisible(false);
             }
-            
-            
         //Fin Vehiculos
         
         //*********Solo Conductores
@@ -399,8 +400,6 @@ public class Controlador implements ActionListener, KeyListener{
                }
            
            }
-
-           
            //Modificar
            if(viewCrud.btnModificar==e.getSource()&& casoB==5){
                miViewCaracteristicas.setVisible(true);
@@ -536,7 +535,7 @@ public class Controlador implements ActionListener, KeyListener{
                habilitarTextProducto();
                miViewIngresoProd.btnOkProd.setVisible(false);
             }
-    //Fin Productos
+        //Fin Productos
         
         //*********Solo Contratos
         if(e.getSource()==miViewPrincipal.btnContratos){
@@ -548,16 +547,52 @@ public class Controlador implements ActionListener, KeyListener{
         if(viewCrud.btnCrear==e.getSource() && casoB==7){
             viewCrud.setVisible(false);
             miViewViajes.setVisible(true);
+            miViewViajes.jSeleccionar.setVisible(false);
+            miViewViajes.rbtnSIProducto.setVisible(false);
+            miViewViajes.rbtnNoProducto.setVisible(false);
+            miLista=new ListaProductos();
             limpiarTextoContratos();
+        }
+        
+        if(miViewViajes.btnAgregarProducto==e.getSource()){
+            
+            
+            if(miViewViajes.txtCantidadProductosViajes.getText().length()==0){
+                JOptionPane.showMessageDialog(null,"Especificar cantidad del producto");
+            }else{
+                //Aqui se van a AGREGAR los productos en la lista de viajes
+                agregarProductosAlViaje(miLista);
+                //Controla que seleccione otro producto
+                miViewViajes.jSeleccionar.setVisible(true);
+                miViewViajes.rbtnSIProducto.setVisible(true);
+                miViewViajes.rbtnNoProducto.setVisible(true);
+                
+            }
+           
+            
+        }
+        
+        grupo.add(miViewViajes.rbtnSIProducto);
+        grupo.add(miViewViajes.rbtnNoProducto);
+        
+        if(miViewViajes.rbtnSIProducto.isSelected()){
+            miViewViajes.comboProductos.setEnabled(true);
+            miViewViajes.txtCantidadProductosViajes.setEnabled(true);
+            miViewViajes.btnAgregarProducto.setEnabled(true);
+        }else{
+            if(miViewViajes.rbtnNoProducto.isSelected()){
+                miViewViajes.comboProductos.setEnabled(false);
+                miViewViajes.txtCantidadProductosViajes.setEnabled(false);
+                miViewViajes.btnAgregarProducto.setEnabled(false);
+            }
         }
         
         
         
-        
-        
-        
+     
         if(miViewViajes.btnAceptarViaje==e.getSource()){
-            validarVacioViajes(miViewViajes.txtClienteConViaje.getText(),miViewViajes.txtCiudadOrigen.getText(),miViewViajes.txtCiudadDestino.getText());
+            //validarVacioViajes(miViewViajes.txtClienteConViaje.getText());
+            
         }else{
             if(miViewViajes.btnCancelarViaje==e.getSource()){
                 miViewViajes.setVisible(false);
@@ -566,6 +601,7 @@ public class Controlador implements ActionListener, KeyListener{
         }
         
         
+          
         //Fin contratos
         
         //*********Solo clientes
@@ -660,11 +696,7 @@ public class Controlador implements ActionListener, KeyListener{
         if(miViewPrincipal.btnMapa==e.getSource()){
             dibujar();
         
-        }
-        
-        
-        
-         
+        }    
 }
  
  
@@ -694,34 +726,26 @@ public class Controlador implements ActionListener, KeyListener{
  
  }
   
-  private void mostrarClientes(){
-      DefaultTableModel modelo=new DefaultTableModel();
-     modelo.addColumn("Nombre");
-     modelo.addColumn("Telefono");
-     modelo.addColumn("Correo");
-     modelo.addColumn("Direccion");
+    private void mostrarClientes(){
+        DefaultTableModel modelo=new DefaultTableModel();
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Telefono");
+        modelo.addColumn("Correo");
+        modelo.addColumn("Direccion");
      
-     this.viewCrud.table.setModel(modelo);
-     Clientes miCliente=new Clientes();
-     miCliente=miEmpresas.getMiListaClientes().getHeadCliente();
-     while(miCliente!=null){
-         String []info=new String[4];
-         info[0]=miCliente.getNombre();
-         info[1]=Long.toString(miCliente.getTelefono());
-         info[2]=miCliente.getCorreoElectronico();
-         info[3]=miCliente.getDireccion();
-        
-         modelo.addRow(info);
-         miCliente=miCliente.getSiguienteCliente();
-     }
-     
-  
-  
-  
-  }
-  
-
-    
+        this.viewCrud.table.setModel(modelo);
+        Clientes miCliente=new Clientes();
+        miCliente=miEmpresas.getMiListaClientes().getHeadCliente();
+        while(miCliente!=null){
+            String []info=new String[4];
+            info[0]=miCliente.getNombre();
+            info[1]=Long.toString(miCliente.getTelefono());
+            info[2]=miCliente.getCorreoElectronico();
+            info[3]=miCliente.getDireccion();
+            modelo.addRow(info);
+            miCliente=miCliente.getSiguienteCliente();
+        }
+    }
   
 private void mostrarCaracteristicas(){
       DefaultTableModel modelo=new DefaultTableModel();
@@ -830,12 +854,7 @@ private void mostrarCiudades(){
        }
     
     }
-
-
-
-
-
-    
+  
 //Funciones para Ocultar o hacer visibles uns Botones
      private void ocultar(){
     viewCrud.btnEliminar.setVisible(false);
@@ -978,12 +997,8 @@ private void mostrarCiudades(){
      }
 
      //Fin de las funciones para Habilitar
+     
     
-    //Funcion que valida que solo se ingrese numeros
-     
-
-     
-     
     //Funcion que valida que se llenen todos los campos
     public void validarVacioVehiculos(String placa, String marca, String modelo, String pesoMax, String volMaximo){
         
@@ -1083,12 +1098,6 @@ private void mostrarCiudades(){
         nombreCiudad=miViewCiudades.txtCiudadAEnlazar.getText();
         Tiempo=miViewCiudades.txtTiempo.getText();
         
-            if(miViewCiudades.ButtonNoCiudad.isSelected()){
-                miViewCiudades.txtNombreCiudad.setEnabled(false);
-                miViewCiudades.txtTiempo.setEnabled(false); 
-            }
-        
-        
         if(ciudad.length()==0 || coorX.length()==0 || coorY.length()==0){   
             JOptionPane.showMessageDialog(null, "Campos incompletos");
             miViewCiudades.setVisible(true);
@@ -1100,44 +1109,74 @@ private void mostrarCiudades(){
             
             miViewCiudades.setVisible(false);
             viewCrud.setVisible(true);
-            //AQUI VA MOSTRAR CIUDADES
+            //AQUI VA MOSTRARCIUDADES
             mostrarCiudades();
-            
         }
     }
   
     public void dibujar(){
-        
         Dibujos elemento = new Dibujos();
         elemento.setMiLista(miEmpresas.getMiListaCiudades());
         elemento.setPreferredSize(miViewDibujo.getSize());
         JPanel panel = new JPanel();  
-        
         miViewDibujo.getContentPane().setLayout(new FlowLayout());
-
-       // panel.add(elemento);
-       // panel.add(miViewDibujo.btnAtrasDib);
-       // miViewDibujo.setContentPane(panel);
         miViewDibujo.getContentPane().add(miViewDibujo.btnAtrasDib);
         miViewDibujo.getContentPane().add(elemento);
-        
         miViewDibujo.setVisible(true);
+    }
     
+    public void agregarProductosAlViaje(ListaProductos miLista){
+        String producto;
+        producto=miViewViajes.comboProductos.getSelectedItem().toString();
+        Productos miProducto=new Productos();
+        miProducto=miEmpresas.consultarProducto(producto);
+        agregarProductoLista(miProducto);
+       
+        //miEmpresas.
+        
+        
+        //miEmpresas.
     
     }
-    public void validarVacioViajes(String cliente, String ciudadO, String ciudadD){
-        cliente=miViewViajes.txtClienteConViaje.getText();
-        ciudadO=miViewViajes.txtClienteConViaje.getText();
-        ciudadD=miViewViajes.txtCiudadDestino.getText();
+    public void agregarProductoLista(Productos miProducto){
         
+        if(miLista.getHeadProducto()==null){
+            miLista.setHeadProducto(miProducto);
+            miLista.setTailProducto(miProducto);
+        }else{
+            miLista.getTailProducto().setSiguienteProducto(miProducto);
+            miLista.setTailProducto(miProducto);
+            
+        
+        }
+    }
+    
+    
+    
+    
+    public void validarVacioViajes(String cliente, String ciudadO, String ciudadD){
+        int dia,mes,anio;
+        
+        cliente=miViewViajes.txtClienteConViaje.getText();
+        ciudadO=miViewViajes.comboCiudadOrigen.getSelectedItem().toString();
+        ciudadD=miViewViajes.comboCiudadDestino.getSelectedItem().toString();
+        dia=Integer.parseInt(miViewViajes.txtDiaViaje.getText());
+        mes=Integer.parseInt(miViewViajes.txtMesViaje.getText());
+        anio=Integer.parseInt(miViewViajes.txtAnioViaje.getText());
+       
+        
+        
+       //ciudadD=miViewViajes.txtCiudadDestino.getText();
         if(cliente.length()==0 || ciudadO.length()==0 || ciudadD.length()==0){
             JOptionPane.showMessageDialog(null, "Campos incompletos");
             miViewViajes.setVisible(true);
             viewCrud.setVisible(false);
         }else{
             //AQUI VA AGREGAR VIAJE
+            miEmpresas.agregarContrato(ciudadD, dia, mes, anio, miLista);
             miViewViajes.setVisible(false);
             viewCrud.setVisible(true);
+            
             //AQUI VA MOSTRAR VIAJE
         }
     }
@@ -1151,6 +1190,9 @@ private void mostrarCiudades(){
         miViewCiudades.txtCordenadaY.setText("");
         miViewCiudades.txtCiudadAEnlazar.setText("");
         miViewCiudades.txtTiempo.setText("");
+        miViewCiudades.txtCoordX.setText("");
+        miViewCiudades.txtCoordY.setText("");
+        miViewCiudades.ButtonNoCiudad.setText("");
     }
     
     //******VEHICULOS
@@ -1187,8 +1229,8 @@ private void mostrarCiudades(){
     //******CONTRATOS
     public void limpiarTextoContratos(){
         miViewViajes.txtCantidadProductosViajes.setText("");
-        miViewViajes.txtCiudadDestino.setText("");
-        miViewViajes.txtCiudadOrigen.setText("");
+       // miViewViajes.txtCiudadDestino.setText("");
+       // miViewViajes.txtCiudadOrigen.setText("");
         miViewViajes.txtClienteConViaje.setText("");
         miViewViajes.txtDiaViaje.setText("");
         miViewViajes.txtMesViaje.setText("");
@@ -1205,13 +1247,13 @@ private void mostrarCiudades(){
     
     //Fin de funciones de limpiar texto
     
-    
     @Override
     public void keyTyped(KeyEvent e) {   
         char tecla;
         if(miViewVehiculos.txtPesoMaximoVehiculo==e.getSource()|| miViewVehiculos.txtVolumneMaximoVehiculo==e.getSource() || miViewIngresoConductores.txtCedulaConductor==e.getSource() || miViewIngresoProd.txtPeso==e.getSource() || 
             miViewIngresoProd.txtVolum==e.getSource() || miVentanaIngresoClientes.txtTelefonoCliente==e.getSource() || miViewCiudades.txtCordenadaX==e.getSource() || miViewCiudades.txtCordenadaY==e.getSource() || miViewCiudades.txtTiempo==e.getSource() || 
-                miViewViajes.txtDiaViaje==e.getSource() || miViewViajes.txtMesViaje==e.getSource() || miViewViajes.txtAnioViaje==e.getSource()){
+                miViewViajes.txtDiaViaje==e.getSource() || miViewViajes.txtMesViaje==e.getSource() || miViewViajes.txtAnioViaje==e.getSource() || miViewViajes.txtCantidadProductosViajes==e.getSource() || miViewCiudades.txtCoordX==e.getSource()
+                || miViewCiudades.txtCoordY==e.getSource()){
             tecla=e.getKeyChar();
             if(!Character.isDigit(tecla) && tecla!=KeyEvent.VK_BACK_SPACE){     
             e.consume();
@@ -1219,15 +1261,10 @@ private void mostrarCiudades(){
             }
         }    
     }    
-
     @Override
     public void keyPressed(KeyEvent e) {
     }
     @Override
     public void keyReleased(KeyEvent e) {   
     }
-
  }
-
-    
-

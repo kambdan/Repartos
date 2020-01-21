@@ -4,6 +4,14 @@ public class Conductores extends Personas{
     
     private long cedula;
     private String CiudadReside;
+
+    public String getCiudadReside() {
+        return CiudadReside;
+    }
+
+    public void setCiudadReside(String CiudadReside) {
+        this.CiudadReside = CiudadReside;
+    }
     private Conductores siguienteConductor;
 
     public Conductores(){

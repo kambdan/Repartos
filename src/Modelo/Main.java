@@ -1,6 +1,9 @@
 package Modelo;
 
 import CONTROLADOR.*;
+import Modelo.CaracteristicasEspeciales;
+import Modelo.ListaCaracteristicasEspeciales;
+import Modelo.Vehiculos;
 import Vista.*;
 
 import Vista.ventanaEntradaClientes;

@@ -11,6 +11,15 @@ public class Vehiculos {
     private double VolumenMaximo;
     private ListaCaracteristicasEspeciales CaracteristicasVehiculo;
     private Vehiculos siguienteVehiculo;
+    private NodoCiudad ciudad;
+
+    public NodoCiudad getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(NodoCiudad ciudad) {
+        this.ciudad = ciudad;
+    }
     
     public Vehiculos(){
         

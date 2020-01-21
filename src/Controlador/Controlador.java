@@ -30,6 +30,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 import sun.tools.jar.resources.jar;
 
 public class Controlador implements ActionListener, KeyListener{
@@ -293,10 +294,22 @@ public class Controlador implements ActionListener, KeyListener{
             if(viewCrud.btnBuscar==e.getSource() && casoB==3){
                 Vehiculos miVehiculo=new Vehiculos();
                 miVehiculo=miEmpresas.consultarVehiculos(viewCrud.txtBuscar.getText());
-                DefaultListModel modelo = new DefaultListModel();
+                DefaultTableModel modelo = new DefaultTableModel();
                 if(miVehiculo!=null){
-                    modelo.addElement(miVehiculo.getPlaca());
-                    viewCrud.listCrud.setModel(modelo);
+                    
+                    
+                     String []info=new String[7];
+                     info[0]=miVehiculo.getPlaca();
+                     info[1]=miVehiculo.getMarca();
+                     info[2]=miVehiculo.getModelo();
+                     info[3]=String.valueOf(miVehiculo.getPesoMaximo());
+                     info[4]=String.valueOf(miVehiculo.getVolumenMaximo());
+                     info[5]=String.valueOf(miVehiculo.getCiudad().getNombre());
+                     info[6]="caracteristicas";
+
+                     modelo.addRow(info);
+                    //viewCrud.listCrud.setModel(modelo);
+                    
                 }else{
                    //vemtana mergente no esta el producto
                     JOptionPane.showMessageDialog(null,"Elemento no encontrado");
@@ -304,7 +317,9 @@ public class Controlador implements ActionListener, KeyListener{
             }
              //Consultar
             if(viewCrud.btnConsultar==e.getSource()&& casoB==3){
-                String value =(String) viewCrud.listCrud.getSelectedValue();//para obntener el string Sleleccionado
+                DefaultTableModel tm = (DefaultTableModel) viewCrud.table.getModel();
+                String value =(String) tm.getValueAt(viewCrud.table.getSelectedRow(), 0);
+                //String value =(String) viewCrud.listCrud.getSelectedValue();//para obntener el string Sleleccionado
                 actualizarEnVentanaVehiculos(value);
                 
                 miViewVehiculos.btnOkVehiculo.setVisible(true);
@@ -386,7 +401,7 @@ public class Controlador implements ActionListener, KeyListener{
               DefaultListModel modelo = new DefaultListModel();
               if(miCaract!=null){
                    modelo.addElement(miCaract.getCaracteristicas());
-                   viewCrud.listCrud.setModel(modelo);
+                  // viewCrud.listCrud.setModel(modelo);
                }else{
                    //vemtana mergente no esta el producto
                    JOptionPane.showMessageDialog(null,"Elemento no encontrado");
@@ -397,22 +412,22 @@ public class Controlador implements ActionListener, KeyListener{
            //Modificar
            if(viewCrud.btnModificar==e.getSource()&& casoB==5){
                miViewCaracteristicas.setVisible(true);
-               String value =(String) viewCrud.listCrud.getSelectedValue();
-               actualizarEnVentanaCaracteristicas(value);
+               //String value =(String) viewCrud.listCrud.getSelectedValue();
+              // actualizarEnVentanaCaracteristicas(value);
                miViewCaracteristicas.setVisible(true);
                viewCrud.setVisible(false);
                casoModificar=5;   
             }
            if(miViewCaracteristicas.btnAceptarCaract==e.getSource() && casoModificar==5){
-                miEmpresas.modificarCaracteristica(viewCrud.listCrud.getSelectedValue().toString(),miViewCaracteristicas.txtNombreCaracterisitca.getText(),miViewCaracteristicas.txtDescripcionCaract.getText());
+                //miEmpresas.modificarCaracteristica(viewCrud.listCrud.getSelectedValue().toString(),miViewCaracteristicas.txtNombreCaracterisitca.getText(),miViewCaracteristicas.txtDescripcionCaract.getText());
                 viewCrud.setVisible(true);
                 mostrarCaracteristicas();
                 casoModificar=0;
             } 
            //Consultar
            if(viewCrud.btnConsultar==e.getSource() && casoB==5){
-                String value =(String) viewCrud.listCrud.getSelectedValue();
-                actualizarEnVentanaCaracteristicas(value);
+                //String value =(String) viewCrud.listCrud.getSelectedValue();
+               // actualizarEnVentanaCaracteristicas(value);
                 miViewCaracteristicas.btnOkCE.setVisible(true);
                 miViewCaracteristicas.setVisible(true);
                 inahbiltarTextCaracteristicas();
@@ -434,7 +449,7 @@ public class Controlador implements ActionListener, KeyListener{
            
           //Eliminar
            if(viewCrud.btnEliminar==e.getSource() && casoB==5){
-                miEmpresas.eliminarCaracteristica(viewCrud.listCrud.getSelectedValue());
+                //miEmpresas.eliminarCaracteristica(viewCrud.listCrud.getSelectedValue());
                 viewCrud.setVisible(true);
                 mostrarCaracteristicas();    
             }
@@ -462,10 +477,25 @@ public class Controlador implements ActionListener, KeyListener{
             if(viewCrud.btnBuscar==e.getSource()&&casoB==6){
               Productos miProducto=new Productos();
               miProducto=miEmpresas.consultarProducto(viewCrud.txtBuscar.getText());
-              DefaultListModel modelo = new DefaultListModel();
+                System.out.println("Feliz");
+              DefaultTableModel modelo=new DefaultTableModel();
+               modelo.addColumn("Nombre");
+                modelo.addColumn("Coordenada en X");
+                modelo.addColumn("Coordenada en Y");
+                modelo.addColumn("Conectada con");
+                modelo.addColumn("Tiempo");
+                this.viewCrud.table.setModel(modelo);
               if(miProducto!=null){
-                   modelo.addElement(miProducto.getNombreProducto());
-                   viewCrud.listCrud.setModel(modelo);
+                 
+                 String []info=new String[5];
+                 info[0]=miProducto.getNombreProducto();
+                 info[1]="caract";
+                 info[2]=miProducto.getUnidad();
+                 info[3]=String.valueOf(miProducto.getPeso());
+                 info[4]=String.valueOf(miProducto.getVolumen());
+                 modelo.addRow(info);
+                 
+                   //viewCrud.listCrud.setModel(modelo);
                }else{
                    //vemtana mergente no esta el producto
                    JOptionPane.showMessageDialog(null,"Elemento no encontrado");
@@ -475,7 +505,9 @@ public class Controlador implements ActionListener, KeyListener{
             if(viewCrud.btnModificar==e.getSource()&& casoB==6){
               
                miViewIngresoProd.setVisible(true);
-               String value =(String) viewCrud.listCrud.getSelectedValue();
+               DefaultTableModel tm = (DefaultTableModel) viewCrud.table.getModel();
+               String value =(String) tm.getValueAt(viewCrud.table.getSelectedRow(), 0);
+               //System.out.println("values"+value);
                actualizarEnVentanaProductos(value);
                
                miViewIngresoProd.setVisible(true);
@@ -484,25 +516,21 @@ public class Controlador implements ActionListener, KeyListener{
             }
             
             if(miViewIngresoProd.btnIngresarProd==e.getSource() && casoModificar==6){
-                miEmpresas.modificarProducto(viewCrud.listCrud.getSelectedValue().toString(),miViewIngresoProd.txtNombProd.getText(), miViewIngresoProd.txtUnidad.getText(),Double.parseDouble(miViewIngresoProd.txtPeso.getText()), Double.parseDouble(miViewIngresoProd.txtVolum.getText()));
+                DefaultTableModel tm = (DefaultTableModel) viewCrud.table.getModel();
+                String value =(String) tm.getValueAt(viewCrud.table.getSelectedRow(), 0);
+                miEmpresas.modificarProducto(value,miViewIngresoProd.txtNombProd.getText(), miViewIngresoProd.txtUnidad.getText(),Double.parseDouble(miViewIngresoProd.txtPeso.getText()), Double.parseDouble(miViewIngresoProd.txtVolum.getText()));
                 viewCrud.setVisible(true);
                 mostrarProductos();
                 casoModificar=0;
             }
             if(viewCrud.btnEliminar==e.getSource() && casoB==6){
-                miEmpresas.eliminarProducto(viewCrud.listCrud.getSelectedValue().toString());
+                DefaultTableModel tm = (DefaultTableModel) viewCrud.table.getModel();
+                String value =(String) tm.getValueAt(viewCrud.table.getSelectedRow(), 0);
+                miEmpresas.eliminarProducto(value);
                 viewCrud.setVisible(true);
                 mostrarProductos();    
             }
-            //consultar
-            if(viewCrud.btnConsultar==e.getSource() && casoB==6){
-                String value =(String) viewCrud.listCrud.getSelectedValue();
-                actualizarEnVentanaProductos(value);
-                miViewIngresoProd.btnOkProd.setVisible(true);
-                miViewIngresoProd.setVisible(true);
-                inahbiltarTextProductos();
             
-            }
             if(miViewIngresoProd.btnOkProd==e.getSource()&&casoB==6){
                viewCrud.setVisible(true);
                miViewIngresoProd.setVisible(false);
@@ -522,6 +550,7 @@ public class Controlador implements ActionListener, KeyListener{
         if(e.getSource()==miViewPrincipal.btnContratos){
             viewCrud.setVisible(true);  
             miViewPrincipal.setVisible(false);
+            
             casoB=7;
         }
         if(viewCrud.btnCrear==e.getSource() && casoB==7){
@@ -562,17 +591,23 @@ public class Controlador implements ActionListener, KeyListener{
             if(viewCrud.btnBuscar==e.getSource()&&casoB==8){
                Clientes miCliente=new Clientes();
                miCliente=miEmpresas.consultarCliente(viewCrud.txtBuscar.getText());
-               DefaultListModel modelo = new DefaultListModel();
+               DefaultTableModel modelo=new DefaultTableModel();
                if(miCliente!=null){
-                   modelo.addElement(miCliente.getNombre());
-                   viewCrud.listCrud.setModel(modelo);
+                    String []info=new String[4];
+                    info[0]=miCliente.getNombre();
+                    info[1]=Long.toString(miCliente.getTelefono());
+                    info[2]=miCliente.getCorreoElectronico();
+                    info[3]=miCliente.getDireccion();
+
+                    modelo.addRow(info);
                }else{
                     JOptionPane.showMessageDialog(null,"Elemento no encontrado");
                }
             }
             if(viewCrud.btnModificar==e.getSource()&& casoB==8){
                miVentanaIngresoClientes.setVisible(true);
-               String value =(String) viewCrud.listCrud.getSelectedValue();//Toma el valor de lo que selecciono dando click en la ventana CRUD
+               DefaultTableModel tm = (DefaultTableModel) viewCrud.table.getModel();
+               String value =(String) tm.getValueAt(viewCrud.table.getSelectedRow(), 0);
                actualizarEnVentanaClientes(value);
                miVentanaIngresoClientes.setVisible(true);
                viewCrud.setVisible(false);
@@ -580,21 +615,26 @@ public class Controlador implements ActionListener, KeyListener{
             }
             
            if(miVentanaIngresoClientes.btnIngresarCliente==e.getSource() && casoModificar==8){
-                miEmpresas.modificarCliente(viewCrud.listCrud.getSelectedValue().toString(),miVentanaIngresoClientes.txtNombreCliente.getText(), Long.parseLong(miVentanaIngresoClientes.txtTelefonoCliente.getText()), miVentanaIngresoClientes.txtCorreoCliente.getText(),miVentanaIngresoClientes.txtDireccionCliente.getText());
+               DefaultTableModel tm = (DefaultTableModel) viewCrud.table.getModel();
+               String value =(String) tm.getValueAt(viewCrud.table.getSelectedRow(), 0);
+                miEmpresas.modificarCliente(value,miVentanaIngresoClientes.txtNombreCliente.getText(), Long.parseLong(miVentanaIngresoClientes.txtTelefonoCliente.getText()), miVentanaIngresoClientes.txtCorreoCliente.getText(),miVentanaIngresoClientes.txtDireccionCliente.getText());
                 viewCrud.setVisible(true);
                 mostrarClientes();
                 casoModificar=0;
             }
            
            if(viewCrud.btnEliminar==e.getSource() && casoB==8){
-                miEmpresas.eliminarCliente(viewCrud.listCrud.getSelectedValue().toString());
+               DefaultTableModel tm = (DefaultTableModel) viewCrud.table.getModel();
+                String value =(String) tm.getValueAt(viewCrud.table.getSelectedRow(), 0);
+               miEmpresas.eliminarCliente(value);
                 viewCrud.setVisible(true);
                 mostrarClientes();    
             }
            
             //consultar
             if(viewCrud.btnConsultar==e.getSource()&& casoB==8){
-                String value =(String) viewCrud.listCrud.getSelectedValue();
+                DefaultTableModel tm = (DefaultTableModel) viewCrud.table.getModel();
+                String value =(String) tm.getValueAt(viewCrud.table.getSelectedRow(), 0);
                 actualizarEnVentanaClientes(value);
                 miVentanaIngresoClientes.btnOkCliente.setVisible(true);
                 miVentanaIngresoClientes.setVisible(true);
@@ -629,90 +669,155 @@ public class Controlador implements ActionListener, KeyListener{
  
  
  //Funciones para Mostrar
+ 
+ 
  private void mostrarProductos(){
-      DefaultListModel modelo = new DefaultListModel();
-      Productos miProducto=new Productos();
+     DefaultTableModel modelo=new DefaultTableModel();
+     modelo.addColumn("Nombre");
+     modelo.addColumn("Caracteristicas Especiales");
+     modelo.addColumn("Unidad");
+     modelo.addColumn("Peso");
+     modelo.addColumn("Volumen");
+     this.viewCrud.table.setModel(modelo);
+     Productos miProducto=new Productos();
       miProducto=miEmpresas.getMiListaProduc().getHeadProducto();
-      
      while(miProducto!=null){
-          modelo.addElement(miProducto.getNombreProducto());
-          miProducto=miProducto.getSiguienteProducto();
-          
-         
+         String []info=new String[5];
+         info[0]=miProducto.getNombreProducto();
+         info[1]="caracteristic";
+         info[2]=miProducto.getUnidad();
+         info[3]=String.valueOf(miProducto.getPeso());
+         info[4]=String.valueOf(miProducto.getVolumen());
+         modelo.addRow(info);
+         miProducto=miProducto.getSiguienteProducto();
      }
-     viewCrud.listCrud.setModel(modelo);
-
-}
-  
-  
-
+ 
+ }
   
   private void mostrarClientes(){
-
-      
+      DefaultTableModel modelo=new DefaultTableModel();
+     modelo.addColumn("Nombre");
+     modelo.addColumn("Telefono");
+     modelo.addColumn("Correo");
+     modelo.addColumn("Direccion");
+     
+     this.viewCrud.table.setModel(modelo);
      Clientes miCliente=new Clientes();
      miCliente=miEmpresas.getMiListaClientes().getHeadCliente();
-     DefaultListModel modelo = new DefaultListModel();
-     int i=0;
      while(miCliente!=null){
-          modelo.addElement(miCliente.getNombre());
-          miCliente=miCliente.getSiguienteCliente();
-          System.out.println(": "+i+" ");
-          i++;
+         String []info=new String[4];
+         info[0]=miCliente.getNombre();
+         info[1]=Long.toString(miCliente.getTelefono());
+         info[2]=miCliente.getCorreoElectronico();
+         info[3]=miCliente.getDireccion();
+        
+         modelo.addRow(info);
+         miCliente=miCliente.getSiguienteCliente();
      }
-     viewCrud.listCrud.setModel(modelo);
-    }
+     
+  
+  
+  
+  }
+  
 
-    private void mostrarCaracteristicas() {
-      
-     CaracteristicasEspeciales miCar=new CaracteristicasEspeciales();
-   
-     miCar=miEmpresas.getMiListaCarac().getHeadCaracteristica();
-     DefaultListModel modelo = new DefaultListModel();
-     int i=0;
-     while(miCar!=null){
-          modelo.addElement(miCar.getCaracteristicas());
-          miCar=miCar.getSiguienteCaracteristica();
-          
-         
-     }
-     viewCrud.listCrud.setModel(modelo);
-    }
-    private void mostrarConductores(){
-      
-        Conductores miConductor=new Conductores();
-        miConductor=miEmpresas.getMiListaconductores().getHeadConductor();
-        DefaultListModel modelo = new DefaultListModel();
-        while(miConductor!=null){
-             modelo.addElement(miConductor.getNombre());
-             miConductor=miConductor.getSiguienteConductor();
-        }
-        viewCrud.listCrud.setModel(modelo);
-    }
     
-    private void mostrarVehiculos() {
+  
+private void mostrarCaracteristicas(){
+      DefaultTableModel modelo=new DefaultTableModel();
+     modelo.addColumn("Nombre");
+     modelo.addColumn("Descripcion");
+     
+     this.viewCrud.table.setModel(modelo);
+     CaracteristicasEspeciales miCar=new CaracteristicasEspeciales();
+     miCar=miEmpresas.getMiListaCarac().getHeadCaracteristica();
+    
+     while(miCar!=null){
+         String []info=new String[2];
+         info[0]=miCar.getCaracteristicas();
+         info[1]=miCar.getDescripcion();
+          modelo.addRow(info);
+          miCar=miCar.getSiguienteCaracteristica();
+     }
+}
+
+private void mostrarConductores(){
+      DefaultTableModel modelo=new DefaultTableModel();
+     modelo.addColumn("Nombre");
+     modelo.addColumn("Cedula");
+     modelo.addColumn("Ciudad Residencia");
+    
+     this.viewCrud.table.setModel(modelo);
+      Conductores miConductor=new Conductores();
+    miConductor=miEmpresas.getMiListaconductores().getHeadConductor();
+     while(miConductor!=null){
+         String []info=new String[3];
+         info[0]=miConductor.getNombre();
+         info[1]=Long.toString(miConductor.getCedula());
+         
+         info[2]=miConductor.getCiudadReside();
         
-        Vehiculos miVehiculo=new Vehiculos();
-        miVehiculo=miEmpresas.getMiListaVehic().getHeadVehiculos();
-        DefaultListModel modelo = new DefaultListModel();
-        while(miVehiculo!=null){
-            modelo.addElement(miVehiculo.getPlaca());
-            miVehiculo=miVehiculo.getSiguienteVehiculo(); 
-        }
-        viewCrud.listCrud.setModel(modelo);
-    }
- 
-    private void mostrarCiudades() {
+         modelo.addRow(info);
+        miConductor= miConductor.getSiguienteConductor();
+     }
+   }
+   
+
+
+
+private void mostrarVehiculos(){
+    DefaultTableModel modelo=new DefaultTableModel();
+    modelo.addColumn("Placa");
+    modelo.addColumn("Marca");
+    modelo.addColumn("Modelo");
+    modelo.addColumn("Peso max.");
+    modelo.addColumn("Volumen max.");
+    modelo.addColumn("Ciudad Residencia");
+    modelo.addColumn("Caracteristicas");
+    this.viewCrud.table.setModel(modelo);
+    Vehiculos miVehiculo=new Vehiculos();
+    miVehiculo=miEmpresas.getMiListaVehic().getHeadVehiculos();
+     while(miVehiculo!=null){
+         String []info=new String[7];
+         info[0]=miVehiculo.getPlaca();
+         info[1]=miVehiculo.getMarca();
+         info[2]=miVehiculo.getModelo();
+         info[3]=String.valueOf(miVehiculo.getPesoMaximo());
+         info[4]=String.valueOf(miVehiculo.getVolumenMaximo());
+         info[5]=String.valueOf(miVehiculo.getCiudad().getNombre());
+         info[6]="caracteristicas";
         
-        NodoCiudad miCiudad=new NodoCiudad();
-        miCiudad=miEmpresas.getMiListaCiudades().getHeadNodo();
-        DefaultListModel modelo = new DefaultListModel();
-        while(miCiudad!=null){
-            modelo.addElement(miCiudad.getNombre());
-            miCiudad=miCiudad.getSigNodo(); 
-        }
-        viewCrud.listCrud.setModel(modelo);
-    }
+         modelo.addRow(info);
+         miVehiculo=miVehiculo.getSiguienteVehiculo();
+     }
+   }
+
+
+private void mostrarCiudades(){
+    DefaultTableModel modelo=new DefaultTableModel();
+    modelo.addColumn("Nombre");
+    modelo.addColumn("Coordenada en X");
+    modelo.addColumn("Coordenada en Y");
+    modelo.addColumn("Conectada con");
+    modelo.addColumn("Tiempo");
+    this.viewCrud.table.setModel(modelo);
+    NodoCiudad miCiudad=new NodoCiudad();
+    miCiudad=miEmpresas.getMiListaCiudades().getHeadNodo();
+     while(miCiudad!=null){
+         String []info=new String[7];
+         info[0]=miCiudad.getNombre();
+         info[1]=String.valueOf(miCiudad.getCoordX());
+         info[2]=String.valueOf(miCiudad.getCoordY());
+         info[3]=miCiudad.getCiudadEnlace();
+         info[4]=String.valueOf(miCiudad.getDistancia().getTiempo());
+         
+        
+         modelo.addRow(info);
+         miCiudad=miCiudad.getSigNodo();
+     }
+   }
+
+
  //Fin Funciones para mostrar
     
     

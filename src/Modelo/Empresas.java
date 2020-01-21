@@ -396,8 +396,8 @@ public class Empresas {
     
     
     // ********FUNCIONES CIUDADES
-     public void agregarCiudad(String nombre,int x,int y,String otraCiudad,double tiempo){
-        NodoCiudad miNodo=new NodoCiudad(nombre, x, y, otraCiudad);
+     public void agregarCiudad(String nombre,int x,int y,String otraCiudad,double t,int x1,int y1){
+        NodoCiudad miNodo=new NodoCiudad(nombre, x, y, otraCiudad,x1,y1,t);
         if(miListaCiudades.getHeadNodo()==null){
             miListaCiudades.setHeadNodo(miNodo);
             miListaCiudades.setTailNodo(miNodo);
@@ -408,11 +408,12 @@ public class Empresas {
             
             //si es diferente de null  quiere decir que se trata de un grafo
             miListaCiudades.setTailNodo(miNodo);
-            if(miListaCiudades.getTailNodo()!=null){
-                ConectarCiudades(miNodo, tiempo);
-            }
+            
         
         }
+        if(miListaCiudades.getTailNodo()!=null&&miNodo.getDistanciaEnlace().getNodoCiudad()!=null){
+                ConectarCiudades(miNodo);
+         }
     }
     
      public NodoCiudad consultarCiudad(String nombreCiudad){
@@ -433,22 +434,37 @@ public class Empresas {
      
      
      //aqui me recibe el nodo de la ciudad con la que se conecta
-     public void ConectarCiudades(NodoCiudad miNodo,double tiempo){
-         String ciudadEnlace=miNodo.getCiudadEnlace();
+     public void ConectarCiudades(NodoCiudad miNodo){
+         String ciudadEnlace=miNodo.getDistanciaEnlace().getNodoCiudad().getNombre();
+         System.out.println("ciudad: "+ciudadEnlace);
+         NodoCiudad nodAux;
          if(ciudadEnlace!=null){
-                //llamar a una funcion que me consulte el nodo , y en ese momento me conecte
-                NodoCiudad nodAux;
-                //este me va a devolver el nodo consultado
-                nodAux=consultarCiudad(ciudadEnlace);
-                //esta añade las listas horizontales
-                //ListaCiudadConectadas miLista=new ListaCiudadConectadas();
-                //miLista=miNodo.getMiListaConectada();
-                
-               nodAux.getMiListaConectada().agregarCiudadesConectadas(miNodo,tiempo);
-               ///miNodo.getMiListaConectada().agregarCiudadesConectadas(nodAux, tiempo);
-               // nodAux.getMiListaConectada().agregarCiudadesConectadas(miNodo, tiempo);
-                //agregarCiudadesConectadas(nodAux, tiempo);
+             nodAux=consultarCiudad(ciudadEnlace);
+
+
+            if(nodAux!=null){
+                   //llamar a una funcion que me consulte el nodo , y en ese momento me conecte
+
+                   //este me va a devolver el nodo consultado
+
+                   //esta añade las listas horizontales
+                   //ListaCiudadConectadas miLista=new ListaCiudadConectadas();
+                   //miLista=miNodo.getMiListaConectada();
+
+
+                  nodAux.getMiListaConectada().agregarCiudadesConectadas(miNodo);
+                  System.out.println(nodAux.getMiListaConectada().getHeadVetice().getNombre()+" ::"+nodAux.getMiListaConectada().getHeadVetice().getCoordX());
+                  ///miNodo.getMiListaConectada().agregarCiudadesConectadas(nodAux, tiempo);
+                  // nodAux.getMiListaConectada().agregarCiudadesConectadas(miNodo, tiempo);
+                   //agregarCiudadesConectadas(nodAux, tiempo);
+               }else{
+                System.out.println("aquiiiii");
+                agregarCiudad(miNodo.getDistanciaEnlace().getNodoCiudad().getNombre(),miNodo.getDistanciaEnlace().getNodoCiudad().getCoordX(),
+               miNodo.getDistanciaEnlace().getNodoCiudad().getCoordY(),null, miNodo.getDistanciaEnlace().getTiempo(),0,0);
             }
+         
+         }
+            
      
      
      }
@@ -462,7 +478,7 @@ public class Empresas {
              NodoCiudad aux=nodAux.getMiListaConectada().getHeadVetice();
              System.out.print(" "+nodAux.getNombre());
              while(aux!=null){
-                 System.out.print("-->"+aux.getNombre()+"("+aux.getDistancia().getTiempo()+")");
+                 //System.out.print("-->"+aux.getNombre()+"("+aux.getDistancia().getTiempo()+")");
                  //System.out.println("tiempo: "+aux.getDistancia().getTiempo());
                  aux=aux.getSigVertice();
              }

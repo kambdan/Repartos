@@ -10,12 +10,21 @@ package Modelo;
  * @author STRIX
  */
 public class NodoCiudad {
-  private NodoCiudad sigVertice;
+   private NodoCiudad sigVertice;
    private NodoCiudad sigNodo;
-   private Enlaces distancia;
+   private Enlaces distanciaEnlace;
+
+    public Enlaces getDistanciaEnlace() {
+        return distanciaEnlace;
+    }
+
+    public void setDistanciaEnlace(Enlaces distanciaEnlace) {
+        this.distanciaEnlace = distanciaEnlace;
+    }
    private String nombre;
    private int coordX;
    private int coordY;
+   
    private String ciudadEnlace;
    private ListaCiudadConectadas miListaConectada;
 
@@ -27,25 +36,26 @@ public class NodoCiudad {
         this.miListaConectada = miListaConectada;
     }
 
-    public NodoCiudad(String nombre, int coordX, int coordY, String ciudadEnlace) {
+    public NodoCiudad(String nombre, int coordX, int coordY, String ciudadEnlace,int x1,int y1,double t) {
         this.nombre = nombre;
         this.coordX = coordX;
         this.coordY = coordY;
         this.ciudadEnlace = ciudadEnlace;
+        this.distanciaEnlace=new Enlaces(ciudadEnlace,x1,y1,t);
+       
+             
         miListaConectada=new ListaCiudadConectadas();
+    }
+    public NodoCiudad(String nombre,int coordx,int coordY){
+        this.nombre = nombre;
+        this.coordX = coordX;
+        this.coordY = coordY;
     }
     public NodoCiudad(){
     
     }
 
-    public Enlaces getDistancia() {
-        return distancia;
-    }
-
-    public void setDistancia(Enlaces distancia) {
-        this.distancia = distancia;
-    }
-  
+   
     public NodoCiudad getSigVertice() {
         return sigVertice;
     }

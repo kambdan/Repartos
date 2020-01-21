@@ -47,8 +47,8 @@ public class VentanaEntradaCiudades extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        txtCoordX = new javax.swing.JTextField();
+        txtCoordY = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -93,9 +93,14 @@ public class VentanaEntradaCiudades extends javax.swing.JFrame {
 
         jLabel10.setText("CORDENADA Y:");
 
-        jTextField1.setText("jTextField1");
+        txtCoordX.setText("jTextField1");
 
-        jTextField2.setText("jTextField2");
+        txtCoordY.setText("jTextField2");
+        txtCoordY.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCoordYActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -132,7 +137,7 @@ public class VentanaEntradaCiudades extends javax.swing.JFrame {
                                 .addGap(332, 332, 332)
                                 .addComponent(jLabel10)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField2))))
+                                .addComponent(txtCoordY))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
@@ -160,7 +165,7 @@ public class VentanaEntradaCiudades extends javax.swing.JFrame {
                         .addGap(71, 71, 71)
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtCoordX, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -193,8 +198,8 @@ public class VentanaEntradaCiudades extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(jLabel10)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCoordX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCoordY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -217,6 +222,10 @@ public class VentanaEntradaCiudades extends javax.swing.JFrame {
     private void ButtonSICiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonSICiudadActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ButtonSICiudadActionPerformed
+
+    private void txtCoordYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCoordYActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCoordYActionPerformed
 
     /**
      * @param args the command line arguments
@@ -269,9 +278,9 @@ public class VentanaEntradaCiudades extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     public javax.swing.JTextField txtCiudadAEnlazar;
+    public javax.swing.JTextField txtCoordX;
+    public javax.swing.JTextField txtCoordY;
     public javax.swing.JTextField txtCordenadaX;
     public javax.swing.JTextField txtCordenadaY;
     public javax.swing.JTextField txtNombreCiudad;

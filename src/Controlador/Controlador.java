@@ -809,7 +809,7 @@ private void mostrarCiudades(){
          info[1]=String.valueOf(miCiudad.getCoordX());
          info[2]=String.valueOf(miCiudad.getCoordY());
          info[3]=miCiudad.getCiudadEnlace();
-         info[4]=String.valueOf(miCiudad.getDistancia().getTiempo());
+         info[4]=String.valueOf(miCiudad.getDistanciaEnlace().getTiempo());
          
         
          modelo.addRow(info);
@@ -820,9 +820,14 @@ private void mostrarCiudades(){
 
  //Fin Funciones para mostrar
 // Funciones para añadir items al JCombo
-    private void addCOmbo(){
-        
-    
+    private void addCombo(){
+       
+       CaracteristicasEspeciales miCarac=new CaracteristicasEspeciales();
+       miCarac=miEmpresas.getMiListaCarac().getHeadCaracteristica();
+       while(miCarac!=null){
+           miViewVehiculos.itemCaract.addItem("");
+           miCarac=miCarac.getSiguienteCaracteristica();
+       }
     
     }
 
@@ -1090,7 +1095,9 @@ private void mostrarCiudades(){
             viewCrud.setVisible(false);   
         }else{
             //AQUI VA AGREGAR CIUDAD
-            miEmpresas.agregarCiudad(miViewCiudades.txtNombreCiudad.getText(),Integer.parseInt(miViewCiudades.txtCordenadaX.getText()),Integer.parseInt(miViewCiudades.txtCordenadaY.getText()),miViewCiudades.txtCiudadAEnlazar.getText(), Double.parseDouble(miViewCiudades.txtTiempo.getText()));
+            miEmpresas.agregarCiudad(miViewCiudades.txtNombreCiudad.getText(),Integer.parseInt(miViewCiudades.txtCordenadaX.getText()),Integer.parseInt(miViewCiudades.txtCordenadaY.getText()),miViewCiudades.txtCiudadAEnlazar.getText(), Double.parseDouble(miViewCiudades.txtTiempo.getText()),
+                    Integer.parseInt(miViewCiudades.txtCoordX.getText()),Integer.parseInt(miViewCiudades.txtCoordY.getText()));
+            
             miViewCiudades.setVisible(false);
             viewCrud.setVisible(true);
             //AQUI VA MOSTRAR CIUDADES

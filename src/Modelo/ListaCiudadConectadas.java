@@ -29,9 +29,8 @@ public class ListaCiudadConectadas {
     }
     
     
-    public void agregarCiudadesConectadas(NodoCiudad miNodo,double tiempo){
-         Enlaces distancia=new Enlaces();
-         distancia.setTiempo(tiempo);
+    public void agregarCiudadesConectadas(NodoCiudad miNodo){
+         
          if(headVetice==null){
              headVetice=miNodo;
              tailVertice=miNodo;
@@ -39,13 +38,12 @@ public class ListaCiudadConectadas {
              //conecttamos la cabeza con la distancia ,eso quiere decir
              //que la raiz ssabe cuanto tiempo tendrá con el siguiente nodo
              //mirar dibujo 
-             headVetice.setDistancia(distancia);
-             tailVertice.setDistancia(distancia);
+             
             
          }else{
              tailVertice.setSigVertice(miNodo);
              tailVertice=miNodo;
-             tailVertice.setDistancia(distancia);
+             
              
          }
          

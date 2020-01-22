@@ -2,15 +2,23 @@
 package Modelo;
 
 public class ListaVehiculos {
+    private int tamListaVehiculos;
     private Vehiculos headVehiculos;
     private Vehiculos tailVehiculos;
 
     //Constructor
     public ListaVehiculos(){
+        this.tamListaVehiculos=0;
         this.headVehiculos=null;
         this.tailVehiculos=null;
     }
-    
+    public int getTamListaVehiculos() {
+        return tamListaVehiculos;
+    }
+
+    public void setTamListaVehiculos(int tamListaVehiculos) {
+        this.tamListaVehiculos = tamListaVehiculos;
+    }
     public Vehiculos getHeadVehiculos() {
         return headVehiculos;
     }

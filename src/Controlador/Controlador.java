@@ -547,6 +547,9 @@ public class Controlador implements ActionListener, KeyListener{
         if(viewCrud.btnCrear==e.getSource() && casoB==7){
             viewCrud.setVisible(false);
             miViewViajes.setVisible(true);
+            AgregarComboboxProductos();
+            AgregarComboboxCiudadesOrigen();
+            AgregarComboboxCiudadesDestino();
             miViewViajes.jSeleccionar.setVisible(false);
             miViewViajes.rbtnSIProducto.setVisible(false);
             miViewViajes.rbtnNoProducto.setVisible(false);
@@ -1247,6 +1250,34 @@ private void mostrarCiudades(){
     
     //Fin de funciones de limpiar texto
     
+    //funciones para Agregar los textos a los jComboBox
+    public void AgregarComboboxProductos(){
+        Productos miProducto=new Productos();
+        miProducto=miEmpresas.getMiListaProduc().getHeadProducto();
+        while(miProducto!=null){
+            miViewViajes.comboProductos.addItem(miProducto.getNombreProducto());
+            miProducto=miProducto.getSiguienteProducto();
+        }
+    }
+    public void AgregarComboboxCiudadesOrigen(){
+        NodoCiudad miCiudad=new NodoCiudad();
+        miCiudad=miEmpresas.getMiListaCiudades().getHeadNodo();
+        while(miCiudad!=null){
+            miViewViajes.comboCiudadOrigen.addItem(miCiudad.getNombre());
+            miCiudad=miCiudad.getSigVertice();
+        }
+    }
+    
+    public void AgregarComboboxCiudadesDestino(){
+        NodoCiudad miCiudad=new NodoCiudad();
+        miCiudad=miEmpresas.getMiListaCiudades().getHeadNodo();
+        while(miCiudad!=null){
+            miViewViajes.comboCiudadDestino.addItem(miCiudad.getNombre());
+            miCiudad=miCiudad.getSigVertice();
+        }
+    }
+    
+    //fin ComBobox
     @Override
     public void keyTyped(KeyEvent e) {   
         char tecla;

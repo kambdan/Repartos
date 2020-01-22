@@ -50,8 +50,8 @@ public class VentanaEntradaViajes extends javax.swing.JFrame {
         txtAnioViaje = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         btnAgregarProducto = new javax.swing.JButton();
-        comboCiudadOrigen = new javax.swing.JComboBox<>();
-        comboCiudadDestino = new javax.swing.JComboBox<>();
+        comboCiudadOrigen = new javax.swing.JComboBox<String>();
+        comboCiudadDestino = new javax.swing.JComboBox<String>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -75,7 +75,6 @@ public class VentanaEntradaViajes extends javax.swing.JFrame {
             }
         });
 
-        comboProductos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Producto1", "Producto2", "Producto3" }));
         comboProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboProductosActionPerformed(evt);
@@ -113,10 +112,6 @@ public class VentanaEntradaViajes extends javax.swing.JFrame {
         jLabel12.setText("Elejir producto:");
 
         btnAgregarProducto.setText("AgregarProd");
-
-        comboCiudadOrigen.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        comboCiudadDestino.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -188,7 +183,7 @@ public class VentanaEntradaViajes extends javax.swing.JFrame {
                                         .addComponent(jLabel6)
                                         .addGap(129, 129, 129))
                                     .addComponent(btnCancelarViaje, javax.swing.GroupLayout.Alignment.TRAILING))))))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -148,6 +148,7 @@ public class Controlador implements ActionListener, KeyListener{
         miViewIngresoProd.btnCancelarProd.addActionListener(this);
         miViewIngresoProd.txtPeso.addKeyListener(this);
         miViewIngresoProd.txtVolum.addKeyListener(this);
+        miViewIngresoProd.btnAgregarCaract.addActionListener(this);
         //Fin Productos
         
         //ActionListener y KeyListener para la Ventana de ingreso de datos de los Contratos
@@ -371,9 +372,14 @@ public class Controlador implements ActionListener, KeyListener{
             miViewIngresoConductores.setVisible(true);
             viewCrud.setVisible(false);
             limpiarTextoConductores();
+            agregarCiudadResidenciaConductores();
+          
         }
+        
+       
         if(miViewIngresoConductores.btnAceptarConductor==e.getSource() && casoB==4){
-            validarVacioConductores(miViewIngresoConductores.TxtNombreConductor.getText(), miViewIngresoConductores.txtCedulaConductor.getText(), miViewIngresoConductores.txtCiudadReside.getText());
+            validarVacioConductores(miViewIngresoConductores.TxtNombreConductor.getText(), 
+                    miViewIngresoConductores.txtCedulaConductor.getText(), miViewIngresoConductores.comboCiudad.getSelectedItem().toString());
         }
         else{
             if(miViewIngresoConductores.btnCancelarConductor==e.getSource() && casoB==4){
@@ -477,6 +483,14 @@ public class Controlador implements ActionListener, KeyListener{
                 miViewIngresoProd.setVisible(true);
                 viewCrud.setVisible(false);
                 limpiarTextoProductos();
+                agregarCaracteristicasComboProductos();
+                miListaCaract=new ListaCaracteristicasEspeciales();
+                miViewIngresoProd.btnIngresarProd.setVisible(false);
+                
+            }
+            if(miViewIngresoProd.btnAgregarCaract==e.getSource()){
+                agregarCaracteristicasAlProducto();
+                miViewIngresoProd.btnIngresarProd.setVisible(true);
             }
             if(miViewIngresoProd.btnIngresarProd==e.getSource()  && casoModificar!=6){
                 validarVacioProductos(miViewIngresoProd.txtNombProd.getText(), miViewIngresoProd.txtUnidad.getText(), miViewIngresoProd.txtPeso.getText(), miViewIngresoProd.txtVolum.getText());
@@ -498,7 +512,7 @@ public class Controlador implements ActionListener, KeyListener{
                  
                  String []info=new String[5];
                  info[0]=miProducto.getNombreProducto();
-                 info[1]="caract";
+                 info[1]=miProducto.getListaCaracteristicas().getHeadCaracteristica().getCaracteristicas();
                  info[2]=miProducto.getUnidad();
                  info[3]=String.valueOf(miProducto.getPeso());
                  info[4]=String.valueOf(miProducto.getVolumen());
@@ -639,10 +653,12 @@ public class Controlador implements ActionListener, KeyListener{
                 miVentanaIngresoClientes.setVisible(true);
                 viewCrud.setVisible(false);
                 limpiarTextoClientes();
+                agregarComboCiudadClientes();
             }
             
             if(miVentanaIngresoClientes.btnIngresarCliente==e.getSource() && casoB==8 && casoModificar!=8){
-                validarVacioClientes(miVentanaIngresoClientes.txtNombreCliente.getText(), miVentanaIngresoClientes.txtTelefonoCliente.getText(), miVentanaIngresoClientes.txtCorreoCliente.getText(), miVentanaIngresoClientes.txtDireccionCliente.getText());
+                validarVacioClientes(miVentanaIngresoClientes.txtNombreCliente.getText(), miVentanaIngresoClientes.txtTelefonoCliente.getText(), 
+                        miVentanaIngresoClientes.txtCorreoCliente.getText(), miVentanaIngresoClientes.comboCiudad.getSelectedItem().toString());
             }
             
             if(viewCrud.btnBuscar==e.getSource()&&casoB==8){
@@ -654,7 +670,7 @@ public class Controlador implements ActionListener, KeyListener{
                     info[0]=miCliente.getNombre();
                     info[1]=Long.toString(miCliente.getTelefono());
                     info[2]=miCliente.getCorreoElectronico();
-                    info[3]=miCliente.getDireccion();
+                    info[3]=miCliente.getDireccion().getNombre();
 
                     modelo.addRow(info);
                }else{
@@ -674,7 +690,8 @@ public class Controlador implements ActionListener, KeyListener{
            if(miVentanaIngresoClientes.btnIngresarCliente==e.getSource() && casoModificar==8){
                DefaultTableModel tm = (DefaultTableModel) viewCrud.table.getModel();
                String value =(String) tm.getValueAt(viewCrud.table.getSelectedRow(), 0);
-                miEmpresas.modificarCliente(value,miVentanaIngresoClientes.txtNombreCliente.getText(), Long.parseLong(miVentanaIngresoClientes.txtTelefonoCliente.getText()), miVentanaIngresoClientes.txtCorreoCliente.getText(),miVentanaIngresoClientes.txtDireccionCliente.getText());
+                miEmpresas.modificarCliente(value,miVentanaIngresoClientes.txtNombreCliente.getText(), Long.parseLong(miVentanaIngresoClientes.txtTelefonoCliente.getText()), 
+                miVentanaIngresoClientes.txtCorreoCliente.getText(),miVentanaIngresoClientes.comboCiudad.getSelectedItem().toString());
                 viewCrud.setVisible(true);
                 mostrarClientes();
                 casoModificar=0;
@@ -737,7 +754,7 @@ public class Controlador implements ActionListener, KeyListener{
      while(miProducto!=null){
          String []info=new String[5];
          info[0]=miProducto.getNombreProducto();
-         info[1]="caracteristic";
+         info[1]=miProducto.getListaCaracteristicas().getHeadCaracteristica().getCaracteristicas();
          info[2]=miProducto.getUnidad();
          info[3]=String.valueOf(miProducto.getPeso());
          info[4]=String.valueOf(miProducto.getVolumen());
@@ -762,7 +779,7 @@ public class Controlador implements ActionListener, KeyListener{
             info[0]=miCliente.getNombre();
             info[1]=Long.toString(miCliente.getTelefono());
             info[2]=miCliente.getCorreoElectronico();
-            info[3]=miCliente.getDireccion();
+            info[3]=miCliente.getDireccion().getNombre();
             modelo.addRow(info);
             miCliente=miCliente.getSiguienteCliente();
         }
@@ -800,7 +817,7 @@ private void mostrarConductores(){
          info[0]=miConductor.getNombre();
          info[1]=Long.toString(miConductor.getCedula());
          
-         info[2]=miConductor.getCiudadReside();
+         info[2]=miConductor.getCiudadResidencia().getNombre();
         
          modelo.addRow(info);
         miConductor= miConductor.getSiguienteConductor();
@@ -909,7 +926,7 @@ private void mostrarCiudades(){
         miVentanaIngresoClientes.txtNombreCliente.setText(miClient.getNombre());
         miVentanaIngresoClientes.txtTelefonoCliente.setText(String.valueOf(miClient.getTelefono()));
         miVentanaIngresoClientes.txtCorreoCliente.setText(miClient.getCorreoElectronico());
-        miVentanaIngresoClientes.txtDireccionCliente.setText(miClient.getDireccion());
+        
     }
     
     private void actualizarEnVentanaCaracteristicas(String value){
@@ -950,8 +967,7 @@ private void mostrarCiudades(){
         miVentanaIngresoClientes.txtTelefonoCliente.setEnabled(false);
         miVentanaIngresoClientes.txtCorreoCliente.setEditable(false);
         miVentanaIngresoClientes.txtCorreoCliente.setEnabled(false);
-        miVentanaIngresoClientes.txtDireccionCliente.setEditable(false);
-        miVentanaIngresoClientes.txtDireccionCliente.setEnabled(false);
+ 
      }
      
      private void inahbiltarTextCaracteristicas(){
@@ -993,8 +1009,7 @@ private void mostrarCiudades(){
         miVentanaIngresoClientes.txtTelefonoCliente.setEnabled(true);
         miVentanaIngresoClientes.txtCorreoCliente.setEditable(true);
         miVentanaIngresoClientes.txtCorreoCliente.setEnabled(true);
-        miVentanaIngresoClientes.txtDireccionCliente.setEditable(true);
-        miVentanaIngresoClientes.txtDireccionCliente.setEnabled(true);
+        
      }
      
      private void habilitarTextCaracteristicas(){
@@ -1043,15 +1058,16 @@ private void mostrarCiudades(){
     }  
     
     public void validarVacioConductores(String nombre, String cedula, String ciudad){
-        nombre=miViewIngresoConductores.TxtNombreConductor.getText();
-        cedula=miViewIngresoConductores.txtCedulaConductor.getText();
-        ciudad=miViewIngresoConductores.txtCiudadReside.getText();
+        //nombre=miViewIngresoConductores.TxtNombreConductor.getText();
+        //cedula=miViewIngresoConductores.txtCedulaConductor.getText();
+        //ciudad=miViewIngresoConductores.comboCiudad.getSegetText();
         if(nombre.length()==0||cedula.length()==0||ciudad.length()==0){
                 JOptionPane.showMessageDialog(null, "Campos incompletos");
                 miViewIngresoConductores.setVisible(true);
                 viewCrud.setVisible(false);
         }else{
-                miEmpresas.agregarConductor(miViewIngresoConductores.TxtNombreConductor.getText(),Long.parseLong(miViewIngresoConductores.txtCedulaConductor.getText()),miViewIngresoConductores.txtCiudadReside.getText());
+                miEmpresas.agregarConductor(miViewIngresoConductores.TxtNombreConductor.getText(),Long.parseLong(miViewIngresoConductores.txtCedulaConductor.getText()),
+                        miViewIngresoConductores.comboCiudad.getSelectedItem().toString());
                 miViewIngresoConductores.setVisible(false);
                 viewCrud.setVisible(true);
                 mostrarConductores();
@@ -1064,13 +1080,13 @@ private void mostrarCiudades(){
         nombre=miVentanaIngresoClientes.txtNombreCliente.getText();
         telefono=miVentanaIngresoClientes.txtTelefonoCliente.getText();
         correo=miVentanaIngresoClientes.txtCorreoCliente.getText();
-        direccion=miVentanaIngresoClientes.txtDireccionCliente.getText();
+       
         if(nombre.length()==0 || telefono.length()==0 || correo.length()==0 || direccion.length()==0){
             JOptionPane.showMessageDialog(null, "Campos incompletos");
             miVentanaIngresoClientes.setVisible(true);
             viewCrud.setVisible(false);
         }else{
-            miEmpresas.agregarCliente(miVentanaIngresoClientes.txtNombreCliente.getText(),Long.parseLong(miVentanaIngresoClientes.txtTelefonoCliente.getText()),miVentanaIngresoClientes.txtCorreoCliente.getText(),miVentanaIngresoClientes.txtDireccionCliente.getText());
+            miEmpresas.agregarCliente(miVentanaIngresoClientes.txtNombreCliente.getText(),Long.parseLong(miVentanaIngresoClientes.txtTelefonoCliente.getText()),miVentanaIngresoClientes.txtCorreoCliente.getText(),miVentanaIngresoClientes.comboCiudad.getSelectedItem().toString());
             miVentanaIngresoClientes.setVisible(false);
             viewCrud.setVisible(true);
             mostrarClientes();
@@ -1104,7 +1120,7 @@ private void mostrarCiudades(){
             miViewIngresoProd.setVisible(true);
             viewCrud.setVisible(false);
         }else{
-            miEmpresas.agregarProducto(miViewIngresoProd.txtNombProd.getText(),miViewIngresoProd.txtUnidad.getText(), Double.parseDouble(miViewIngresoProd.txtPeso.getText()),Double.parseDouble(miViewIngresoProd.txtVolum.getText()));
+            miEmpresas.agregarProducto(miViewIngresoProd.txtNombProd.getText(),miViewIngresoProd.txtUnidad.getText(), Double.parseDouble(miViewIngresoProd.txtPeso.getText()),Double.parseDouble(miViewIngresoProd.txtVolum.getText()),miListaCaract);
             miViewIngresoProd.setVisible(false);
             viewCrud.setVisible(true);
             mostrarCaracteristicas();
@@ -1169,6 +1185,18 @@ private void mostrarCiudades(){
     
     
     }
+    
+     public void agregarCaracteristicasAlProducto(){
+         String caracter;
+         caracter=miViewIngresoProd.comboCaracteristicas.getSelectedItem().toString();
+         CaracteristicasEspeciales miCar=new CaracteristicasEspeciales();
+         miCar=miEmpresas.consultarCaracteristica(caracter);
+         agregarCaracter(miCar);
+    
+    
+    }
+    
+    
     public void agregarCaracter(CaracteristicasEspeciales miCar){
         if(miListaCaract.getHeadCaracteristica()==null){
             miListaCaract.setHeadCaracteristica(miCar);
@@ -1252,7 +1280,7 @@ private void mostrarCiudades(){
     public void limpiarTextoConductores(){
         miViewIngresoConductores.TxtNombreConductor.setText("");
         miViewIngresoConductores.txtCedulaConductor.setText("");
-        miViewIngresoConductores.txtCiudadReside.setText("");
+        
     }
     
     //******CARACTERISTICAS
@@ -1264,7 +1292,7 @@ private void mostrarCiudades(){
     //******PRODUCTOS
     public void limpiarTextoProductos(){
         miViewIngresoProd.txtNombProd.setText("");
-        miViewIngresoProd.txtCaract.setText("");
+       
         miViewIngresoProd.txtPeso.setText("");
         miViewIngresoProd.txtUnidad.setText("");
         miViewIngresoProd.txtVolum.setText("");
@@ -1284,7 +1312,7 @@ private void mostrarCiudades(){
     //******CLIENTES
     public void limpiarTextoClientes(){
         miVentanaIngresoClientes.txtCorreoCliente.setText("");
-        miVentanaIngresoClientes.txtDireccionCliente.setText("");
+        
         miVentanaIngresoClientes.txtNombreCliente.setText("");
         miVentanaIngresoClientes.txtTelefonoCliente.setText("");
     }
@@ -1292,6 +1320,7 @@ private void mostrarCiudades(){
     //Fin de funciones de limpiar texto
     
     //funciones para Agregar los textos a los jComboBox
+    ///*************ventanas viajes
     public void AgregarComboboxProductos(){
         Productos miProducto=new Productos();
         miProducto=miEmpresas.getMiListaProduc().getHeadProducto();
@@ -1318,6 +1347,7 @@ private void mostrarCiudades(){
         }
     }
     
+    //*******************ventana Vehiculos
     public void AgregarCiudadVehiculosCombo(){
         NodoCiudad miCiudad=new NodoCiudad();
         miCiudad=miEmpresas.getMiListaCiudades().getHeadNodo();
@@ -1333,6 +1363,43 @@ private void mostrarCiudades(){
         while(miCar!=null){
             miViewVehiculos.comboCaract.addItem(miCar.getCaracteristicas());
             miCar=miCar.getSiguienteCaracteristica();
+        }
+    
+    }
+    
+    
+    //******************ventana Productos
+    public void agregarCaracteristicasComboProductos(){
+        CaracteristicasEspeciales miCar=new CaracteristicasEspeciales();
+        miCar=miEmpresas.getMiListaCarac().getHeadCaracteristica();
+        while(miCar!=null){
+            
+            miViewIngresoProd.comboCaracteristicas.addItem(miCar.getCaracteristicas());
+            miCar=miCar.getSiguienteCaracteristica();
+        }
+    
+    
+    }
+    
+    
+    //************************ventana Conductores
+    public void agregarCiudadResidenciaConductores(){
+        NodoCiudad miCiudad=new NodoCiudad();
+        miCiudad=miEmpresas.getMiListaCiudades().getHeadNodo();
+        while(miCiudad!=null){
+            miViewIngresoConductores.comboCiudad.addItem(miCiudad.getNombre());
+            miCiudad=miCiudad.getSigNodo();
+        }
+    
+    }
+    
+    //*********************************ventana Clientes
+    public void agregarComboCiudadClientes(){
+          NodoCiudad miCiudad=new NodoCiudad();
+        miCiudad=miEmpresas.getMiListaCiudades().getHeadNodo();
+        while(miCiudad!=null){
+            miVentanaIngresoClientes.comboCiudad.addItem(miCiudad.getNombre());
+            miCiudad=miCiudad.getSigNodo();
         }
     
     }

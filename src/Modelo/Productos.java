@@ -8,6 +8,15 @@ public class Productos {
     private double Peso;
     private double Volumen;
     private Productos siguienteProducto;
+    private ListaCaracteristicasEspeciales listaCaracteristicas;
+
+    public ListaCaracteristicasEspeciales getListaCaracteristicas() {
+        return listaCaracteristicas;
+    }
+
+    public void setListaCaracteristicas(ListaCaracteristicasEspeciales listaCaracteristicas) {
+        this.listaCaracteristicas = listaCaracteristicas;
+    }
 
     public Productos() {
         
@@ -23,12 +32,13 @@ public class Productos {
     
     
     
-    public Productos(String NombreProducto,String Unidad, double Peso, double Volumen){
+    public Productos(String NombreProducto,String Unidad, double Peso, double Volumen, ListaCaracteristicasEspeciales listaCaracteristicas){
         this.NombreProducto=NombreProducto;
         this.Unidad=Unidad;
         this.Peso=Peso;
         this.Volumen=Volumen;
         this.siguienteProducto=null;
+        this.listaCaracteristicas=listaCaracteristicas;
     
     }
     

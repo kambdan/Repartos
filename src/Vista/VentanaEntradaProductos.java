@@ -33,7 +33,6 @@ public class VentanaEntradaProductos extends javax.swing.JFrame {
         jLabelUnidad = new javax.swing.JLabel();
         jLabelPesoUnidad = new javax.swing.JLabel();
         txtNombProd = new javax.swing.JTextField();
-        txtCaract = new javax.swing.JTextField();
         txtUnidad = new javax.swing.JTextField();
         txtPeso = new javax.swing.JTextField();
         jLabelVolumenUnidad = new javax.swing.JLabel();
@@ -41,6 +40,8 @@ public class VentanaEntradaProductos extends javax.swing.JFrame {
         btnIngresarProd = new javax.swing.JButton();
         btnCancelarProd = new javax.swing.JButton();
         btnOkProd = new javax.swing.JButton();
+        comboCaracteristicas = new javax.swing.JComboBox<>();
+        btnAgregarCaract = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,6 +75,8 @@ public class VentanaEntradaProductos extends javax.swing.JFrame {
 
         btnOkProd.setText("ok");
 
+        btnAgregarCaract.setText("Agregar Caracteristicas");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -87,21 +90,22 @@ public class VentanaEntradaProductos extends javax.swing.JFrame {
                     .addComponent(jLabelPesoUnidad)
                     .addComponent(jLabelCaracteristicasEspecialesProductos))
                 .addGap(73, 73, 73)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtNombProd)
-                        .addComponent(txtCaract)
-                        .addComponent(txtUnidad)
-                        .addComponent(txtPeso)
-                        .addComponent(txtVolum, javax.swing.GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE))
-                    .addComponent(jLabelDatosProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtNombProd)
+                    .addComponent(txtUnidad)
+                    .addComponent(txtPeso)
+                    .addComponent(txtVolum, javax.swing.GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE)
+                    .addComponent(jLabelDatosProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboCaracteristicas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(38, 38, 38)
+                .addComponent(btnAgregarCaract)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(188, 188, 188)
                 .addComponent(btnIngresarProd)
                 .addGap(159, 159, 159)
                 .addComponent(btnOkProd)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 202, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 213, Short.MAX_VALUE)
                 .addComponent(btnCancelarProd)
                 .addGap(135, 135, 135))
         );
@@ -115,10 +119,11 @@ public class VentanaEntradaProductos extends javax.swing.JFrame {
                     .addComponent(txtNombProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelNombreProducto))
                 .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtCaract, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelCaracteristicasEspecialesProductos))
-                .addGap(36, 36, 36)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelCaracteristicasEspecialesProductos)
+                    .addComponent(comboCaracteristicas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAgregarCaract))
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelUnidad)
                     .addComponent(txtUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -185,16 +190,17 @@ public class VentanaEntradaProductos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton btnAgregarCaract;
     public javax.swing.JButton btnCancelarProd;
     public javax.swing.JButton btnIngresarProd;
     public javax.swing.JButton btnOkProd;
+    public javax.swing.JComboBox<String> comboCaracteristicas;
     private javax.swing.JLabel jLabelCaracteristicasEspecialesProductos;
     private javax.swing.JLabel jLabelDatosProductos;
     private javax.swing.JLabel jLabelNombreProducto;
     private javax.swing.JLabel jLabelPesoUnidad;
     private javax.swing.JLabel jLabelUnidad;
     private javax.swing.JLabel jLabelVolumenUnidad;
-    public javax.swing.JTextField txtCaract;
     public javax.swing.JTextField txtNombProd;
     public javax.swing.JTextField txtPeso;
     public javax.swing.JTextField txtUnidad;

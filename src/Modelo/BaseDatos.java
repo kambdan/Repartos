@@ -20,15 +20,20 @@ public class BaseDatos {
     public void init(){
         
         //******para productos
-        miEmpresas.agregarProducto("Manzanas", "fundas", 1.0, 0);
-        miEmpresas.agregarProducto("Peras", "quintales", 1.0, 0);
-        miEmpresas.agregarProducto("Papas", "quintales", 1.0, 0);
-        miEmpresas.agregarProducto("Papayas", "fundas", 1.0, 0);
-        miEmpresas.agregarProducto("Aguacates", "quintales", 1.0, 0);
-        miEmpresas.agregarProducto("Tomates", "quintales", 1.0, 0);
-        miEmpresas.agregarProducto("Guineos", "fundas", 1.0, 0);
-        miEmpresas.agregarProducto("Uvas", "quintales", 1.0, 0);
-        miEmpresas.agregarProducto("Galletas", "quintales", 1.0, 0);
+        ListaCaracteristicasEspeciales miLista=new ListaCaracteristicasEspeciales();
+        CaracteristicasEspeciales nodo=new CaracteristicasEspeciales();
+         nodo.setCaracteristicas("a mano");
+        nodo.setDescripcion("SOLO pequeños");
+        miLista.setHeadCaracteristica(nodo);
+        miEmpresas.agregarProducto("Manzanas", "fundas", 1.0, 0,miLista);
+        miEmpresas.agregarProducto("Peras", "quintales", 1.0, 0,miLista);
+        miEmpresas.agregarProducto("Papas", "quintales", 1.0, 0,miLista);
+        miEmpresas.agregarProducto("Papayas", "fundas", 1.0, 0,miLista);
+        miEmpresas.agregarProducto("Aguacates", "quintales", 1.0, 0,miLista);
+        miEmpresas.agregarProducto("Tomates", "quintales", 1.0, 0,miLista);
+        miEmpresas.agregarProducto("Guineos", "fundas", 1.0, 0,miLista);
+        miEmpresas.agregarProducto("Uvas", "quintales", 1.0, 0,miLista);
+        miEmpresas.agregarProducto("Galletas", "quintales", 1.0, 0,miLista);
     
          
         //****************para caracteristicasEspeciales
@@ -75,11 +80,8 @@ public class BaseDatos {
         miEmpresas.agregarConductor("Jorge", 0104501120, "Cuenca");
         
         //****************Vehiculos
-        ListaCaracteristicasEspeciales miLista=new ListaCaracteristicasEspeciales();
-        CaracteristicasEspeciales nodo=new CaracteristicasEspeciales();
-        nodo.setCaracteristicas("a mano");
-        nodo.setDescripcion("SOLO pequeños");
-        miLista.setHeadCaracteristica(nodo);
+        
+       
         miEmpresas.agregarVehiculo("ABD2", "Chevrolet", "#wf", 152, 1420,"Cuenca",miLista);
         miEmpresas.agregarVehiculo("VSV2", "Hyndai", "#wf", 152, 1420,"quevedo",miLista);
         miEmpresas.agregarVehiculo("SDD2", "Toyota", "#wf", 152, 1420,"quevedo",miLista);
@@ -97,7 +99,7 @@ public class BaseDatos {
         miEmpresas.agregarCliente("Perez", 0121, "jasjj@.gma.com", "Cuenca");
         miEmpresas.agregarCliente("Enrique", 011, "bb@.gma.com", "Cuenca");
         miEmpresas.agregarCliente("Paul", 0121, "jdd@.gma.com", "Quito");
-        miEmpresas.agregarCliente("Luis", 0121, "ndvd@.gma.com", "Sucua");
+        miEmpresas.agregarCliente("Luis", 0121, "ndvd@.gma.com", "Quito");
         miEmpresas.agregarCliente("Campos", 0121, "asd@.gma.com", "Quevedo");
         miEmpresas.agregarCliente("Perez", 0121, "mbncv@.gma.com", "Cuenca");
         miEmpresas.agregarCliente("Perez", 0121, "jasdas@.gma.com", "Cuenca");

@@ -3,23 +3,31 @@ package Modelo;
 
 public class Clientes extends Personas{
     private String correoElectronico;
-    private String direccion;
-    private Clientes siguienteCliente;
+    private NodoCiudad direccion;
 
+    
    
     
     //Constructor
     public Clientes(){
     
     }
-    public Clientes(String Nombre, long telefono,String correo, String d){
+    public Clientes(String Nombre, long telefono,String correo, NodoCiudad direccion){
         super(Nombre,telefono);
         this.correoElectronico=correo;
-        this.direccion=d;
+        this.direccion=direccion;
         this.siguienteCliente=null;
         
     }
-    
+    public NodoCiudad getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(NodoCiudad direccion) {
+        this.direccion = direccion;
+    }
+    private Clientes siguienteCliente;
+
   
     public String getCorreoElectronico() {
         return correoElectronico;
@@ -29,13 +37,7 @@ public class Clientes extends Personas{
         this.correoElectronico = correoElectronico;
     }
 
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
+    
     
      public Clientes getSiguienteCliente() {
         return siguienteCliente;

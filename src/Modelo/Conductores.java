@@ -3,24 +3,26 @@ package Modelo;
 public class Conductores extends Personas{
     
     private long cedula;
-    private String CiudadReside;
+    private NodoCiudad CiudadResidencia;
 
-    public String getCiudadReside() {
-        return CiudadReside;
+    public NodoCiudad getCiudadResidencia() {
+        return CiudadResidencia;
     }
 
-    public void setCiudadReside(String CiudadReside) {
-        this.CiudadReside = CiudadReside;
+    public void setCiudadResidencia(NodoCiudad CiudadResidencia) {
+        this.CiudadResidencia = CiudadResidencia;
     }
+
+   
     private Conductores siguienteConductor;
 
     public Conductores(){
         
     }
-    public Conductores(String Nombre, long cedula,String Ciudad){
+    public Conductores(String Nombre, long cedula,NodoCiudad ciudadResisdencia){
         super(Nombre);
         this.cedula=cedula;
-        this.CiudadReside=Ciudad;
+        this.CiudadResidencia=ciudadResisdencia;
         this.siguienteConductor=null;
     }
     

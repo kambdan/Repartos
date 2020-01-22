@@ -13,7 +13,15 @@ public class ListaContratos {
     
     private Contratos headContratos;
     private Contratos tailContratos;
+    private int tamlistaContratos;
 
+    public int getTamlistaContratos() {
+        return tamlistaContratos;
+    }
+
+    public void setTamlistaContratos(int tamlistaContratos) {
+        this.tamlistaContratos = tamlistaContratos;
+    }
     public Contratos getHeadContratos() {
         return headContratos;
     }

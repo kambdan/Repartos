@@ -110,8 +110,11 @@ public class Empresas {
     //Fin ciudad
     
     //*********Funciones Vehiculos
-    public void agregarVehiculo(String placa, String marca, String modelo, double peso, double volumen){
+    public void agregarVehiculo(String placa, String marca, String modelo, double peso, double volumen,String ciudad,ListaCaracteristicasEspeciales miLista){
             Vehiculos nuevoVehiculo=new Vehiculos(placa, marca, modelo, peso, volumen);
+            NodoCiudad nod=consultarCiudad(ciudad);
+            nuevoVehiculo.setCiudad(nod);
+            nuevoVehiculo.setCaracteristicasVehiculo(miLista);
             if(miListaVehic.getHeadVehiculos()==null){
                 miListaVehic.setHeadVehiculos(nuevoVehiculo);
                 miListaVehic.setTailVehiculos(nuevoVehiculo);

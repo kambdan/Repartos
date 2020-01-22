@@ -5,6 +5,9 @@ public class ListaVehiculos {
     private int tamListaVehiculos;
     private Vehiculos headVehiculos;
     private Vehiculos tailVehiculos;
+    private Vehiculos listaFechasOcupadas;
+
+    
 
     //Constructor
     public ListaVehiculos(){
@@ -12,6 +15,15 @@ public class ListaVehiculos {
         this.headVehiculos=null;
         this.tailVehiculos=null;
     }
+    
+    public Vehiculos getListaFechasOcupadas() {
+        return listaFechasOcupadas;
+    }
+
+    public void setListaFechasOcupadas(Vehiculos listaFechasOcupadas) {
+        this.listaFechasOcupadas = listaFechasOcupadas;
+    }
+    
     public int getTamListaVehiculos() {
         return tamListaVehiculos;
     }

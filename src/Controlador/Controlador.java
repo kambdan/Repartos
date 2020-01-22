@@ -1,11 +1,13 @@
 
 package CONTROLADOR;
 
+import Modelo.BaseDatos;
 import Modelo.CaracteristicasEspeciales;
 import Modelo.Clientes;
 import Modelo.Conductores;
 import Modelo.Dibujos;
 import Modelo.Empresas;
+import Modelo.ListaCaracteristicasEspeciales;
 import Modelo.ListaClientes;
 import Modelo.ListaProductos;
 import Modelo.NodoCiudad;
@@ -50,7 +52,8 @@ public class Controlador implements ActionListener, KeyListener{
 
     private VentanaDibujo miViewDibujo;
     private ListaProductos miLista;
-    
+    private ListaCaracteristicasEspeciales miListaCaract;
+    private BaseDatos miBase;
 
     private VentanaEntradaViajes miViewViajes;
     
@@ -73,6 +76,7 @@ public class Controlador implements ActionListener, KeyListener{
         miViewDibujo=new VentanaDibujo();
         miViewViajes=new VentanaEntradaViajes();
         this.miEmpresas=miEmpresas;
+        miBase=new BaseDatos(miEmpresas);
         init();
     }
     
@@ -121,6 +125,7 @@ public class Controlador implements ActionListener, KeyListener{
         miViewVehiculos.btnCancelarVehiculo.addActionListener(this);
         miViewVehiculos.txtPesoMaximoVehiculo.addKeyListener(this);
         miViewVehiculos.txtVolumneMaximoVehiculo.addKeyListener(this);
+        miViewVehiculos.btnAgregarProduct.addActionListener(this);
         //Fin Vehiculos
         
         //ActionListener y KeyListener para la Ventana de ingreso de datos de los Conductores
@@ -196,7 +201,7 @@ public class Controlador implements ActionListener, KeyListener{
         //*********Solo para Ciudad
         if(e.getSource()==miViewPrincipal.btnCiudad){
                 viewCrud.setVisible(true);
-              
+                mostrarCiudades();
                 miViewPrincipal.setVisible(false);
                casoB=2;
             
@@ -258,6 +263,7 @@ public class Controlador implements ActionListener, KeyListener{
                miViewPrincipal.setVisible(false);
                viewCrud.btnModificar.setVisible(false);
                viewCrud.btnEliminar.setVisible(false);
+               mostrarVehiculos();
                casoB=3;
             }
             
@@ -268,12 +274,24 @@ public class Controlador implements ActionListener, KeyListener{
             
             if(viewCrud.btnCrear==e.getSource() && casoB==3){
                 miViewVehiculos.setVisible(true);
+                miViewVehiculos.btnAceptarVehiculo.setVisible(false);
                 viewCrud.setVisible(false);
-                limpiarTextoVehiculos();               
+                AgregarCiudadVehiculosCombo();
+                AgregarCaracterVehiculosCombo();
+                limpiarTextoVehiculos();   
+                miListaCaract=new ListaCaracteristicasEspeciales();
             }
             
+          if(miViewVehiculos.btnAgregarProduct==e.getSource()){
+             
+              agregarCaracteristicasAlVehiculo();
+              miViewVehiculos.btnAceptarVehiculo.setVisible(true);
+          }
+            
+            
             if(miViewVehiculos.btnAceptarVehiculo==e.getSource()){
-                validarVacioVehiculos(miViewVehiculos.txtPlacaVehiculo.getText(), miViewVehiculos.txtMarcaVehiculo.getText(), miViewVehiculos.txtModeloVehiculo.getText(),miViewVehiculos.txtPesoMaximoVehiculo.getText(),miViewVehiculos.txtVolumneMaximoVehiculo.getText());              
+                validarVacioVehiculos(miViewVehiculos.txtPlacaVehiculo.getText(), miViewVehiculos.txtMarcaVehiculo.getText(), miViewVehiculos.txtModeloVehiculo.getText(),
+                        miViewVehiculos.txtPesoMaximoVehiculo.getText(),miViewVehiculos.txtVolumneMaximoVehiculo.getText());              
             }else{
                if(miViewVehiculos.btnCancelarVehiculo==e.getSource()){
                    miViewVehiculos.setVisible(false);
@@ -294,7 +312,7 @@ public class Controlador implements ActionListener, KeyListener{
                      info[2]=miVehiculo.getModelo();
                      info[3]=String.valueOf(miVehiculo.getPesoMaximo());
                      info[4]=String.valueOf(miVehiculo.getVolumenMaximo());
-                     info[5]=String.valueOf(miVehiculo.getCiudad().getNombre());
+                     info[5]=miVehiculo.getCiudad().getNombre();
                      info[6]="caracteristicas";
 
                      modelo.addRow(info);
@@ -811,8 +829,8 @@ private void mostrarVehiculos(){
          info[2]=miVehiculo.getModelo();
          info[3]=String.valueOf(miVehiculo.getPesoMaximo());
          info[4]=String.valueOf(miVehiculo.getVolumenMaximo());
-         info[5]=String.valueOf(miVehiculo.getCiudad().getNombre());
-         info[6]="caracteristicas";
+         info[5]="7";
+         info[6]=miVehiculo.getCaracteristicasVehiculo().getHeadCaracteristica().getCaracteristicas();
         
          modelo.addRow(info);
          miVehiculo=miVehiculo.getSiguienteVehiculo();
@@ -852,7 +870,7 @@ private void mostrarCiudades(){
        CaracteristicasEspeciales miCarac=new CaracteristicasEspeciales();
        miCarac=miEmpresas.getMiListaCarac().getHeadCaracteristica();
        while(miCarac!=null){
-           miViewVehiculos.itemCaract.addItem("");
+           miViewVehiculos.comboCaract.addItem("");
            miCarac=miCarac.getSiguienteCaracteristica();
        }
     
@@ -1016,7 +1034,8 @@ private void mostrarCiudades(){
                 miViewVehiculos.setVisible(true);
                 viewCrud.setVisible(false);
             }else{
-                miEmpresas.agregarVehiculo(miViewVehiculos.txtPlacaVehiculo.getText(), miViewVehiculos.txtMarcaVehiculo.getText(), miViewVehiculos.txtModeloVehiculo.getText(),Double.parseDouble(miViewVehiculos.txtPesoMaximoVehiculo.getText()), Double.parseDouble(miViewVehiculos.txtVolumneMaximoVehiculo.getText()));
+                miEmpresas.agregarVehiculo(miViewVehiculos.txtPlacaVehiculo.getText(), miViewVehiculos.txtMarcaVehiculo.getText(), miViewVehiculos.txtModeloVehiculo.getText(),Double.parseDouble(miViewVehiculos.txtPesoMaximoVehiculo.getText()),
+                        Double.parseDouble(miViewVehiculos.txtVolumneMaximoVehiculo.getText()),miViewVehiculos.comboCiudad.getSelectedItem().toString(),miListaCaract);
                 miViewVehiculos.setVisible(false);
                 viewCrud.setVisible(true);
                 mostrarVehiculos();
@@ -1141,6 +1160,28 @@ private void mostrarCiudades(){
         //miEmpresas.
     
     }
+    public void agregarCaracteristicasAlVehiculo(){
+         String caracter;
+         caracter=miViewVehiculos.comboCaract.getSelectedItem().toString();
+         CaracteristicasEspeciales miCar=new CaracteristicasEspeciales();
+         miCar=miEmpresas.consultarCaracteristica(caracter);
+         agregarCaracter(miCar);
+    
+    
+    }
+    public void agregarCaracter(CaracteristicasEspeciales miCar){
+        if(miListaCaract.getHeadCaracteristica()==null){
+            miListaCaract.setHeadCaracteristica(miCar);
+            miListaCaract.setTailCaracterisitca(miCar);
+        }else{
+            miListaCaract.getTailCaracterisitca().setSiguienteCaracteristica(miCar);
+            miListaCaract.setTailCaracterisitca(miCar);
+        }
+        System.out.println("///**");
+        System.out.println("*****"+miListaCaract.getHeadCaracteristica().getCaracteristicas());
+    }
+    
+    
     public void agregarProductoLista(Productos miProducto){
         
         if(miLista.getHeadProducto()==null){
@@ -1264,7 +1305,7 @@ private void mostrarCiudades(){
         miCiudad=miEmpresas.getMiListaCiudades().getHeadNodo();
         while(miCiudad!=null){
             miViewViajes.comboCiudadOrigen.addItem(miCiudad.getNombre());
-            miCiudad=miCiudad.getSigVertice();
+            miCiudad=miCiudad.getSigNodo();
         }
     }
     
@@ -1273,9 +1314,30 @@ private void mostrarCiudades(){
         miCiudad=miEmpresas.getMiListaCiudades().getHeadNodo();
         while(miCiudad!=null){
             miViewViajes.comboCiudadDestino.addItem(miCiudad.getNombre());
-            miCiudad=miCiudad.getSigVertice();
+            miCiudad=miCiudad.getSigNodo();
         }
     }
+    
+    public void AgregarCiudadVehiculosCombo(){
+        NodoCiudad miCiudad=new NodoCiudad();
+        miCiudad=miEmpresas.getMiListaCiudades().getHeadNodo();
+        while(miCiudad!=null){
+            miViewVehiculos.comboCiudad.addItem(miCiudad.getNombre());
+            miCiudad=miCiudad.getSigNodo();
+        }
+    
+    }
+    public void AgregarCaracterVehiculosCombo(){
+        CaracteristicasEspeciales miCar=new CaracteristicasEspeciales();
+        miCar=miEmpresas.getMiListaCarac().getHeadCaracteristica();
+        while(miCar!=null){
+            miViewVehiculos.comboCaract.addItem(miCar.getCaracteristicas());
+            miCar=miCar.getSiguienteCaracteristica();
+        }
+    
+    }
+    
+    
     
     //fin ComBobox
     @Override

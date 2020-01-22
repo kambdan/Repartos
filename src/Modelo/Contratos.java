@@ -12,7 +12,15 @@ package Modelo;
 public class Contratos {
     
     private String ciudadDestino;
-    private int dia,mes,ano;
+    private Fechas fechaContrato;
+
+    public Fechas getFechaContrato() {
+        return fechaContrato;
+    }
+
+    public void setFechaContrato(Fechas fechaContrato) {
+        this.fechaContrato = fechaContrato;
+    }
     private Contratos siguienteContrato;
     private ListaProductos miLista;
 
@@ -26,9 +34,9 @@ public class Contratos {
     
     public Contratos(String ciudadDestino, int dia, int mes, int ano,ListaProductos miLista) {
         this.ciudadDestino = ciudadDestino;
-        this.dia = dia;
-        this.mes = mes;
-        this.ano = ano;
+        fechaContrato.setAño(ano);
+        fechaContrato.setMes(mes);
+        fechaContrato.setDia(dia);
         this.miLista=miLista;
         this.siguienteContrato=null;
     }
@@ -41,29 +49,7 @@ public class Contratos {
         this.ciudadDestino = ciudadDestino;
     }
 
-    public int getDia() {
-        return dia;
-    }
-
-    public void setDia(int dia) {
-        this.dia = dia;
-    }
-
-    public int getMes() {
-        return mes;
-    }
-
-    public void setMes(int mes) {
-        this.mes = mes;
-    }
-
-    public int getAno() {
-        return ano;
-    }
-
-    public void setAno(int ano) {
-        this.ano = ano;
-    }
+    
     
     public Contratos getSiguienteContrato() {
         return siguienteContrato;

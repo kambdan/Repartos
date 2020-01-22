@@ -41,10 +41,11 @@ public class VentanaEntradaVehiculos extends javax.swing.JFrame {
         txtVolumneMaximoVehiculo = new javax.swing.JTextField();
         btnCancelarVehiculo = new javax.swing.JButton();
         btnOkVehiculo = new javax.swing.JButton();
-        txtCiudadResidenc = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        itemCaract = new javax.swing.JComboBox<>();
+        comboCaract = new javax.swing.JComboBox<>();
+        comboCiudad = new javax.swing.JComboBox<>();
+        btnAgregarProduct = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -78,13 +79,16 @@ public class VentanaEntradaVehiculos extends javax.swing.JFrame {
 
         btnOkVehiculo.setText("OK");
 
-        txtCiudadResidenc.setText("jTextField1");
-
         jLabel7.setText("Ciudad Residencia:");
 
         jLabel8.setText("Caracteristicas:");
 
-        itemCaract.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        btnAgregarProduct.setText("Agregar Caracteristicas");
+        btnAgregarProduct.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarProductActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -122,20 +126,22 @@ public class VentanaEntradaVehiculos extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtVolumneMaximoVehiculo)
-                                    .addGroup(layout.createSequentialGroup()
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addGap(9, 9, 9)
                                         .addComponent(btnOkVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(btnCancelarVehiculo))))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(btnAgregarProduct)
+                                            .addComponent(btnCancelarVehiculo)))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel7)
                                     .addComponent(jLabel8))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtCiudadResidenc)
-                                    .addComponent(itemCaract, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
-                .addContainerGap(46, Short.MAX_VALUE))
+                                    .addComponent(comboCaract, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(comboCiudad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,12 +174,14 @@ public class VentanaEntradaVehiculos extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCiudadResidenc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(itemCaract, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(78, 78, 78)
+                    .addComponent(comboCaract, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(btnAgregarProduct)
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAceptarVehiculo)
                     .addComponent(btnOkVehiculo)
@@ -191,6 +199,10 @@ public class VentanaEntradaVehiculos extends javax.swing.JFrame {
     private void txtPesoMaximoVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesoMaximoVehiculoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPesoMaximoVehiculoActionPerformed
+
+    private void btnAgregarProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarProductActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAgregarProductActionPerformed
 
     /**
      * @param args the command line arguments
@@ -229,9 +241,11 @@ public class VentanaEntradaVehiculos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnAceptarVehiculo;
+    public javax.swing.JButton btnAgregarProduct;
     public javax.swing.JButton btnCancelarVehiculo;
     public javax.swing.JButton btnOkVehiculo;
-    public javax.swing.JComboBox<String> itemCaract;
+    public javax.swing.JComboBox<String> comboCaract;
+    public javax.swing.JComboBox<String> comboCiudad;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -240,7 +254,6 @@ public class VentanaEntradaVehiculos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    public javax.swing.JTextField txtCiudadResidenc;
     public javax.swing.JTextField txtMarcaVehiculo;
     public javax.swing.JTextField txtModeloVehiculo;
     public javax.swing.JTextField txtPesoMaximoVehiculo;

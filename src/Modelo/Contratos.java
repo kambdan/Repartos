@@ -23,7 +23,7 @@ public class Contratos {
     }
     private Contratos siguienteContrato;
     private ListaProductos miLista;
-
+    
     public ListaProductos getMiLista() {
         return miLista;
     }
@@ -31,7 +31,9 @@ public class Contratos {
     public void setMiLista(ListaProductos miLista) {
         this.miLista = miLista;
     }
-    
+    public Contratos(){
+        
+    }
     public Contratos(String ciudadDestino, int dia, int mes, int ano,ListaProductos miLista) {
         this.ciudadDestino = ciudadDestino;
         fechaContrato.setAño(ano);

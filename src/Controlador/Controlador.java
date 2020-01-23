@@ -760,7 +760,7 @@ public void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {
                // miViewOrdenamientos.setVisible(false);
                 //if(miViewOrdenamientos.btnObtenerReporte==e.getSource()){
                     if(miViewOrdenamientos.comboOrdenamiento.getSelectedItem().toString().equals("Seleccionar...") || miViewOrdenamientos.comboReportes.getSelectedItem().toString().equals("Seleccionar...")){
-                        JOptionPane.showMessageDialog(null, "Se debe seleccionar un ordenamiento");
+                        JOptionPane.showMessageDialog(null, "Se debe seleccionar un ordenamiento y un metodo de Reporte");
                         miViewOrdenamientos.setVisible(true);
                         miViewReportes.setVisible(false);
 
@@ -768,9 +768,16 @@ public void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {
                         
                         miOrdenamiento=new Ordenamientos();
                         ListaVehiculos miListaV=new ListaVehiculos();
-                        miListaV=miEmpresas.getMiListaVehic();
+                        miListaV=miEmpresas.getMiListaVehic();//recupera la lista de la clase empresa
                         ListaVehiculos nuevalista=new ListaVehiculos();
-                        nuevalista=miListaV;
+                        Vehiculos miVehiculo=new Vehiculos();
+                        miVehiculo=miListaV.getHeadVehiculos();
+                        //Se hace una copia de la lista que se recupero de la clase empresa
+                        //Caso contrario se ordena la lista
+                        for(int i=0; i<miListaV.getTamListaVehiculos(); i++){
+                            nuevalista.agregarVehiculo(nuevalista, miVehiculo);
+                            miVehiculo=miVehiculo.getSiguienteVehiculo();
+                        }
                         miOrdenamiento.setMiListaOrdenadaVehiculos(nuevalista);
                         
                         if(miViewOrdenamientos.comboOrdenamiento.getSelectedItem().toString().equals("Heap Sort")){

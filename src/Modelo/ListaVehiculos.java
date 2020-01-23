@@ -58,5 +58,6 @@ public class ListaVehiculos {
                 miListaVehic.getTailVehiculos().setSiguienteVehiculo(nuevoVehiculo);
                 miListaVehic.setTailVehiculos(nuevoVehiculo);
             }
+            tamListaVehiculos++;
         }   
     }

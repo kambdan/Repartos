@@ -64,15 +64,17 @@ public class Dibujos extends JPanel{
             g.drawString(nodAux.getNombre(),nodAux.getCoordX(),nodAux.getCoordY());
             g.setColor(Color.BLACK);
             g.fillOval(nodAux.getCoordX(),nodAux.getCoordY(), diametro, diametro);
-            if(nodAux.getCiudadEnlace().equals("cuenca")){
+            //if(nodAux.getCiudadEnlace().equals("cuenca")){
                 
-              g.drawLine (10+diametro/2, 10+diametro/2, nodAux.getCoordX()+diametro/2, nodAux.getCoordY()+diametro/2);
+            NodoCiudad aux=nodAux.getMiListaConectada().getHeadVetice();
+            while(aux!=null){    
+              g.drawLine (nodAux.getCoordX()+diametro/2, nodAux.getCoordY()+diametro/2, aux.getCoordX()+diametro/2, aux.getCoordY()+diametro/2);
               int x1,x0,y0,y1;
               int k=20;
-              x0=(int) (nodAux.getCoordX());
-              x1=10+diametro;
-              y0=(int) (nodAux.getCoordY());
-              y1=10+diametro;
+              x0=(int) (aux.getCoordX());
+              x1=nodAux.getCoordX()+diametro;
+              y0=(int) (aux.getCoordY());
+              y1=nodAux.getCoordY()+diametro;
               double alfa=Math.atan2(y1-y0,x1-x0);
               int xa=(int)(x1-k*Math.cos(alfa+1));
               int ya=(int)(y1-k*Math.sin(alfa+1));
@@ -86,6 +88,7 @@ public class Dibujos extends JPanel{
               g.drawLine(xa,ya,x1,y1);
               //+Math.pow(1/2*diametro*diametro,1/2)-diametro/2
               //+Math.pow(1/2*diametro*diametro,1/2)-diametro/2
+              aux=aux.getSigVertice();
             }
             nodAux=nodAux.getSigNodo();
         }

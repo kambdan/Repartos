@@ -435,14 +435,14 @@ public class Ordenamientos {
         nodoPoshijoMayor=devolverNodoContratos(miListaViajesContratados, posHijoMayor);
         Contratos aux=new Contratos();
         aux=nodoPosPadre;//Toma el valor del padre
-        nodoPosPadre.setDia(nodoPoshijoMayor.getDia());
-        nodoPosPadre.setMes(nodoPoshijoMayor.getMes());
-        nodoPosPadre.setAno(nodoPoshijoMayor.getAno());
+        nodoPosPadre.getFechaContrato().setDia(nodoPoshijoMayor.getFechaContrato().getDia());
+        nodoPosPadre.getFechaContrato().setMes(nodoPoshijoMayor.getFechaContrato().getMes());
+        nodoPosPadre.getFechaContrato().setAño(nodoPoshijoMayor.getFechaContrato().getAño());
         nodoPosPadre.setCiudadDestino(nodoPoshijoMayor.getCiudadDestino());
         nodoPosPadre.setMiLista(nodoPoshijoMayor.getMiLista());
-        nodoPoshijoMayor.setDia(aux.getDia());
-        nodoPoshijoMayor.setMes(aux.getMes());
-        nodoPoshijoMayor.setAno(aux.getAno());
+        nodoPoshijoMayor.getFechaContrato().setDia(aux.getFechaContrato().getDia());
+        nodoPoshijoMayor.getFechaContrato().setMes(aux.getFechaContrato().getMes());
+        nodoPoshijoMayor.getFechaContrato().setAño(aux.getFechaContrato().getAño());
         nodoPoshijoMayor.setCiudadDestino(aux.getCiudadDestino());
         nodoPoshijoMayor.setMiLista(aux.getMiLista());
     }
@@ -478,28 +478,28 @@ public class Ordenamientos {
                 aux_intercambio=devolverNodoContratos(miLista, i);
                 auxNodoi=devolverNodoContratos(miLista, i);
                 auxNodoi.setCiudadDestino(auxNodoj.getCiudadDestino());
-                auxNodoi.setDia(auxNodoj.getDia());
-                auxNodoi.setMes(auxNodoj.getMes());
-                auxNodoi.setAno(auxNodoj.getAno());
+                auxNodoi.getFechaContrato().setDia(auxNodoj.getFechaContrato().getDia());
+                auxNodoi.getFechaContrato().setMes(auxNodoj.getFechaContrato().getMes());
+                auxNodoi.getFechaContrato().setAño(auxNodoj.getFechaContrato().getAño());
                 auxNodoi.setMiLista(auxNodoj.getMiLista());
                 auxNodoj.setCiudadDestino(aux_intercambio.getCiudadDestino());
-                auxNodoj.setDia(aux_intercambio.getDia());
-                auxNodoj.setMes(aux_intercambio.getMes());
-                auxNodoj.setAno(aux_intercambio.getAno());
+                auxNodoj.getFechaContrato().setDia(aux_intercambio.getFechaContrato().getDia());
+                auxNodoj.getFechaContrato().setMes(aux_intercambio.getFechaContrato().getMes());
+                auxNodoj.getFechaContrato().setAño(aux_intercambio.getFechaContrato().getAño());
                 auxNodoj.setMiLista(aux_intercambio.getMiLista());
              }
         }
         aux_intercambio=devolverNodoContratos(miLista, i+1);
         auxNodoi1=devolverNodoContratos(miLista, i+1);
         auxNodoi1.setCiudadDestino(AuxNodoUltimo.getCiudadDestino());
-        auxNodoi1.setDia(AuxNodoUltimo.getDia());
-        auxNodoi1.setMes(AuxNodoUltimo.getMes());
-        auxNodoi1.setAno(AuxNodoUltimo.getAno());
+        auxNodoi1.getFechaContrato().setDia(AuxNodoUltimo.getFechaContrato().getDia());
+        auxNodoi1.getFechaContrato().setMes(AuxNodoUltimo.getFechaContrato().getMes());
+        auxNodoi1.getFechaContrato().setAño(AuxNodoUltimo.getFechaContrato().getAño());
         auxNodoi1.setMiLista(AuxNodoUltimo.getMiLista());
         AuxNodoUltimo.setCiudadDestino(aux_intercambio.getCiudadDestino());
-        AuxNodoUltimo.setDia(aux_intercambio.getDia());
-        AuxNodoUltimo.setMes(aux_intercambio.getMes());
-        AuxNodoUltimo.setAno(aux_intercambio.getAno());
+        AuxNodoUltimo.getFechaContrato().setDia(aux_intercambio.getFechaContrato().getDia());
+        AuxNodoUltimo.getFechaContrato().setMes(aux_intercambio.getFechaContrato().getMes());
+        AuxNodoUltimo.getFechaContrato().setAño(aux_intercambio.getFechaContrato().getAño());
         AuxNodoUltimo.setMiLista(aux_intercambio.getMiLista());      
         return(i+1);
     }

@@ -110,8 +110,11 @@ public class Empresas {
     //Fin ciudad
     
     //*********Funciones Vehiculos
-    public void agregarVehiculo(String placa, String marca, String modelo, double peso, double volumen){
+    public void agregarVehiculo(String placa, String marca, String modelo, double peso, double volumen,String ciudad,ListaCaracteristicasEspeciales miLista){
             Vehiculos nuevoVehiculo=new Vehiculos(placa, marca, modelo, peso, volumen);
+            NodoCiudad nod=consultarCiudad(ciudad);
+            nuevoVehiculo.setCiudad(nod);
+            nuevoVehiculo.setCaracteristicasVehiculo(miLista);
             if(miListaVehic.getHeadVehiculos()==null){
                 miListaVehic.setHeadVehiculos(nuevoVehiculo);
                 miListaVehic.setTailVehiculos(nuevoVehiculo);
@@ -138,7 +141,9 @@ public class Empresas {
     
     //*********Funciones Conductores
     public void agregarConductor(String Nombre,long cedula,String Ciudad){
-        Conductores miConductor=new Conductores(Nombre,cedula,Ciudad);
+        NodoCiudad miNodo=consultarCiudad(Ciudad);
+        Conductores miConductor=new Conductores(Nombre,cedula,miNodo);
+        
         if(miListaconductores.getHeadConductor()==null){
             miListaconductores.setHeadConductor(miConductor);
             miListaconductores.setTailConductor(miConductor);
@@ -229,9 +234,9 @@ public class Empresas {
     //Fin Caracteristicas Especiales
     
     //**********Funciones Productos
-    public void agregarProducto(String NombreProducto,String Unidad, double Peso, double Volumen){
+    public void agregarProducto(String NombreProducto,String Unidad, double Peso, double Volumen,ListaCaracteristicasEspeciales miLista){
         
-        Productos miProducto=new Productos(NombreProducto,Unidad,Peso,Volumen);
+        Productos miProducto=new Productos(NombreProducto,Unidad,Peso,Volumen,miLista);
         
         if(miListaProduc.getHeadProducto()==null){
             miListaProduc.setHeadProducto(miProducto);
@@ -344,8 +349,9 @@ public class Empresas {
     
     //*********Funciones Clientes
     public void agregarCliente(String Nombre, long telefono,String correo, String direccion){
+        NodoCiudad nodo=consultarCiudad(direccion);
+        Clientes nuevoCliente=new Clientes(Nombre,telefono,correo,nodo);
         
-        Clientes nuevoCliente=new Clientes(Nombre,telefono,correo,direccion);
         if(miListaClientes.getHeadCliente()==null){
             miListaClientes.setHeadCliente(nuevoCliente);
             miListaClientes.setTailCliente(nuevoCliente);
@@ -382,7 +388,7 @@ public class Empresas {
             nodAux.setNombre(NombreCliente);
             nodAux.setTelefono(telefono);
             nodAux.setCorreoElectronico(correo);
-            nodAux.setDireccion(direccion);
+            nodAux.getDireccion().setNombre(direccion);
 
             System.out.println("MODIFICADO CON EXITO");
         }else{

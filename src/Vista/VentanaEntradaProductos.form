@@ -33,16 +33,16 @@
                   <Component id="jLabelCaracteristicasEspecialesProductos" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="txtNombProd" alignment="0" max="32767" attributes="0"/>
-                      <Component id="txtCaract" alignment="0" max="32767" attributes="0"/>
-                      <Component id="txtUnidad" alignment="0" max="32767" attributes="0"/>
-                      <Component id="txtPeso" max="32767" attributes="0"/>
-                      <Component id="txtVolum" pref="393" max="32767" attributes="0"/>
-                  </Group>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="txtNombProd" alignment="0" max="32767" attributes="0"/>
+                  <Component id="txtUnidad" alignment="0" max="32767" attributes="0"/>
+                  <Component id="txtPeso" max="32767" attributes="0"/>
+                  <Component id="txtVolum" pref="393" max="32767" attributes="0"/>
                   <Component id="jLabelDatosProductos" min="-2" pref="190" max="-2" attributes="0"/>
+                  <Component id="comboCaracteristicas" alignment="0" max="32767" attributes="0"/>
               </Group>
+              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+              <Component id="btnAgregarCaract" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
@@ -50,7 +50,7 @@
               <Component id="btnIngresarProd" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="159" max="-2" attributes="0"/>
               <Component id="btnOkProd" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="202" max="32767" attributes="0"/>
+              <EmptySpace pref="213" max="32767" attributes="0"/>
               <Component id="btnCancelarProd" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="135" max="-2" attributes="0"/>
           </Group>
@@ -67,11 +67,12 @@
                   <Component id="jLabelNombreProducto" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="txtCaract" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabelCaracteristicasEspecialesProductos" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabelCaracteristicasEspecialesProductos" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="comboCaracteristicas" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnAgregarCaract" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabelUnidad" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtUnidad" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -131,11 +132,6 @@
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtCaract">
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-      </AuxValues>
-    </Component>
     <Component class="javax.swing.JTextField" name="txtUnidad">
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -178,6 +174,25 @@
     <Component class="javax.swing.JButton" name="btnOkProd">
       <Properties>
         <Property name="text" type="java.lang.String" value="ok"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="comboCaracteristicas">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnAgregarCaract">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Agregar Caracteristicas"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>

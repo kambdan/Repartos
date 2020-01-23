@@ -38,18 +38,18 @@
                       </Group>
                       <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="TxtNombreConductor" alignment="0" max="32767" attributes="0"/>
+                          <Component id="TxtNombreConductor" alignment="0" pref="364" max="32767" attributes="0"/>
                           <Component id="txtCedulaConductor" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtCiudadReside" alignment="0" pref="364" max="32767" attributes="0"/>
+                          <Component id="comboCiudad" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="142" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="162" max="-2" attributes="0"/>
               <Component id="btnAceptarConductor" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="292" max="32767" attributes="0"/>
+              <EmptySpace pref="318" max="32767" attributes="0"/>
               <Component id="btnCancelarConductor" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="143" max="-2" attributes="0"/>
           </Group>
@@ -70,12 +70,12 @@
                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtCedulaConductor" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtCiudadReside" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="comboCiudad" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="146" max="32767" attributes="0"/>
+              <EmptySpace pref="145" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnAceptarConductor" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnCancelarConductor" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -119,11 +119,6 @@
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtCiudadReside">
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-      </AuxValues>
-    </Component>
     <Component class="javax.swing.JButton" name="btnAceptarConductor">
       <Properties>
         <Property name="text" type="java.lang.String" value="Aceptar"/>
@@ -137,6 +132,17 @@
         <Property name="text" type="java.lang.String" value="Cancelar"/>
       </Properties>
       <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="comboCiudad">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
     </Component>

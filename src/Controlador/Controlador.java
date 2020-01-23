@@ -769,15 +769,20 @@ public void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {
                         miOrdenamiento=new Ordenamientos();
                         ListaVehiculos miListaV=new ListaVehiculos();
                         miListaV=miEmpresas.getMiListaVehic();
-                        miOrdenamiento.setMiListaOrdenadaVehiculos(miListaV);
+                        ListaVehiculos nuevalista=new ListaVehiculos();
+                        nuevalista=miListaV;
+                        miOrdenamiento.setMiListaOrdenadaVehiculos(nuevalista);
                         
                         if(miViewOrdenamientos.comboOrdenamiento.getSelectedItem().toString().equals("Heap Sort")){
                         //Realizar el metodo HEAP
                             if(miViewOrdenamientos.comboReportes.getSelectedItem().toString().equals("Placa")){
                                 //Ordenar HEAP POR PLACA
                                 System.out.println("*****");
-                                
+                                miOrdenamiento.imprimirLista(miListaV);
                                 miOrdenamiento.heapVehiculos();
+                                nuevalista=miOrdenamiento.getMiListaOrdenadaVehiculos();
+                                System.out.println("Mi lista Ordenada");
+                                miOrdenamiento.imprimirLista(nuevalista);
                                 //
                                 //mostrarReporteHeap(miOrdenamiento.getMiListaOrdenadaVehiculos());
                             }else if(miViewOrdenamientos.comboReportes.getSelectedItem().toString().equals("Contrato - Ciudad destino")){

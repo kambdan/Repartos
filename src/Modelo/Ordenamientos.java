@@ -34,7 +34,7 @@ public class Ordenamientos {
     //********************Funciones de metodos para ordenamientos de Vehiculos
     //InicioHeap
     public void heapVehiculos(){
-       imprimirLista(miListaOrdenadaVehiculos);
+       String padre,hijoIzquierdo,hijoderecho;
        int posPadre;
        Vehiculos nodoPosPadre=new Vehiculos();
        int posHijoIzquierdo;
@@ -43,7 +43,7 @@ public class Ordenamientos {
        Vehiculos nodoPosHijoderecho=new Vehiculos();
        int n;
        n=miListaOrdenadaVehiculos.getTamListaVehiculos()-1;
-       
+        System.out.println("Tamano Lista: "+miListaOrdenadaVehiculos.getTamListaVehiculos());
        do{
        posPadre=n/2;
        posHijoIzquierdo=2*posPadre+1;
@@ -60,7 +60,9 @@ public class Ordenamientos {
               
           }else if(posHijoIzquierdo<=n && posHijoDrecho>n){//quiere decir que solo tiene hijo izquierdo
               nodoPosPadre=devolverNodo(miListaOrdenadaVehiculos,posPadre);
+              padre=nodoPosPadre.getPlaca();
               nodoPosHijoIzquierdo=devolverNodo(miListaOrdenadaVehiculos, posHijoIzquierdo);
+              hijoIzquierdo=nodoPosHijoIzquierdo.getPlaca();
               //Debe hacer una comparacion con el hijo izquierdo
               if(nodoPosPadre.getPlaca().compareTo(nodoPosHijoIzquierdo.getPlaca())<0){
                   //Se deben intercambiarVehiculos
@@ -82,9 +84,12 @@ public class Ordenamientos {
                 nodoPosPadre=devolverNodo(miListaOrdenadaVehiculos,posPadre);
                 nodoPosHijoIzquierdo=devolverNodo(miListaOrdenadaVehiculos, posHijoIzquierdo);
                 nodoPosHijoderecho=devolverNodo(miListaOrdenadaVehiculos, posHijoDrecho);
-                if(nodoPosPadre.getPlaca().compareTo(nodoPosHijoIzquierdo.getPlaca())<0){//Se pregunta si el padre es menor que el hijo izquierdo
+                padre=nodoPosPadre.getPlaca();
+                hijoIzquierdo=nodoPosHijoIzquierdo.getPlaca();
+                hijoderecho=nodoPosHijoderecho.getPlaca();
+                if(padre.compareTo(hijoIzquierdo)<0){//Se pregunta si el padre es menor que el hijo izquierdo
                     //Quiere decir que el hijo izquiero es mayor que el padre
-                    if(nodoPosHijoIzquierdo.getPlaca().compareTo(nodoPosHijoderecho.getPlaca())>0){
+                    if(hijoIzquierdo.compareTo(hijoderecho)>0){
                         //Esto quiere decir que el mayor de los 3 es el hijo izquierdo
                         //Se debe intercambiarVehiculos el padre por el hijo izquierdo
                         intercambiarVehiculos(posPadre, posHijoIzquierdo);
@@ -101,8 +106,8 @@ public class Ordenamientos {
                             
                     }
                     
-                }else if(nodoPosPadre.getPlaca().compareTo(nodoPosHijoderecho.getPlaca())<0){//Se pregunta si el padre es menor que el hijo derecho
-                    if(nodoPosHijoderecho.getPlaca().compareTo(nodoPosHijoIzquierdo.getPlaca())>0){//Quiere decir que el hijo derecho es el mayor de los 3
+                }else if(padre.compareTo(hijoderecho)<0){//Se pregunta si el padre es menor que el hijo derecho
+                    if(hijoderecho.compareTo(hijoIzquierdo)>0){//Quiere decir que el hijo derecho es el mayor de los 3
                         //Se debe intercambiarVehiculos el padre por el hijo derecho
                             intercambiarVehiculos(posPadre, posHijoDrecho);
                             posPadre=posPadre-1;
@@ -135,10 +140,9 @@ public class Ordenamientos {
        }while(n!=0);
        
         System.out.println("Lista Ordenada");
-       imprimirLista(miListaOrdenadaVehiculos);
    }
     public void intercambiarVehiculos(int posPadre,int posHijoMayor){
-        String placa,marca,modelo;
+        String placa,placa1,marca,modelo;
         NodoCiudad miCiudad=new NodoCiudad();
         double pesoM,volumenM;
         ListaCaracteristicasEspeciales miListaC=new ListaCaracteristicasEspeciales();
@@ -148,33 +152,24 @@ public class Ordenamientos {
         Vehiculos nodoPoshijoMayor=new Vehiculos();
         nodoPosPadre=devolverNodo(miListaOrdenadaVehiculos, posPadre);
         nodoPoshijoMayor=devolverNodo(miListaOrdenadaVehiculos, posHijoMayor);
-        placa=nodoPoshijoMayor.getPlaca();
-        marca=nodoPoshijoMayor.getMarca();
-        modelo=nodoPoshijoMayor.getModelo();
-        miCiudad=nodoPoshijoMayor.getCiudad();
-        pesoM=nodoPoshijoMayor.getPesoMaximo();
-        volumenM=nodoPoshijoMayor.getVolumenMaximo();
-        miListaC=nodoPoshijoMayor.getCaracteristicasVehiculo();
-        misFechas=nodoPoshijoMayor.getListaFechas();
-        Vehiculos aux=new Vehiculos();
-        aux=nodoPosPadre;//Toma el valor del padre
-        nodoPosPadre.setPlaca(placa);
-        nodoPosPadre.setMarca(marca);
-        nodoPosPadre.setModelo(modelo);
-        nodoPosPadre.setCiudad(miCiudad);
-        nodoPosPadre.setPesoMaximo(pesoM);
-        nodoPosPadre.setVolumenMaximo(volumenM);
-        nodoPosPadre.setCaracteristicasVehiculo(miListaC);
-        nodoPosPadre.setListaFechas(misFechas);
+        placa=nodoPosPadre.getPlaca();
+        marca=nodoPosPadre.getMarca();
+        modelo=nodoPosPadre.getModelo();
+        miCiudad=nodoPosPadre.getCiudad();
+        pesoM=nodoPosPadre.getPesoMaximo();
+        volumenM=nodoPosPadre.getVolumenMaximo();
+        miListaC=nodoPosPadre.getCaracteristicasVehiculo();
+        misFechas=nodoPosPadre.getListaFechas();
+        //Toma el valor del padre
+        nodoPosPadre.setPlaca(nodoPoshijoMayor.getPlaca());
+        nodoPosPadre.setMarca(nodoPoshijoMayor.getMarca());
+        nodoPosPadre.setModelo(nodoPoshijoMayor.getModelo());
+        nodoPosPadre.setCiudad(nodoPoshijoMayor.getCiudad());
+        nodoPosPadre.setPesoMaximo(nodoPoshijoMayor.getPesoMaximo());
+        nodoPosPadre.setVolumenMaximo(nodoPoshijoMayor.getVolumenMaximo());
+        nodoPosPadre.setCaracteristicasVehiculo(nodoPoshijoMayor.getCaracteristicasVehiculo());
+        nodoPosPadre.setListaFechas(nodoPoshijoMayor.getListaFechas());
         //*****Para aux
-        placa=aux.getPlaca();
-        marca=aux.getMarca();
-        modelo=aux.getModelo();
-        miCiudad=aux.getCiudad();
-        pesoM=aux.getPesoMaximo();
-        volumenM=aux.getVolumenMaximo();
-        miListaC=aux.getCaracteristicasVehiculo();
-        misFechas=aux.getListaFechas();
         nodoPoshijoMayor.setPlaca(placa);
         nodoPoshijoMayor.setMarca(marca);
         nodoPoshijoMayor.setModelo(modelo);
@@ -557,27 +552,19 @@ public class Ordenamientos {
         
         nodoPosPadre=devolverNodoContratos(miListaViajesContratados, posPadre);
         nodoPoshijoMayor=devolverNodoContratos(miListaViajesContratados, posHijoMayor);
+        //Toma el valor del padre
+        dia=nodoPosPadre.getFechaContrato().getDia();
+        mes=nodoPosPadre.getFechaContrato().getMes();
+        ano=nodoPosPadre.getFechaContrato().getAño();
+        miCiudad=nodoPosPadre.getCiudadDestino();
+        miListaP=nodoPosPadre.getMiLista();
         
-        dia=nodoPoshijoMayor.getFechaContrato().getDia();
-        mes=nodoPoshijoMayor.getFechaContrato().getMes();
-        ano=nodoPoshijoMayor.getFechaContrato().getAño();
-        miCiudad=nodoPoshijoMayor.getCiudadDestino();
-        miListaP=nodoPoshijoMayor.getMiLista();
-        
-        Contratos aux=new Contratos();
-        aux=nodoPosPadre;//Toma el valor del padre
-        nodoPosPadre.getFechaContrato().setDia(dia);
-        nodoPosPadre.getFechaContrato().setMes(mes);
-        nodoPosPadre.getFechaContrato().setAño(ano);
-        nodoPosPadre.setCiudadDestino(miCiudad);
-        nodoPosPadre.setMiLista(miListaP);
-        
-        dia=aux.getFechaContrato().getDia();
-        mes=aux.getFechaContrato().getMes();
-        ano=aux.getFechaContrato().getAño();
-        miCiudad=aux.getCiudadDestino();
-        miListaP=aux.getMiLista();
-        
+        nodoPosPadre.getFechaContrato().setDia(nodoPoshijoMayor.getFechaContrato().getDia());
+        nodoPosPadre.getFechaContrato().setMes(nodoPoshijoMayor.getFechaContrato().getMes());
+        nodoPosPadre.getFechaContrato().setAño(nodoPoshijoMayor.getFechaContrato().getAño());
+        nodoPosPadre.setCiudadDestino(nodoPoshijoMayor.getCiudadDestino());
+        nodoPosPadre.setMiLista(nodoPoshijoMayor.getMiLista());
+
         nodoPoshijoMayor.getFechaContrato().setDia(dia);
         nodoPoshijoMayor.getFechaContrato().setMes(mes);
         nodoPoshijoMayor.getFechaContrato().setAño(ano);
@@ -739,7 +726,7 @@ public class Ordenamientos {
     
     //*******************Funciones de Ordenamientos para los contratos segun la fecha
         //InicioHeapSort
-       public void heapContratosFechas(){
+    public void heapContratosFechas(){
        int posPadre;
        Contratos nodoPosPadre=new Contratos();
        int posHijoIzquierdo;
@@ -849,26 +836,18 @@ public class Ordenamientos {
         nodoPosPadre=devolverNodoContratos(miListaViajesContratados, posPadre);
         nodoPoshijoMayor=devolverNodoContratos(miListaViajesContratados, posHijoMayor);
         
-        dia=nodoPoshijoMayor.getFechaContrato().getDia();
-        mes=nodoPoshijoMayor.getFechaContrato().getMes();
-        ano=nodoPoshijoMayor.getFechaContrato().getAño();
-        miCiudad=nodoPoshijoMayor.getCiudadDestino();
-        miListaP=nodoPoshijoMayor.getMiLista();
+        dia=nodoPosPadre.getFechaContrato().getDia();
+        mes=nodoPosPadre.getFechaContrato().getMes();
+        ano=nodoPosPadre.getFechaContrato().getAño();
+        miCiudad=nodoPosPadre.getCiudadDestino();
+        miListaP=nodoPosPadre.getMiLista();
         
-        Contratos aux=new Contratos();
-        aux=nodoPosPadre;//Toma el valor del padre
-        nodoPosPadre.getFechaContrato().setDia(dia);
-        nodoPosPadre.getFechaContrato().setMes(mes);
-        nodoPosPadre.getFechaContrato().setAño(ano);
-        nodoPosPadre.setCiudadDestino(miCiudad);
-        nodoPosPadre.setMiLista(miListaP);
-        
-        dia=aux.getFechaContrato().getDia();
-        mes=aux.getFechaContrato().getMes();
-        ano=aux.getFechaContrato().getAño();
-        miCiudad=aux.getCiudadDestino();
-        miListaP=aux.getMiLista();
-        
+        nodoPosPadre.getFechaContrato().setDia(nodoPoshijoMayor.getFechaContrato().getDia());
+        nodoPosPadre.getFechaContrato().setMes(nodoPoshijoMayor.getFechaContrato().getMes());
+        nodoPosPadre.getFechaContrato().setAño(nodoPoshijoMayor.getFechaContrato().getAño());
+        nodoPosPadre.setCiudadDestino(nodoPoshijoMayor.getCiudadDestino());
+        nodoPosPadre.setMiLista(nodoPoshijoMayor.getMiLista());
+
         nodoPoshijoMayor.getFechaContrato().setDia(dia);
         nodoPoshijoMayor.getFechaContrato().setMes(mes);
         nodoPoshijoMayor.getFechaContrato().setAño(ano);

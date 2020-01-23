@@ -631,16 +631,14 @@ public void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {
      
         if(miViewViajes.btnAceptarViaje==e.getSource()){
             //validarVacioViajes(miViewViajes.txtClienteConViaje.getText());
-            
+                    
         }else{
             if(miViewViajes.btnCancelarViaje==e.getSource()){
                 miViewViajes.setVisible(false);
                 viewCrud.setVisible(true);
             }
         }
-        
-        
-          
+  
         //Fin contratos
         
         //*********Solo clientes

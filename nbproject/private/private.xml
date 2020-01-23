@@ -3,12 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
+            <file>file:/C:/Users/CARLOS%20ARMIJOS/Desktop/PDIC2019/RepartosFinal1/src/Vista/VentanaOrdenamientos.java</file>
+            <file>file:/C:/Users/CARLOS%20ARMIJOS/Desktop/PDIC2019/RepartosFinal1/src/Modelo/ListaVehiculos.java</file>
+            <file>file:/C:/Users/CARLOS%20ARMIJOS/Desktop/PDIC2019/RepartosFinal1/src/Modelo/ListaProductos.java</file>
+            <file>file:/C:/Users/CARLOS%20ARMIJOS/Desktop/PDIC2019/RepartosFinal1/src/Modelo/Main.java</file>
+=======
             <file>file:/C:/Users/MCJA/Documents/NetBeansProjects/Repartos/src/Modelo/ListaContratos.java</file>
             <file>file:/C:/Users/MCJA/Documents/NetBeansProjects/Repartos/src/Modelo/Contratos.java</file>
             <file>file:/C:/Users/MCJA/Documents/NetBeansProjects/Repartos/src/Modelo/ListaVehiculos.java</file>
             <file>file:/C:/Users/MCJA/Documents/NetBeansProjects/Repartos/src/Modelo/Empresas.java</file>
             <file>file:/C:/Users/MCJA/Documents/NetBeansProjects/Repartos/src/Modelo/Fechas.java</file>
             <file>file:/C:/Users/MCJA/Documents/NetBeansProjects/Repartos/src/Modelo/Vehiculos.java</file>
+>>>>>>> 312219a27f93b39bb8386624f090d8a289a895af
         </group>
     </open-files>
 </project-private>

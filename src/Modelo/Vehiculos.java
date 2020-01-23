@@ -46,7 +46,7 @@ public class Vehiculos {
         this.siguienteVehiculo=null;
         this.CaracteristicasVehiculo=new ListaCaracteristicasEspeciales();
     }
-    public Vehiculos(String placa, String marca, String modelo, NodoCiudad ciudad,double peso, double volumen,ListaCaracteristicasEspeciales CaracteristicasVehiculo){
+    public Vehiculos(String placa, String marca, String modelo, NodoCiudad ciudad,double peso, double volumen,ListaCaracteristicasEspeciales CaracteristicasVehiculo,ListaFechas miListaFechas){
         this.Placa=placa;
         this.Marca=marca;
         this.Modelo=modelo;
@@ -55,6 +55,7 @@ public class Vehiculos {
         this.VolumenMaximo=volumen;
         this.siguienteVehiculo=null;
         this.CaracteristicasVehiculo=CaracteristicasVehiculo;
+        this.listaFechas=miListaFechas;
     }
     
     public String getPlaca() {

@@ -33,6 +33,7 @@ public class VentanaOrdenamientos extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         comboReportes = new javax.swing.JComboBox<>();
         btnObtenerReporte = new javax.swing.JButton();
+        btnAtras = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -40,7 +41,7 @@ public class VentanaOrdenamientos extends javax.swing.JFrame {
 
         jLabel2.setText("Ordenar por:");
 
-        comboOrdenamiento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboOrdenamiento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar...", "Heap Sort", "Quick Sort", "Merge Sort" }));
         comboOrdenamiento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboOrdenamientoActionPerformed(evt);
@@ -49,9 +50,16 @@ public class VentanaOrdenamientos extends javax.swing.JFrame {
 
         jLabel3.setText("Reportar: ");
 
-        comboReportes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboReportes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar...", "Placa", "Contrato -Ciudad destino", "Fecha" }));
+        comboReportes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboReportesActionPerformed(evt);
+            }
+        });
 
         btnObtenerReporte.setText("Obtener Reporte");
+
+        btnAtras.setText("Atrás");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -60,8 +68,8 @@ public class VentanaOrdenamientos extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(149, 149, 149)
-                        .addComponent(jLabel1))
+                        .addContainerGap()
+                        .addComponent(btnAtras))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -72,26 +80,31 @@ public class VentanaOrdenamientos extends javax.swing.JFrame {
                             .addComponent(comboOrdenamiento, 0, 171, Short.MAX_VALUE)
                             .addComponent(comboReportes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(136, 136, 136)
+                        .addGap(146, 146, 146)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(137, 137, 137)
                         .addComponent(btnObtenerReporte)))
-                .addContainerGap(106, Short.MAX_VALUE))
+                .addContainerGap(116, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(btnAtras)
+                .addGap(2, 2, 2)
                 .addComponent(jLabel1)
-                .addGap(22, 22, 22)
+                .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(comboOrdenamiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
+                .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(comboReportes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(65, 65, 65)
+                .addGap(18, 18, 18)
                 .addComponent(btnObtenerReporte)
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         pack();
@@ -100,6 +113,10 @@ public class VentanaOrdenamientos extends javax.swing.JFrame {
     private void comboOrdenamientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboOrdenamientoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_comboOrdenamientoActionPerformed
+
+    private void comboReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboReportesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboReportesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -137,6 +154,7 @@ public class VentanaOrdenamientos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton btnAtras;
     public javax.swing.JButton btnObtenerReporte;
     public javax.swing.JComboBox<String> comboOrdenamiento;
     public javax.swing.JComboBox<String> comboReportes;

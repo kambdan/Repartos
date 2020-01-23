@@ -20,8 +20,10 @@ import Vista.VentanaEntradaConductores;
 import Vista.VentanaEntradaProductos;
 import Vista.VentanaEntradaVehiculos;
 import Vista.VentanaEntradaViajes;
+import Vista.VentanaOrdenamientos;
 import Vista.ventanaCRUD;
 import Vista.VentanaPrincipal;
+import Vista.VentanaReportes;
 import Vista.ventanaEntradaClientes;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -49,13 +51,14 @@ public class Controlador implements ActionListener, KeyListener{
     private VentanaEntradaConductores miViewIngresoConductores;
     private VentanaEntradaVehiculos miViewVehiculos;
     private VentanaEntradaCiudades miViewCiudades;
-
     private VentanaDibujo miViewDibujo;
     private ListaProductos miLista;
     private ListaCaracteristicasEspeciales miListaCaract;
     private BaseDatos miBase;
 
     private VentanaEntradaViajes miViewViajes;
+    private VentanaOrdenamientos miViewOrdenamientos;
+    private VentanaReportes miViewReportes;
     
     //Fin de las variables para las ventanas
     
@@ -75,7 +78,10 @@ public class Controlador implements ActionListener, KeyListener{
         miViewCiudades=new VentanaEntradaCiudades();
         miViewDibujo=new VentanaDibujo();
         miViewViajes=new VentanaEntradaViajes();
+        miViewOrdenamientos=new VentanaOrdenamientos();
+        miViewReportes=new VentanaReportes();
         this.miEmpresas=miEmpresas;
+        
         miBase=new BaseDatos(miEmpresas);
         init();
     }
@@ -93,6 +99,7 @@ public class Controlador implements ActionListener, KeyListener{
         miViewPrincipal.btnVehiculos.addActionListener(this);
         miViewPrincipal.btnViajar.addActionListener(this);
         miViewPrincipal.btnMapa.addActionListener(this);
+        miViewPrincipal.btnReportes.addActionListener(this);
         //Fin de los botones de la VENTANA principal
 
         //****Action listener para los botones de la ventana viewCRUD
@@ -170,7 +177,15 @@ public class Controlador implements ActionListener, KeyListener{
         miVentanaIngresoClientes.btnCancelarCliente.addActionListener(this);
         miVentanaIngresoClientes.txtTelefonoCliente.addKeyListener(this);
         //Fin clientes
+        
+        //ActionListener y KeyListener para la Ventana de Reportes y Ordenamientos
+        miViewReportes.btnOkReporte.addActionListener(this);
+        miViewOrdenamientos.btnObtenerReporte.addActionListener(this);
+        miViewOrdenamientos.btnAtras.addActionListener(this);
+        //miViewOrdenamientos.comboOrdenamiento.addActionListener(this);
+        //Fin Reportes
 
+        
     }       
 public void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {                                            
 
@@ -626,9 +641,6 @@ public void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {
             }
         }
         
-        
-        
-     
         if(miViewViajes.btnAceptarViaje==e.getSource()){
             //validarVacioViajes(miViewViajes.txtClienteConViaje.getText());
             
@@ -734,6 +746,75 @@ public void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {
                miVentanaIngresoClientes.btnOkCliente.setVisible(false);
             }
         //Fin clientes
+        
+        //**********************Solo ORDENAMIENTOS y REPORTES
+            
+            if(miViewPrincipal.btnReportes==e.getSource()){
+                miViewOrdenamientos.setVisible(true);
+                miViewPrincipal.setVisible(false);
+                casoB=9;
+            }
+            if(miViewOrdenamientos.btnObtenerReporte==e.getSource()){
+               // miViewOrdenamientos.setVisible(false);
+                //if(miViewOrdenamientos.btnObtenerReporte==e.getSource()){
+                    if(miViewOrdenamientos.comboOrdenamiento.getSelectedItem().toString().equals("Seleccionar...") || miViewOrdenamientos.comboReportes.getSelectedItem().toString().equals("Seleccionar...")){
+                        JOptionPane.showMessageDialog(null, "Se debe seleccionar un ordenamiento");
+                        miViewOrdenamientos.setVisible(true);
+                        miViewReportes.setVisible(false);
+
+                    }else{
+                        if(miViewOrdenamientos.comboOrdenamiento.getSelectedItem().toString().equals("Heap Sort")){
+                        //Realizar el metodo HEAP
+                            if(miViewOrdenamientos.comboReportes.getSelectedItem().toString().equals("Placa")){
+                                //Ordenar HEAP POR PLACA
+                            }else if(miViewOrdenamientos.comboReportes.getSelectedItem().toString().equals("Contrato - Ciudad destino")){
+                                //Ordenar HEAP POR CONTRATO
+                            }else if(miViewOrdenamientos.comboReportes.getSelectedItem().toString().equals("Fecha")){
+                                //Ordenar HEAP POR FECHA
+                            }
+                        }else{
+                            if(miViewOrdenamientos.comboOrdenamiento.getSelectedItem().toString().equals("Quick Sort")){
+                                //Realizar el metodo QUICK
+                                if(miViewOrdenamientos.comboReportes.getSelectedItem().toString().equals("Placa")){
+                                    //Ordenar QUICK POR PLACA
+                                }else if(miViewOrdenamientos.comboReportes.getSelectedItem().toString().equals("Contrato - Ciudad destino")){
+                                    //Ordenar QUICK POR CONTRATO
+                                }else if(miViewOrdenamientos.comboReportes.getSelectedItem().toString().equals("Fecha")){
+                                    //Ordenar QUICK POR FECHA
+                                }
+                            }else{
+                                if(miViewOrdenamientos.comboOrdenamiento.getSelectedItem().toString().equals("Merge Sort")){
+                                    //Realizar el metodo MERGE
+                                    if(miViewOrdenamientos.comboReportes.getSelectedItem().toString().equals("Placa")){
+                                        //Ordenar MERGE POR PLACA
+                                    }else if(miViewOrdenamientos.comboReportes.getSelectedItem().toString().equals("Contrato - Ciudad destino")){
+                                        //Ordenar MERGE POR CONTRATO
+                                    }else if(miViewOrdenamientos.comboReportes.getSelectedItem().toString().equals("Fecha")){
+                                        //Ordenar MERGE POR FECHA
+                                    }
+                                }
+                            }
+                        }
+                        miViewReportes.setVisible(true);
+                        miViewReportes.txtxReportes.setEnabled(false);
+                    }
+            }else{ 
+                if(miViewOrdenamientos.btnAtras==e.getSource()){
+                    miViewOrdenamientos.setVisible(false);
+                    miViewPrincipal.setVisible(true);
+
+                }   
+            }
+            if(miViewReportes.btnOkReporte==e.getSource()){
+                miViewReportes.setVisible(false);
+                
+            }
+        
+        
+        //Fin Ordenamientos y Reportes
+        
+        
+        
         
         // *************************solo mapas
         if(miViewPrincipal.btnMapa==e.getSource()){

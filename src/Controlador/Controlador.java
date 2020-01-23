@@ -763,10 +763,10 @@ public void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {
                         JOptionPane.showMessageDialog(null, "Se debe seleccionar un ordenamiento");
                         miViewOrdenamientos.setVisible(true);
                         miViewReportes.setVisible(false);
-
                     }else{
-                        
                         miOrdenamiento=new Ordenamientos();
+                        
+                        
                         ListaVehiculos miListaV=new ListaVehiculos();
                         miListaV=miEmpresas.getMiListaVehic();
                         ListaVehiculos nuevalista=new ListaVehiculos();
@@ -777,8 +777,6 @@ public void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {
                         //Realizar el metodo HEAP
                             if(miViewOrdenamientos.comboReportes.getSelectedItem().toString().equals("Placa")){
                                 //Ordenar HEAP POR PLACA
-                                System.out.println("*****");
-                                miOrdenamiento.imprimirLista(miListaV);
                                 miOrdenamiento.heapVehiculos();
                                 nuevalista=miOrdenamiento.getMiListaOrdenadaVehiculos();
                                 System.out.println("Mi lista Ordenada");
@@ -812,7 +810,7 @@ public void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {
                                     
                                     if(miViewOrdenamientos.comboReportes.getSelectedItem().toString().equals("Placa")){
                                         //Ordenar MERGE POR PLACA
-                                        miOrdenamiento.ordenarMergeSortVehiculos(miListaV, 0, 6);
+                                        miOrdenamiento.ordenarMergeSortVehiculos(miListaV, 0, miListaV.getTamListaVehiculos()-1);
                                         miOrdenamiento.imprimirLista(miListaV);
                                     }else if(miViewOrdenamientos.comboReportes.getSelectedItem().toString().equals("Contrato - Ciudad destino")){
                                         //Ordenar MERGE POR CONTRATO

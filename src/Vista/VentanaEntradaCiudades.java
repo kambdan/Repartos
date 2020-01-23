@@ -93,9 +93,6 @@ public class VentanaEntradaCiudades extends javax.swing.JFrame {
 
         jLabel10.setText("CORDENADA Y:");
 
-        txtCoordX.setText("jTextField1");
-
-        txtCoordY.setText("jTextField2");
         txtCoordY.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCoordYActionPerformed(evt);

@@ -1,4 +1,3 @@
-
 package Modelo;
 
 public class Ordenamientos {
@@ -141,8 +140,22 @@ public class Ordenamientos {
         nodoPoshijoMayor=devolverNodo(miListaOrdenadaVehiculos, posHijoMayor);
         Vehiculos aux=new Vehiculos();
         aux=nodoPosPadre;//Toma el valor del padre
-        nodoPosPadre=nodoPoshijoMayor;
-        nodoPoshijoMayor=aux;
+        nodoPosPadre.setPlaca(nodoPoshijoMayor.getPlaca());
+        nodoPosPadre.setMarca(nodoPoshijoMayor.getMarca());
+        nodoPosPadre.setModelo(nodoPoshijoMayor.getModelo());
+        nodoPosPadre.setCiudad(nodoPoshijoMayor.getCiudad());
+        nodoPosPadre.setPesoMaximo(nodoPoshijoMayor.getPesoMaximo());
+        nodoPosPadre.setVolumenMaximo(nodoPoshijoMayor.getVolumenMaximo());
+        nodoPosPadre.setCaracteristicasVehiculo(nodoPoshijoMayor.getCaracteristicasVehiculo());
+        nodoPosPadre.setListaFechas(nodoPoshijoMayor.getListaFechas());
+        nodoPoshijoMayor.setPlaca(aux.getPlaca());
+        nodoPoshijoMayor.setMarca(aux.getMarca());
+        nodoPoshijoMayor.setModelo(aux.getModelo());
+        nodoPoshijoMayor.setCiudad(aux.getCiudad());
+        nodoPoshijoMayor.setPesoMaximo(aux.getPesoMaximo());
+        nodoPoshijoMayor.setVolumenMaximo(aux.getVolumenMaximo());
+        nodoPoshijoMayor.setCaracteristicasVehiculo(aux.getCaracteristicasVehiculo());
+        nodoPoshijoMayor.setListaFechas(aux.getListaFechas());
     }
     //Fin HeapSort
     
@@ -173,46 +186,43 @@ public class Ordenamientos {
             if(auxNodoj.getPlaca().compareTo(aux_comparacion)<=0){
                 i++;
                 aux_intercambio=devolverNodo(miLista, i);
-                 auxNodoi=devolverNodo(miLista, i);
-                /*
-               
+                auxNodoi=devolverNodo(miLista, i);
                 auxNodoi.setPlaca(auxNodoj.getPlaca());
                 auxNodoi.setMarca(auxNodoj.getMarca());
                 auxNodoi.setModelo(auxNodoj.getModelo());
                 auxNodoi.setCiudad(auxNodoj.getCiudad());
                 auxNodoi.setPesoMaximo(auxNodoj.getPesoMaximo());
                 auxNodoi.setVolumenMaximo(auxNodoj.getVolumenMaximo());
-                auxNodoi.setCaracteristicasVehiculo(auxNodoj.getCaracteristicasVehiculo());*/
-                auxNodoi=auxNodoj;
-                /*auxNodoj.setPlaca(aux_intercambio.getPlaca());
+                auxNodoi.setCaracteristicasVehiculo(auxNodoj.getCaracteristicasVehiculo());
+                auxNodoi.setListaFechas(auxNodoj.getListaFechas());
+                auxNodoj.setPlaca(aux_intercambio.getPlaca());
                 auxNodoj.setMarca(aux_intercambio.getMarca());
                 auxNodoj.setModelo(aux_intercambio.getModelo());
                 auxNodoj.setCiudad(aux_intercambio.getCiudad());
                 auxNodoj.setPesoMaximo(aux_intercambio.getPesoMaximo());
                 auxNodoj.setVolumenMaximo(aux_intercambio.getVolumenMaximo());
-                auxNodoj.setCaracteristicasVehiculo(aux_intercambio.getCaracteristicasVehiculo());*/
-                auxNodoj=aux_intercambio;
-                
+                auxNodoj.setCaracteristicasVehiculo(aux_intercambio.getCaracteristicasVehiculo());
+                auxNodoj.setListaFechas(aux_intercambio.getListaFechas());
              }
         }
         aux_intercambio=devolverNodo(miLista, i+1);
         auxNodoi1=devolverNodo(miLista, i+1);
-       /* auxNodoi1.setPlaca(AuxNodoUltimo.getPlaca());
+        auxNodoi1.setPlaca(AuxNodoUltimo.getPlaca());
         auxNodoi1.setMarca(AuxNodoUltimo.getMarca());
         auxNodoi1.setModelo(AuxNodoUltimo.getModelo());
         auxNodoi1.setCiudad(AuxNodoUltimo.getCiudad());
         auxNodoi1.setPesoMaximo(AuxNodoUltimo.getPesoMaximo());
         auxNodoi1.setVolumenMaximo(AuxNodoUltimo.getVolumenMaximo());
-        auxNodoi1.setCaracteristicasVehiculo(AuxNodoUltimo.getCaracteristicasVehiculo());*/
-        auxNodoi1=AuxNodoUltimo;
-       /* AuxNodoUltimo.setPlaca(aux_intercambio.getPlaca());
+        auxNodoi1.setCaracteristicasVehiculo(AuxNodoUltimo.getCaracteristicasVehiculo());
+        auxNodoi1.setListaFechas(AuxNodoUltimo.getListaFechas());
+        AuxNodoUltimo.setPlaca(aux_intercambio.getPlaca());
         AuxNodoUltimo.setMarca(aux_intercambio.getMarca());
         AuxNodoUltimo.setModelo(aux_intercambio.getModelo());
         AuxNodoUltimo.setCiudad(aux_intercambio.getCiudad());
         AuxNodoUltimo.setPesoMaximo(aux_intercambio.getPesoMaximo());
         AuxNodoUltimo.setVolumenMaximo(aux_intercambio.getVolumenMaximo());
-        AuxNodoUltimo.setCaracteristicasVehiculo(aux_intercambio.getCaracteristicasVehiculo());*/
-        AuxNodoUltimo=aux_intercambio;
+        AuxNodoUltimo.setCaracteristicasVehiculo(aux_intercambio.getCaracteristicasVehiculo());
+        AuxNodoUltimo.setListaFechas(aux_intercambio.getListaFechas());
         return(i+1);
     }
     //----------------------------Fin quickSort
@@ -238,11 +248,11 @@ public class Ordenamientos {
     // Copying our subarrays into temporaries
     for (int i = 0; i < mitad - inicio + 1; i++){
         auxiliar=devolverNodo(array, inicio+i);
-        leftArray.agregarVehiculo(leftArray,auxiliar.getPlaca(),auxiliar.getMarca(),auxiliar.getModelo(),auxiliar.getCiudad(),auxiliar.getPesoMaximo(),auxiliar.getVolumenMaximo(),auxiliar.getCaracteristicasVehiculo());
+        leftArray.agregarVehiculo(leftArray,auxiliar);
     }
     for (int i = 0; i < fin - mitad; i++){
         auxiliar=devolverNodo(array, mitad + i + 1);
-        rightArray.agregarVehiculo(rightArray,auxiliar.getPlaca(),auxiliar.getMarca(),auxiliar.getModelo(),auxiliar.getCiudad(),auxiliar.getPesoMaximo(),auxiliar.getVolumenMaximo(),auxiliar.getCaracteristicasVehiculo());
+        rightArray.agregarVehiculo(rightArray,auxiliar);
     }    
     // Iterators containing current index of temp subarrays
     int leftIndex = 0;
@@ -262,28 +272,28 @@ public class Ordenamientos {
                for(int j=0; j<i; j++){
                    nodoIntercambio=nodoIntercambio.getSiguienteVehiculo();
                }
-              /* nodoIntercambio.setPlaca(nodoindiceIzquierdo.getPlaca());
+               nodoIntercambio.setPlaca(nodoindiceIzquierdo.getPlaca());
                nodoIntercambio.setMarca(nodoindiceIzquierdo.getMarca());
                nodoIntercambio.setModelo(nodoindiceIzquierdo.getModelo());
                nodoIntercambio.setCiudad(nodoindiceIzquierdo.getCiudad());
                nodoIntercambio.setPesoMaximo(nodoindiceIzquierdo.getPesoMaximo());
                nodoIntercambio.setVolumenMaximo(nodoindiceIzquierdo.getVolumenMaximo());
-               nodoIntercambio.setCaracteristicasVehiculo(nodoindiceIzquierdo.getCaracteristicasVehiculo());*/
-               nodoIntercambio=nodoindiceIzquierdo;
+               nodoIntercambio.setCaracteristicasVehiculo(nodoindiceIzquierdo.getCaracteristicasVehiculo());
+               nodoIntercambio.setListaFechas(nodoindiceIzquierdo.getListaFechas());
                leftIndex++;
             } else {
                 nodoIntercambio=array.getHeadVehiculos();
                 for(int j=0; j<i; j++){
                    nodoIntercambio=nodoIntercambio.getSiguienteVehiculo();
                }
-                /*nodoIntercambio.setPlaca(nodoindiceDerecho.getPlaca());
+                nodoIntercambio.setPlaca(nodoindiceDerecho.getPlaca());
                 nodoIntercambio.setMarca(nodoindiceDerecho.getMarca());
                 nodoIntercambio.setModelo(nodoindiceDerecho.getModelo());
                 nodoIntercambio.setCiudad(nodoindiceDerecho.getCiudad());
                 nodoIntercambio.setPesoMaximo(nodoindiceDerecho.getPesoMaximo());
                 nodoIntercambio.setVolumenMaximo(nodoindiceDerecho.getVolumenMaximo());
-                nodoIntercambio.setCaracteristicasVehiculo(nodoindiceDerecho.getCaracteristicasVehiculo());*/
-                nodoIntercambio=nodoindiceDerecho;
+                nodoIntercambio.setCaracteristicasVehiculo(nodoindiceDerecho.getCaracteristicasVehiculo());
+                nodoIntercambio.setListaFechas(nodoindiceDerecho.getListaFechas());
                 rightIndex++;
             }
         } else if (leftIndex < mitad - inicio + 1) {
@@ -292,14 +302,14 @@ public class Ordenamientos {
                 for(int j=0; j<i; j++){
                    nodoIntercambio=nodoIntercambio.getSiguienteVehiculo();
                }
-                /*nodoIntercambio.setPlaca(nodoindiceIzquierdo.getPlaca());
+                nodoIntercambio.setPlaca(nodoindiceIzquierdo.getPlaca());
                 nodoIntercambio.setMarca(nodoindiceIzquierdo.getMarca());
                 nodoIntercambio.setModelo(nodoindiceIzquierdo.getModelo());
                 nodoIntercambio.setCiudad(nodoindiceIzquierdo.getCiudad());
                 nodoIntercambio.setPesoMaximo(nodoindiceIzquierdo.getPesoMaximo());
                 nodoIntercambio.setVolumenMaximo(nodoindiceIzquierdo.getVolumenMaximo());
-                nodoIntercambio.setCaracteristicasVehiculo(nodoindiceIzquierdo.getCaracteristicasVehiculo());*/
-                nodoIntercambio=nodoindiceIzquierdo;
+                nodoIntercambio.setCaracteristicasVehiculo(nodoindiceIzquierdo.getCaracteristicasVehiculo());
+                nodoIntercambio.setListaFechas(nodoindiceIzquierdo.getListaFechas());
                 leftIndex++;
         } else if (rightIndex < fin - mitad) {
             // If all elements have been copied from leftArray, copy rest of rightArray
@@ -307,14 +317,14 @@ public class Ordenamientos {
                 for(int j=0; j<i; j++){
                    nodoIntercambio=nodoIntercambio.getSiguienteVehiculo();
                }
-                /*nodoIntercambio.setPlaca(nodoindiceDerecho.getPlaca());
+                nodoIntercambio.setPlaca(nodoindiceDerecho.getPlaca());
                 nodoIntercambio.setMarca(nodoindiceDerecho.getMarca());
                 nodoIntercambio.setModelo(nodoindiceDerecho.getModelo());
                 nodoIntercambio.setCiudad(nodoindiceDerecho.getCiudad());
                 nodoIntercambio.setPesoMaximo(nodoindiceDerecho.getPesoMaximo());
                 nodoIntercambio.setVolumenMaximo(nodoindiceDerecho.getVolumenMaximo());
-                nodoIntercambio.setCaracteristicasVehiculo(nodoindiceDerecho.getCaracteristicasVehiculo());*/
-                nodoIntercambio=nodoindiceDerecho;
+                nodoIntercambio.setCaracteristicasVehiculo(nodoindiceDerecho.getCaracteristicasVehiculo());
+                nodoIntercambio.setListaFechas(nodoindiceDerecho.getListaFechas());
             rightIndex++;
         }
     }
@@ -431,18 +441,16 @@ public class Ordenamientos {
         nodoPoshijoMayor=devolverNodoContratos(miListaViajesContratados, posHijoMayor);
         Contratos aux=new Contratos();
         aux=nodoPosPadre;//Toma el valor del padre
-        /*nodoPosPadre.getFechaContrato().setDia(nodoPoshijoMayor.getFechaContrato().getDia());
+        nodoPosPadre.getFechaContrato().setDia(nodoPoshijoMayor.getFechaContrato().getDia());
         nodoPosPadre.getFechaContrato().setMes(nodoPoshijoMayor.getFechaContrato().getMes());
         nodoPosPadre.getFechaContrato().setAño(nodoPoshijoMayor.getFechaContrato().getAño());
         nodoPosPadre.setCiudadDestino(nodoPoshijoMayor.getCiudadDestino());
-        nodoPosPadre.setMiLista(nodoPoshijoMayor.getMiLista());*/
-        nodoPosPadre=nodoPoshijoMayor;
-       /* nodoPoshijoMayor.getFechaContrato().setDia(aux.getFechaContrato().getDia());
+        nodoPosPadre.setMiLista(nodoPoshijoMayor.getMiLista());
+        nodoPoshijoMayor.getFechaContrato().setDia(aux.getFechaContrato().getDia());
         nodoPoshijoMayor.getFechaContrato().setMes(aux.getFechaContrato().getMes());
         nodoPoshijoMayor.getFechaContrato().setAño(aux.getFechaContrato().getAño());
         nodoPoshijoMayor.setCiudadDestino(aux.getCiudadDestino());
-        nodoPoshijoMayor.setMiLista(aux.getMiLista());*/
-        nodoPoshijoMayor=aux;
+        nodoPoshijoMayor.setMiLista(aux.getMiLista());
     }
             //Fin del metodo heapsort
     
@@ -474,34 +482,30 @@ public class Ordenamientos {
                 i++;
                 aux_intercambio=devolverNodoContratos(miLista, i);
                 auxNodoi=devolverNodoContratos(miLista, i);
-               /* auxNodoi.setCiudadDestino(auxNodoj.getCiudadDestino());
+                auxNodoi.setCiudadDestino(auxNodoj.getCiudadDestino());
                 auxNodoi.getFechaContrato().setDia(auxNodoj.getFechaContrato().getDia());
                 auxNodoi.getFechaContrato().setMes(auxNodoj.getFechaContrato().getMes());
                 auxNodoi.getFechaContrato().setAño(auxNodoj.getFechaContrato().getAño());
-                auxNodoi.setMiLista(auxNodoj.getMiLista());*/
-                auxNodoi=auxNodoj;
-               /* auxNodoj.setCiudadDestino(aux_intercambio.getCiudadDestino());
+                auxNodoi.setMiLista(auxNodoj.getMiLista());
+                auxNodoj.setCiudadDestino(aux_intercambio.getCiudadDestino());
                 auxNodoj.getFechaContrato().setDia(aux_intercambio.getFechaContrato().getDia());
                 auxNodoj.getFechaContrato().setMes(aux_intercambio.getFechaContrato().getMes());
                 auxNodoj.getFechaContrato().setAño(aux_intercambio.getFechaContrato().getAño());
-                auxNodoj.setMiLista(aux_intercambio.getMiLista());*/
-                auxNodoj=aux_intercambio;
+                auxNodoj.setMiLista(aux_intercambio.getMiLista());
              }
         }
         aux_intercambio=devolverNodoContratos(miLista, i+1);
         auxNodoi1=devolverNodoContratos(miLista, i+1);
-        /*auxNodoi1.setCiudadDestino(AuxNodoUltimo.getCiudadDestino());
+        auxNodoi1.setCiudadDestino(AuxNodoUltimo.getCiudadDestino());
         auxNodoi1.getFechaContrato().setDia(AuxNodoUltimo.getFechaContrato().getDia());
         auxNodoi1.getFechaContrato().setMes(AuxNodoUltimo.getFechaContrato().getMes());
         auxNodoi1.getFechaContrato().setAño(AuxNodoUltimo.getFechaContrato().getAño());
-        auxNodoi1.setMiLista(AuxNodoUltimo.getMiLista());*/
-        auxNodoi1=AuxNodoUltimo;
-        /*AuxNodoUltimo.setCiudadDestino(aux_intercambio.getCiudadDestino());
+        auxNodoi1.setMiLista(AuxNodoUltimo.getMiLista());
+        AuxNodoUltimo.setCiudadDestino(aux_intercambio.getCiudadDestino());
         AuxNodoUltimo.getFechaContrato().setDia(aux_intercambio.getFechaContrato().getDia());
         AuxNodoUltimo.getFechaContrato().setMes(aux_intercambio.getFechaContrato().getMes());
         AuxNodoUltimo.getFechaContrato().setAño(aux_intercambio.getFechaContrato().getAño());
-        AuxNodoUltimo.setMiLista(aux_intercambio.getMiLista());   */ 
-        AuxNodoUltimo=aux_intercambio;
+        AuxNodoUltimo.setMiLista(aux_intercambio.getMiLista());      
         return(i+1);
     }
     //-------------Fin quickSort Contratos
@@ -551,25 +555,22 @@ public class Ordenamientos {
                for(int j=0; j<i; j++){
                    nodoIntercambio=nodoIntercambio.getSiguienteContrato();
                }
-               /*nodoIntercambio.setCiudadDestino(nodoindiceIzquierdo.getCiudadDestino());
+               nodoIntercambio.setCiudadDestino(nodoindiceIzquierdo.getCiudadDestino());
                nodoIntercambio.getFechaContrato().setDia(nodoindiceIzquierdo.getFechaContrato().getDia());
                nodoIntercambio.getFechaContrato().setMes(nodoindiceIzquierdo.getFechaContrato().getMes());
                nodoIntercambio.getFechaContrato().setAño(nodoindiceIzquierdo.getFechaContrato().getAño());
-               nodoIntercambio.setMiLista(nodoindiceIzquierdo.getMiLista());*/
-               
-               nodoIntercambio=nodoindiceIzquierdo;
+               nodoIntercambio.setMiLista(nodoindiceIzquierdo.getMiLista());
                leftIndex++;
             } else {
                 nodoIntercambio=array.getHeadContratos();
                 for(int j=0; j<i; j++){
                    nodoIntercambio=nodoIntercambio.getSiguienteContrato();
                }
-                /*nodoIntercambio.setCiudadDestino(nodoindiceDerecho.getCiudadDestino());
+                nodoIntercambio.setCiudadDestino(nodoindiceDerecho.getCiudadDestino());
                 nodoIntercambio.getFechaContrato().setDia(nodoindiceDerecho.getFechaContrato().getDia());
                 nodoIntercambio.getFechaContrato().setMes(nodoindiceDerecho.getFechaContrato().getMes());
                 nodoIntercambio.getFechaContrato().setAño(nodoindiceDerecho.getFechaContrato().getAño());
-                nodoIntercambio.setMiLista(nodoindiceDerecho.getMiLista());*/
-                nodoIntercambio=nodoindiceDerecho;
+                nodoIntercambio.setMiLista(nodoindiceDerecho.getMiLista());
                 rightIndex++;
             }
         } else if (leftIndex < mitad - inicio + 1) {
@@ -579,12 +580,11 @@ public class Ordenamientos {
                    nodoIntercambio=nodoIntercambio.getSiguienteContrato();
                }
                 
-                /*nodoIntercambio.setCiudadDestino(nodoindiceIzquierdo.getCiudadDestino());
+                nodoIntercambio.setCiudadDestino(nodoindiceIzquierdo.getCiudadDestino());
                 nodoIntercambio.getFechaContrato().setDia(nodoindiceIzquierdo.getFechaContrato().getDia());
                 nodoIntercambio.getFechaContrato().setMes(nodoindiceIzquierdo.getFechaContrato().getMes());
                 nodoIntercambio.getFechaContrato().setAño(nodoindiceIzquierdo.getFechaContrato().getAño());
-                nodoIntercambio.setMiLista(nodoindiceIzquierdo.getMiLista());*/
-                nodoIntercambio=nodoindiceIzquierdo;
+                nodoIntercambio.setMiLista(nodoindiceIzquierdo.getMiLista());
                 leftIndex++;
         } else if (rightIndex < fin - mitad) {
             // If all elements have been copied from leftArray, copy rest of rightArray
@@ -592,12 +592,11 @@ public class Ordenamientos {
                 for(int j=0; j<i; j++){
                    nodoIntercambio=nodoIntercambio.getSiguienteContrato();
                }
-                /*nodoIntercambio.setCiudadDestino(nodoindiceDerecho.getCiudadDestino());
+                nodoIntercambio.setCiudadDestino(nodoindiceDerecho.getCiudadDestino());
                 nodoIntercambio.getFechaContrato().setDia(nodoindiceDerecho.getFechaContrato().getDia());
                 nodoIntercambio.getFechaContrato().setMes(nodoindiceDerecho.getFechaContrato().getMes());
                 nodoIntercambio.getFechaContrato().setAño(nodoindiceDerecho.getFechaContrato().getAño());
-                nodoIntercambio.setMiLista(nodoindiceDerecho.getMiLista());*/
-                nodoIntercambio=nodoindiceDerecho;
+                nodoIntercambio.setMiLista(nodoindiceDerecho.getMiLista());
             rightIndex++;
         }
     }
@@ -714,18 +713,16 @@ public class Ordenamientos {
         nodoPoshijoMayor=devolverNodoContratos(miListaViajesContratados, posHijoMayor);
         Contratos aux=new Contratos();
         aux=nodoPosPadre;//Toma el valor del padre
-       /* nodoPosPadre.getFechaContrato().setDia(nodoPoshijoMayor.getFechaContrato().getDia());
+        nodoPosPadre.getFechaContrato().setDia(nodoPoshijoMayor.getFechaContrato().getDia());
         nodoPosPadre.getFechaContrato().setMes(nodoPoshijoMayor.getFechaContrato().getMes());
         nodoPosPadre.getFechaContrato().setAño(nodoPoshijoMayor.getFechaContrato().getAño());
         nodoPosPadre.setCiudadDestino(nodoPoshijoMayor.getCiudadDestino());
-        nodoPosPadre.setMiLista(nodoPoshijoMayor.getMiLista());*/
-        nodoPosPadre=nodoPoshijoMayor;
-        /*nodoPoshijoMayor.getFechaContrato().setDia(aux.getFechaContrato().getDia());
+        nodoPosPadre.setMiLista(nodoPoshijoMayor.getMiLista());
+        nodoPoshijoMayor.getFechaContrato().setDia(aux.getFechaContrato().getDia());
         nodoPoshijoMayor.getFechaContrato().setMes(aux.getFechaContrato().getMes());
         nodoPoshijoMayor.getFechaContrato().setAño(aux.getFechaContrato().getAño());
         nodoPoshijoMayor.setCiudadDestino(aux.getCiudadDestino());
-        nodoPoshijoMayor.setMiLista(aux.getMiLista());*/
-        nodoPoshijoMayor=aux;
+        nodoPoshijoMayor.setMiLista(aux.getMiLista());
     }
         //Fin heapSort
     
@@ -757,34 +754,30 @@ public class Ordenamientos {
                 i++;
                 aux_intercambio=devolverNodoContratos(miLista, i);
                 auxNodoi=devolverNodoContratos(miLista, i);
-                /*auxNodoi.setCiudadDestino(auxNodoj.getCiudadDestino());
+                auxNodoi.setCiudadDestino(auxNodoj.getCiudadDestino());
                 auxNodoi.getFechaContrato().setDia(auxNodoj.getFechaContrato().getDia());
                 auxNodoi.getFechaContrato().setMes(auxNodoj.getFechaContrato().getMes());
                 auxNodoi.getFechaContrato().setAño(auxNodoj.getFechaContrato().getAño());
-                auxNodoi.setMiLista(auxNodoj.getMiLista());*/
-                auxNodoi=auxNodoj;
-                /*auxNodoj.setCiudadDestino(aux_intercambio.getCiudadDestino());
+                auxNodoi.setMiLista(auxNodoj.getMiLista());
+                auxNodoj.setCiudadDestino(aux_intercambio.getCiudadDestino());
                 auxNodoj.getFechaContrato().setDia(aux_intercambio.getFechaContrato().getDia());
                 auxNodoj.getFechaContrato().setMes(aux_intercambio.getFechaContrato().getMes());
                 auxNodoj.getFechaContrato().setAño(aux_intercambio.getFechaContrato().getAño());
-                auxNodoj.setMiLista(aux_intercambio.getMiLista());*/
-                auxNodoj=aux_intercambio;
+                auxNodoj.setMiLista(aux_intercambio.getMiLista());
              }
         }
         aux_intercambio=devolverNodoContratos(miLista, i+1);
         auxNodoi1=devolverNodoContratos(miLista, i+1);
-        /*auxNodoi1.setCiudadDestino(AuxNodoUltimo.getCiudadDestino());
+        auxNodoi1.setCiudadDestino(AuxNodoUltimo.getCiudadDestino());
         auxNodoi1.getFechaContrato().setDia(AuxNodoUltimo.getFechaContrato().getDia());
         auxNodoi1.getFechaContrato().setMes(AuxNodoUltimo.getFechaContrato().getMes());
         auxNodoi1.getFechaContrato().setAño(AuxNodoUltimo.getFechaContrato().getAño());
-        auxNodoi1.setMiLista(AuxNodoUltimo.getMiLista());*/
-        auxNodoi1=AuxNodoUltimo;
-        /*AuxNodoUltimo.setCiudadDestino(aux_intercambio.getCiudadDestino());
+        auxNodoi1.setMiLista(AuxNodoUltimo.getMiLista());
+        AuxNodoUltimo.setCiudadDestino(aux_intercambio.getCiudadDestino());
         AuxNodoUltimo.getFechaContrato().setDia(aux_intercambio.getFechaContrato().getDia());
         AuxNodoUltimo.getFechaContrato().setMes(aux_intercambio.getFechaContrato().getMes());
         AuxNodoUltimo.getFechaContrato().setAño(aux_intercambio.getFechaContrato().getAño());
-        AuxNodoUltimo.setMiLista(aux_intercambio.getMiLista()); */
-        AuxNodoUltimo=aux_intercambio;
+        AuxNodoUltimo.setMiLista(aux_intercambio.getMiLista());      
         return(i+1);
     }
         //Fin QuickSort
@@ -831,24 +824,22 @@ public class Ordenamientos {
                for(int j=0; j<i; j++){
                    nodoIntercambio=nodoIntercambio.getSiguienteContrato();
                }
-              /* nodoIntercambio.setCiudadDestino(nodoindiceIzquierdo.getCiudadDestino());
+               nodoIntercambio.setCiudadDestino(nodoindiceIzquierdo.getCiudadDestino());
                nodoIntercambio.getFechaContrato().setDia(nodoindiceIzquierdo.getFechaContrato().getDia());
                nodoIntercambio.getFechaContrato().setMes(nodoindiceIzquierdo.getFechaContrato().getMes());
                nodoIntercambio.getFechaContrato().setAño(nodoindiceIzquierdo.getFechaContrato().getAño());
-               nodoIntercambio.setMiLista(nodoindiceIzquierdo.getMiLista());*/
-               nodoIntercambio=nodoindiceIzquierdo;
+               nodoIntercambio.setMiLista(nodoindiceIzquierdo.getMiLista());
                leftIndex++;
             } else {
                 nodoIntercambio=array.getHeadContratos();
                 for(int j=0; j<i; j++){
                    nodoIntercambio=nodoIntercambio.getSiguienteContrato();
                }
-                /*nodoIntercambio.setCiudadDestino(nodoindiceDerecho.getCiudadDestino());
+                nodoIntercambio.setCiudadDestino(nodoindiceDerecho.getCiudadDestino());
                 nodoIntercambio.getFechaContrato().setDia(nodoindiceDerecho.getFechaContrato().getDia());
                 nodoIntercambio.getFechaContrato().setMes(nodoindiceDerecho.getFechaContrato().getMes());
                 nodoIntercambio.getFechaContrato().setAño(nodoindiceDerecho.getFechaContrato().getAño());
-                nodoIntercambio.setMiLista(nodoindiceDerecho.getMiLista());*/
-                nodoIntercambio=nodoindiceDerecho;
+                nodoIntercambio.setMiLista(nodoindiceDerecho.getMiLista());
                 rightIndex++;
             }
         } else if (leftIndex < mitad - inicio + 1) {
@@ -858,12 +849,11 @@ public class Ordenamientos {
                    nodoIntercambio=nodoIntercambio.getSiguienteContrato();
                }
                 
-                /*nodoIntercambio.setCiudadDestino(nodoindiceIzquierdo.getCiudadDestino());
+                nodoIntercambio.setCiudadDestino(nodoindiceIzquierdo.getCiudadDestino());
                 nodoIntercambio.getFechaContrato().setDia(nodoindiceIzquierdo.getFechaContrato().getDia());
                 nodoIntercambio.getFechaContrato().setMes(nodoindiceIzquierdo.getFechaContrato().getMes());
                 nodoIntercambio.getFechaContrato().setAño(nodoindiceIzquierdo.getFechaContrato().getAño());
-                nodoIntercambio.setMiLista(nodoindiceIzquierdo.getMiLista());*/
-                nodoIntercambio=nodoindiceIzquierdo;
+                nodoIntercambio.setMiLista(nodoindiceIzquierdo.getMiLista());
                 leftIndex++;
         } else if (rightIndex < fin - mitad) {
             // If all elements have been copied from leftArray, copy rest of rightArray
@@ -871,12 +861,11 @@ public class Ordenamientos {
                 for(int j=0; j<i; j++){
                    nodoIntercambio=nodoIntercambio.getSiguienteContrato();
                }
-                /*nodoIntercambio.setCiudadDestino(nodoindiceDerecho.getCiudadDestino());
+                nodoIntercambio.setCiudadDestino(nodoindiceDerecho.getCiudadDestino());
                 nodoIntercambio.getFechaContrato().setDia(nodoindiceDerecho.getFechaContrato().getDia());
                 nodoIntercambio.getFechaContrato().setMes(nodoindiceDerecho.getFechaContrato().getMes());
                 nodoIntercambio.getFechaContrato().setAño(nodoindiceDerecho.getFechaContrato().getAño());
-                nodoIntercambio.setMiLista(nodoindiceDerecho.getMiLista());*/
-                nodoIntercambio=nodoindiceDerecho;
+                nodoIntercambio.setMiLista(nodoindiceDerecho.getMiLista());
             rightIndex++;
         }
     }

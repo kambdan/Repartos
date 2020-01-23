@@ -50,7 +50,7 @@ public class VentanaOrdenamientos extends javax.swing.JFrame {
 
         jLabel3.setText("Reportar: ");
 
-        comboReportes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar...", "Placa", "Contrato -Ciudad destino", "Fecha" }));
+        comboReportes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar...", "Placa", "Contrato - Ciudad destino", "Fecha" }));
         comboReportes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboReportesActionPerformed(evt);
@@ -77,7 +77,7 @@ public class VentanaOrdenamientos extends javax.swing.JFrame {
                             .addComponent(jLabel3))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(comboOrdenamiento, 0, 171, Short.MAX_VALUE)
+                            .addComponent(comboOrdenamiento, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(comboReportes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(146, 146, 146)
@@ -85,7 +85,7 @@ public class VentanaOrdenamientos extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(137, 137, 137)
                         .addComponent(btnObtenerReporte)))
-                .addContainerGap(116, Short.MAX_VALUE))
+                .addContainerGap(114, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

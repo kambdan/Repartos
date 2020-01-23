@@ -82,13 +82,13 @@ public class BaseDatos {
         //****************Vehiculos
         
        
-        miEmpresas.agregarVehiculo("ABD2", "Chevrolet", "#wf", 152, 1420,"Cuenca",miLista);
-        miEmpresas.agregarVehiculo("VSV2", "Hyndai", "#wf", 152, 1420,"quevedo",miLista);
-        miEmpresas.agregarVehiculo("SDD2", "Toyota", "#wf", 152, 1420,"quevedo",miLista);
-        miEmpresas.agregarVehiculo("SDS2", "Chevrolet", "#wf", 152, 1420,"quevedo",miLista);
-        miEmpresas.agregarVehiculo("XCS2", "Chevrolet", "#wf", 152, 1420,"quevedo",miLista);
-        miEmpresas.agregarVehiculo("BAD2", "Toyata", "#wf", 152, 1420,"quevedo",miLista);
-        miEmpresas.agregarVehiculo("DAS2", "Mazda", "#wf", 152, 1420,"quevedo",miLista);
+        miEmpresas.agregarVehiculo("ABD2", "Chevrolet", "#M1", 152, 1420,"Cuenca",miLista);
+        miEmpresas.agregarVehiculo("VSV2", "Hyndai", "#M6", 152, 1420,"quevedo",miLista);
+        miEmpresas.agregarVehiculo("SDD2", "Toyota", "#M4", 152, 1420,"quevedo",miLista);
+        miEmpresas.agregarVehiculo("SDS2", "Chevrolet", "#M5", 152, 1420,"quevedo",miLista);
+        miEmpresas.agregarVehiculo("XCS2", "Chevrolet", "#M7", 152, 1420,"quevedo",miLista);
+        miEmpresas.agregarVehiculo("BAD2", "Toyata", "#M2", 152, 1420,"quevedo",miLista);
+        miEmpresas.agregarVehiculo("DAS2", "Mazda", "#M3", 152, 1420,"quevedo",miLista);
         
         
         

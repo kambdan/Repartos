@@ -138,6 +138,68 @@ public class Empresas {
             return miVehiculo;
         }
     }
+    
+    //**************
+    public int consultarCaracter(ListaCaracteristicasEspeciales lista1,ListaCaracteristicasEspeciales lista2){
+        int cont=0;
+        CaracteristicasEspeciales aux=lista1.getHeadCaracteristica();
+        CaracteristicasEspeciales aux1=lista2.getHeadCaracteristica();
+        while(aux!=null){
+            if(aux.getCaracteristicas().equals(aux1.getCaracteristicas())){
+                aux=aux.getSiguienteCaracteristica();
+                aux1=aux.getSiguienteCaracteristica();
+                cont++;
+            }
+        
+        }
+        return cont;
+    }
+    
+    
+    public Vehiculos consultarVehiculoPorCaracteristicas(ListaCaracteristicasEspeciales lista){
+        Vehiculos vehiculo=miListaVehic.getHeadVehiculos();
+        while(vehiculo!=null&&consultarCaracter(lista, vehiculo.getCaracteristicasVehiculo())==vehiculo.getCaracteristicasVehiculo().getTam()){
+            vehiculo=vehiculo.getSiguienteVehiculo();
+        }
+        if(vehiculo==null){
+            return vehiculo;
+        }else{
+            return vehiculo;
+        }
+    
+    }
+    
+    public int compararFechas(ListaFechas lista1,Fechas fecha){
+        Fechas aux=lista1.getHeadFecha();
+        int bandera=0;
+        while(aux!=null){
+            if(aux.getAño()==fecha.getDia() && aux.getMes()==fecha.getMes() && aux.getDia()==fecha.getDia()){
+                bandera++;
+            }
+            aux=aux.getSigFecha();
+        }
+        return bandera;
+    }
+    
+    
+    public int consultarFechaDisponible(ListaCaracteristicasEspeciales miLista,int dia,int mes,int año){
+        //para consultar fechas ,primero debe obtener el vehiculo con las caracteristicas especiales
+        //luego debo obtener las fechas del vehiculo y verificar si hay una fecha disponible
+        int bandera=0;
+        Fechas fecha=new Fechas(dia, mes, año);
+        Vehiculos vehiculo;
+        vehiculo=consultarVehiculoPorCaracteristicas(miLista);
+        if(vehiculo!=null){
+            bandera=compararFechas(vehiculo.getListaFechas(), fecha);
+        }
+        
+        return bandera;
+    }
+    
+    
+    
+    
+    
     //Fin vehiculos
     
     //*********Funciones Conductores
@@ -559,7 +621,7 @@ public class Empresas {
      
      } 
      
-     //*********************************FECHAS
+     //*********************************
     
      
      

@@ -1410,7 +1410,6 @@ private void mostrarCiudades(){
     }
     
     
-    
     //fin ComBobox
     @Override
     public void keyTyped(KeyEvent e) {   

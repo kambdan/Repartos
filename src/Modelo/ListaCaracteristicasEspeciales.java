@@ -13,7 +13,23 @@ public class ListaCaracteristicasEspeciales {
     
     private CaracteristicasEspeciales headCaracteristica;
     private CaracteristicasEspeciales tailCaracteristica;
-    
+    private int tam;
+
+    public CaracteristicasEspeciales getTailCaracteristica() {
+        return tailCaracteristica;
+    }
+
+    public void setTailCaracteristica(CaracteristicasEspeciales tailCaracteristica) {
+        this.tailCaracteristica = tailCaracteristica;
+    }
+
+    public int getTam() {
+        return tam;
+    }
+
+    public void setTam(int tam) {
+        this.tam = tam;
+    }
     
     public CaracteristicasEspeciales getHeadCaracteristica() {
         return headCaracteristica;
@@ -37,10 +53,12 @@ public class ListaCaracteristicasEspeciales {
         if(miListaCarac.getHeadCaracteristica()==null){
             miListaCarac.setHeadCaracteristica(nuevaCaracteristica);
             miListaCarac.setTailCaracterisitca(nuevaCaracteristica);
+            tam++;
         }else{
             miListaCarac.getTailCaracterisitca().setSiguienteCaracteristica(nuevaCaracteristica);
             
             miListaCarac.setTailCaracterisitca(nuevaCaracteristica);
+            tam++;
         } 
         return miListaCarac;
     }

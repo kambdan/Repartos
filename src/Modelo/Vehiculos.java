@@ -35,6 +35,16 @@ public class Vehiculos {
         this.siguienteVehiculo=null;
         this.CaracteristicasVehiculo=new ListaCaracteristicasEspeciales();
     }
+    public Vehiculos(String placa, String marca, String modelo, NodoCiudad ciudad,double peso, double volumen,ListaCaracteristicasEspeciales CaracteristicasVehiculo){
+        this.Placa=placa;
+        this.Marca=marca;
+        this.Modelo=modelo;
+        this.ciudad=ciudad;
+        this.PesoMaximo=peso;
+        this.VolumenMaximo=volumen;
+        this.siguienteVehiculo=null;
+        this.CaracteristicasVehiculo=CaracteristicasVehiculo;
+    }
     
     public String getPlaca() {
         return Placa;
@@ -91,4 +101,5 @@ public class Vehiculos {
     public void setCaracteristicasVehiculo(ListaCaracteristicasEspeciales CaracteristicasVehiculo) {
         this.CaracteristicasVehiculo = CaracteristicasVehiculo;
     }
+    
 }

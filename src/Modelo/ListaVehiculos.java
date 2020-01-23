@@ -37,5 +37,14 @@ public class ListaVehiculos {
     
     //Funcion para agregar un vehiculo a una lista de vehiculos
     //El Peso y el volumen hace referencia a un peso,volumen maximo que transporta Un vehiculo
-       
+    public void agregarVehiculo(ListaVehiculos miListaVehic, String placa, String marca, String modelo,NodoCiudad miciudad, double peso, double volumen, ListaCaracteristicasEspeciales miListaCaracteristicas){
+            Vehiculos nuevoVehiculo=new Vehiculos(placa, marca, modelo,miciudad, peso, volumen,miListaCaracteristicas);
+            if(miListaVehic.getHeadVehiculos()==null){
+                miListaVehic.setHeadVehiculos(nuevoVehiculo);
+                miListaVehic.setTailVehiculos(nuevoVehiculo);
+            }else{
+                miListaVehic.getTailVehiculos().setSiguienteVehiculo(nuevoVehiculo);
+                miListaVehic.setTailVehiculos(nuevoVehiculo);
+            }
+        }   
     }

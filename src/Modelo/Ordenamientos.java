@@ -222,9 +222,110 @@ public class Ordenamientos {
         
         return(i+1);
     }
+    //----------------------------Fin quickSort
+    
+    //COMIENZO DEL MERGESORT
+    public void ordenarMergeSortVehiculos(ListaVehiculos miLista, int inicio, int fin){        
+
+        if (fin <= inicio) return;
+        
+        int mitad=(inicio+fin)/2;
+
+        ordenarMergeSortVehiculos(miLista, inicio, mitad);
+        ordenarMergeSortVehiculos(miLista, mitad+1, fin);
+        mergeVehiculos(miLista,inicio,mitad,fin);
+        
+    }
+       
+    public void mergeVehiculos(ListaVehiculos array, int inicio, int mitad, int fin){
+    ListaVehiculos leftArray = new ListaVehiculos();//[mitad - inicio + 1];
+    ListaVehiculos rightArray = new ListaVehiculos();//[fin - mitad];
+    Vehiculos auxiliar=new Vehiculos();
+    Vehiculos nodoindiceIzquierdo=new Vehiculos();
+    Vehiculos nodoindiceDerecho=new Vehiculos();
+    // Copying our subarrays into temporaries
+    for (int i = 0; i < mitad - inicio + 1; i++){
+        auxiliar=devolverNodo(array, inicio+i);
+        leftArray.agregarVehiculo(leftArray,auxiliar.getPlaca(),auxiliar.getMarca(),auxiliar.getModelo(),auxiliar.getCiudad(),auxiliar.getPesoMaximo(),auxiliar.getVolumenMaximo(),auxiliar.getCaracteristicasVehiculo());
+    }
+    for (int i = 0; i < fin - mitad; i++){
+        auxiliar=devolverNodo(array, mitad + i + 1);
+        rightArray.agregarVehiculo(rightArray,auxiliar.getPlaca(),auxiliar.getMarca(),auxiliar.getModelo(),auxiliar.getCiudad(),auxiliar.getPesoMaximo(),auxiliar.getVolumenMaximo(),auxiliar.getCaracteristicasVehiculo());
+    }    
+    // Iterators containing current index of temp subarrays
+    int leftIndex = 0;
+    int rightIndex = 0;
+
+    // Copying from leftArray and rightArray back into array
+    for (int i = inicio; i < fin + 1; i++) {
+        // If there are still uncopied elements in R and L, copy minimum of the two
+            nodoindiceIzquierdo=devolverNodo(leftArray, leftIndex);
+            nodoindiceDerecho=devolverNodo(rightArray, rightIndex);
+            Vehiculos nodoIntercambio=new Vehiculos();
+        if (leftIndex < mitad - inicio + 1 && rightIndex < fin - mitad) {
+           
+            
+            if (nodoindiceIzquierdo.getPlaca().compareTo( nodoindiceDerecho.getPlaca()) < 0) {
+                nodoIntercambio=array.getHeadVehiculos();
+               for(int j=0; j<i; j++){
+                   nodoIntercambio=nodoIntercambio.getSiguienteVehiculo();
+               }
+               nodoIntercambio.setPlaca(nodoindiceIzquierdo.getPlaca());
+               nodoIntercambio.setMarca(nodoindiceIzquierdo.getMarca());
+               nodoIntercambio.setModelo(nodoindiceIzquierdo.getModelo());
+               nodoIntercambio.setCiudad(nodoindiceIzquierdo.getCiudad());
+               nodoIntercambio.setPesoMaximo(nodoindiceIzquierdo.getPesoMaximo());
+               nodoIntercambio.setVolumenMaximo(nodoindiceIzquierdo.getVolumenMaximo());
+               nodoIntercambio.setCaracteristicasVehiculo(nodoindiceIzquierdo.getCaracteristicasVehiculo());
+               leftIndex++;
+            } else {
+                nodoIntercambio=array.getHeadVehiculos();
+                for(int j=0; j<i; j++){
+                   nodoIntercambio=nodoIntercambio.getSiguienteVehiculo();
+               }
+                nodoIntercambio.setPlaca(nodoindiceDerecho.getPlaca());
+                nodoIntercambio.setMarca(nodoindiceDerecho.getMarca());
+                nodoIntercambio.setModelo(nodoindiceDerecho.getModelo());
+                nodoIntercambio.setCiudad(nodoindiceDerecho.getCiudad());
+                nodoIntercambio.setPesoMaximo(nodoindiceDerecho.getPesoMaximo());
+                nodoIntercambio.setVolumenMaximo(nodoindiceDerecho.getVolumenMaximo());
+                nodoIntercambio.setCaracteristicasVehiculo(nodoindiceDerecho.getCaracteristicasVehiculo());
+                rightIndex++;
+            }
+        } else if (leftIndex < mitad - inicio + 1) {
+            // If all elements have been copied from rightArray, copy rest of leftArray
+                nodoIntercambio=array.getHeadVehiculos();
+                for(int j=0; j<i; j++){
+                   nodoIntercambio=nodoIntercambio.getSiguienteVehiculo();
+               }
+                nodoIntercambio.setPlaca(nodoindiceIzquierdo.getPlaca());
+                nodoIntercambio.setMarca(nodoindiceIzquierdo.getMarca());
+                nodoIntercambio.setModelo(nodoindiceIzquierdo.getModelo());
+                nodoIntercambio.setCiudad(nodoindiceIzquierdo.getCiudad());
+                nodoIntercambio.setPesoMaximo(nodoindiceIzquierdo.getPesoMaximo());
+                nodoIntercambio.setVolumenMaximo(nodoindiceIzquierdo.getVolumenMaximo());
+                nodoIntercambio.setCaracteristicasVehiculo(nodoindiceIzquierdo.getCaracteristicasVehiculo());
+                leftIndex++;
+        } else if (rightIndex < fin - mitad) {
+            // If all elements have been copied from leftArray, copy rest of rightArray
+                nodoIntercambio=array.getHeadVehiculos();
+                for(int j=0; j<i; j++){
+                   nodoIntercambio=nodoIntercambio.getSiguienteVehiculo();
+               }
+                nodoIntercambio.setPlaca(nodoindiceDerecho.getPlaca());
+                nodoIntercambio.setMarca(nodoindiceDerecho.getMarca());
+                nodoIntercambio.setModelo(nodoindiceDerecho.getModelo());
+                nodoIntercambio.setCiudad(nodoindiceDerecho.getCiudad());
+                nodoIntercambio.setPesoMaximo(nodoindiceDerecho.getPesoMaximo());
+                nodoIntercambio.setVolumenMaximo(nodoindiceDerecho.getVolumenMaximo());
+                nodoIntercambio.setCaracteristicasVehiculo(nodoindiceDerecho.getCaracteristicasVehiculo());
+            rightIndex++;
+        }
+    }
+}
   //***************************************************************Fin de funciones de Ordenamiento para el vehiculo
     
-    //*******************Funciones de Ordenamientos para los contratos
+    //*******************Funciones de Ordenamientos para los contratos segun la ciudad destino
     public void heapContratos(){
        int posPadre;
        Contratos nodoPosPadre=new Contratos();
@@ -402,10 +503,100 @@ public class Ordenamientos {
         AuxNodoUltimo.setMiLista(aux_intercambio.getMiLista());      
         return(i+1);
     }
-    
+    //-------------Fin quickSort Contratos
+    public void ordenarMergeSortContratos(ListaContratos miLista, int inicio, int fin){        
+
+        if (fin <= inicio) return;
+        
+        int mitad=(inicio+fin)/2;
+
+        ordenarMergeSortContratos(miLista, inicio, mitad);
+        ordenarMergeSortContratos(miLista, mitad+1, fin);
+        mergeContratos(miLista,inicio,mitad,fin);
+        
+    }
+       
+    public void mergeContratos(ListaContratos array, int inicio, int mitad, int fin){
+    ListaContratos leftArray = new ListaContratos();//[mitad - inicio + 1];
+    ListaContratos rightArray = new ListaContratos();//[fin - mitad];
+    Contratos auxiliar=new Contratos();
+    Contratos nodoindiceIzquierdo=new Contratos();
+    Contratos nodoindiceDerecho=new Contratos();
+    // Copying our subarrays into temporaries
+    for (int i = 0; i < mitad - inicio + 1; i++){
+        auxiliar=devolverNodoContratos(array, inicio+i);
+        leftArray.agregarContrato(leftArray,auxiliar.getCiudadDestino(),auxiliar.getDia(),auxiliar.getMes(),auxiliar.getAno(),auxiliar.getMiLista());
+    }
+    for (int i = 0; i < fin - mitad; i++){
+        auxiliar=devolverNodoContratos(array, mitad + i + 1);
+        rightArray.agregarContrato(rightArray,auxiliar.getCiudadDestino(),auxiliar.getDia(),auxiliar.getMes(),auxiliar.getAno(),auxiliar.getMiLista());
+    }    
+    // Iterators containing current index of temp subarrays
+    int leftIndex = 0;
+    int rightIndex = 0;
+
+    // Copying from leftArray and rightArray back into array
+    for (int i = inicio; i < fin + 1; i++) {
+        // If there are still uncopied elements in R and L, copy minimum of the two
+            nodoindiceIzquierdo=devolverNodoContratos(leftArray, leftIndex);
+            nodoindiceDerecho=devolverNodoContratos(rightArray, rightIndex);
+            Contratos nodoIntercambio=new Contratos();
+        if (leftIndex < mitad - inicio + 1 && rightIndex < fin - mitad) {
+           
+            
+            if (nodoindiceIzquierdo.getCiudadDestino().compareTo( nodoindiceDerecho.getCiudadDestino()) < 0) {
+                nodoIntercambio=array.getHeadContratos();
+               for(int j=0; j<i; j++){
+                   nodoIntercambio=nodoIntercambio.getSiguienteContrato();
+               }
+               nodoIntercambio.setCiudadDestino(nodoindiceIzquierdo.getCiudadDestino());
+               nodoIntercambio.setDia(nodoindiceIzquierdo.getDia());
+               nodoIntercambio.setMes(nodoindiceIzquierdo.getMes());
+               nodoIntercambio.setAno(nodoindiceIzquierdo.getAno());
+               nodoIntercambio.setMiLista(nodoindiceIzquierdo.getMiLista());
+               leftIndex++;
+            } else {
+                nodoIntercambio=array.getHeadContratos();
+                for(int j=0; j<i; j++){
+                   nodoIntercambio=nodoIntercambio.getSiguienteContrato();
+               }
+                nodoIntercambio.setCiudadDestino(nodoindiceDerecho.getCiudadDestino());
+                nodoIntercambio.setDia(nodoindiceDerecho.getDia());
+                nodoIntercambio.setMes(nodoindiceDerecho.getMes());
+                nodoIntercambio.setAno(nodoindiceDerecho.getAno());
+                nodoIntercambio.setMiLista(nodoindiceDerecho.getMiLista());
+                rightIndex++;
+            }
+        } else if (leftIndex < mitad - inicio + 1) {
+            // If all elements have been copied from rightArray, copy rest of leftArray
+                nodoIntercambio=array.getHeadContratos();
+                for(int j=0; j<i; j++){
+                   nodoIntercambio=nodoIntercambio.getSiguienteContrato();
+               }
+                
+                nodoIntercambio.setCiudadDestino(nodoindiceIzquierdo.getCiudadDestino());
+                nodoIntercambio.setDia(nodoindiceIzquierdo.getDia());
+                nodoIntercambio.setMes(nodoindiceIzquierdo.getMes());
+                nodoIntercambio.setAno(nodoindiceIzquierdo.getAno());
+                nodoIntercambio.setMiLista(nodoindiceIzquierdo.getMiLista());
+                leftIndex++;
+        } else if (rightIndex < fin - mitad) {
+            // If all elements have been copied from leftArray, copy rest of rightArray
+                nodoIntercambio=array.getHeadContratos();
+                for(int j=0; j<i; j++){
+                   nodoIntercambio=nodoIntercambio.getSiguienteContrato();
+               }
+                nodoIntercambio.setCiudadDestino(nodoindiceDerecho.getCiudadDestino());
+                nodoIntercambio.setDia(nodoindiceDerecho.getDia());
+                nodoIntercambio.setMes(nodoindiceDerecho.getMes());
+                nodoIntercambio.setAno(nodoindiceDerecho.getAno());
+                nodoIntercambio.setMiLista(nodoindiceDerecho.getMiLista());
+            rightIndex++;
+        }
+    }
+}
     
     //*******************Fin funciones de ordenamiento para los contratos
-    
 
 //Funcion paa devolver un Nodo de tipo vehiculos especifico de una lista
     public Vehiculos devolverNodo(ListaVehiculos miLista,int pos){//Va a recibir lista y la posicion del nodo que desea devolver

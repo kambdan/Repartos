@@ -38,7 +38,22 @@ public class ListaContratos {
         this.tailContratos = tailContratos;
     }
     
+    public void agregarContrato(ListaContratos miListaContratos,String ciudad, int dia, int mes, int ano,ListaProductos miLista){
     
+        Contratos nuevoContrato=new Contratos(ciudad,dia,mes,ano,miLista);
+        
+        if(miListaContratos.getHeadContratos()==null){
+            
+            miListaContratos.setHeadContratos(nuevoContrato);
+            miListaContratos.setTailContratos(nuevoContrato);
+            
+        }else{
+            
+           miListaContratos.getTailContratos().setSiguienteContrato(nuevoContrato);
+           miListaContratos.setTailContratos(nuevoContrato);
+        }
+
+    }
     
     
     

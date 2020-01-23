@@ -690,7 +690,6 @@ public void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {
                     info[1]=Long.toString(miCliente.getTelefono());
                     info[2]=miCliente.getCorreoElectronico();
                     info[3]=miCliente.getDireccion().getNombre();
-
                     modelo.addRow(info);
                }else{
                     JOptionPane.showMessageDialog(null,"Elemento no encontrado");
@@ -1515,14 +1514,7 @@ private void mostrarCiudades(){
     
     }
     
-    public void mostrarReporteHeap(ListaVehiculos miLista){
-        
-        Vehiculos nodAux=miLista.getHeadVehiculos();
-        while(nodAux!=null){
-            miViewReportes.txtxReportes.setText(nodAux.getPlaca());
-            nodAux=nodAux.getSiguienteVehiculo();
-        }
-    }
+    
     
     
     //fin ComBobox

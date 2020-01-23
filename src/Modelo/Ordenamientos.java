@@ -584,8 +584,12 @@ public class Ordenamientos {
         }
 
     }
+    
     public  int obtener_pivoteContratos(ListaContratos miLista,int primero, int ultimo){
-        Contratos aux_intercambio=new Contratos();
+        NodoCiudad aux_intercambio;
+        int dia, mes,anio;
+        ListaProductos miLista1;
+        Clientes miCliente;
         String aux_comparacion;
         int i,j;
         Contratos AuxNodoUltimo=new Contratos();
@@ -599,32 +603,106 @@ public class Ordenamientos {
             auxNodoj=devolverNodoContratos(miLista, j);
             if(auxNodoj.getCiudadDestino().getNombre().compareTo(aux_comparacion)<=0){
                 i++;
-                aux_intercambio=devolverNodoContratos(miLista, i);
+                
+                //CiudadDestino
+                aux_intercambio=devolverNodoContratos(miLista, i).getCiudadDestino();
                 auxNodoi=devolverNodoContratos(miLista, i);
                 auxNodoi.setCiudadDestino(auxNodoj.getCiudadDestino());
+                auxNodoj.setCiudadDestino(aux_intercambio);
+                
+                //Cliente
+                miCliente=devolverNodoContratos(miLista, i).getCliente();
+                auxNodoi=devolverNodoContratos(miLista, i);
+                auxNodoi.setCliente(auxNodoj.getCliente());
+                auxNodoi.setCliente(miCliente);
+                
+                //DIA
+                dia=devolverNodoContratos(miLista, i).getFechaContrato().getDia();
+                auxNodoi=devolverNodoContratos(miLista, i);
                 auxNodoi.getFechaContrato().setDia(auxNodoj.getFechaContrato().getDia());
+                auxNodoj.getFechaContrato().setDia(dia);
+                
+                //MES
+                mes=devolverNodoContratos(miLista, i).getFechaContrato().getMes();
+                auxNodoi=devolverNodoContratos(miLista, i);
                 auxNodoi.getFechaContrato().setMes(auxNodoj.getFechaContrato().getMes());
+                auxNodoj.getFechaContrato().setMes(mes);
+                
+                //ANIO
+                anio=devolverNodoContratos(miLista, i).getFechaContrato().getAño();
+                auxNodoi=devolverNodoContratos(miLista, i);
                 auxNodoi.getFechaContrato().setAño(auxNodoj.getFechaContrato().getAño());
-                auxNodoi.setMiLista(auxNodoj.getMiLista());
-                auxNodoj.setCiudadDestino(aux_intercambio.getCiudadDestino());
-                auxNodoj.getFechaContrato().setDia(aux_intercambio.getFechaContrato().getDia());
-                auxNodoj.getFechaContrato().setMes(aux_intercambio.getFechaContrato().getMes());
-                auxNodoj.getFechaContrato().setAño(aux_intercambio.getFechaContrato().getAño());
-                auxNodoj.setMiLista(aux_intercambio.getMiLista());
+                auxNodoj.getFechaContrato().setAño(anio);
+                
+                //ListaProductos
+                miLista1=devolverNodoContratos(miLista, i).getMiLista();
+                auxNodoi=devolverNodoContratos(miLista, i);
+                auxNodoi.setMiListaProductos(auxNodoj.getMiLista());
+                auxNodoj.setMiListaProductos(miLista1);
+                                
+//                aux_intercambio=devolverNodoContratos(miLista, i);
+//                auxNodoi=devolverNodoContratos(miLista, i);
+//                auxNodoi.setCiudadDestino(auxNodoj.getCiudadDestino());
+//                auxNodoi.getFechaContrato().setDia(auxNodoj.getFechaContrato().getDia());
+//                auxNodoi.getFechaContrato().setMes(auxNodoj.getFechaContrato().getMes());
+//                auxNodoi.getFechaContrato().setAño(auxNodoj.getFechaContrato().getAño());
+//                auxNodoi.setMiLista(auxNodoj.getMiLista());
+//                auxNodoj.setCiudadDestino(aux_intercambio.getCiudadDestino());
+//                auxNodoj.getFechaContrato().setDia(aux_intercambio.getFechaContrato().getDia());
+//                auxNodoj.getFechaContrato().setMes(aux_intercambio.getFechaContrato().getMes());
+//                auxNodoj.getFechaContrato().setAño(aux_intercambio.getFechaContrato().getAño());
+//                auxNodoj.setMiLista(aux_intercambio.getMiLista());
              }
         }
-        aux_intercambio=devolverNodoContratos(miLista, i+1);
+        
+        //CiudadDestino
+        aux_intercambio=devolverNodoContratos(miLista, i+1).getCiudadDestino();
         auxNodoi1=devolverNodoContratos(miLista, i+1);
         auxNodoi1.setCiudadDestino(AuxNodoUltimo.getCiudadDestino());
+        AuxNodoUltimo.setCiudadDestino(aux_intercambio);
+        
+        //Cliente
+        miCliente=devolverNodoContratos(miLista, i+1).getCliente();
+        auxNodoi1=devolverNodoContratos(miLista, i+1);
+        auxNodoi1.setCliente(AuxNodoUltimo.getCliente());
+        AuxNodoUltimo.setCliente(miCliente);
+        
+        //DIA
+        dia=devolverNodoContratos(miLista, i+1).getFechaContrato().getDia();
+        auxNodoi1=devolverNodoContratos(miLista, i+1);
         auxNodoi1.getFechaContrato().setDia(AuxNodoUltimo.getFechaContrato().getDia());
+        AuxNodoUltimo.getFechaContrato().setDia(dia);
+        
+        //MES
+        mes=devolverNodoContratos(miLista, i+1).getFechaContrato().getMes();
+        auxNodoi1=devolverNodoContratos(miLista, i+1);
         auxNodoi1.getFechaContrato().setMes(AuxNodoUltimo.getFechaContrato().getMes());
+        AuxNodoUltimo.getFechaContrato().setMes(mes);
+        
+        //ANIO
+        anio=devolverNodoContratos(miLista, i+1).getFechaContrato().getAño();
+        auxNodoi1=devolverNodoContratos(miLista, i+1);
         auxNodoi1.getFechaContrato().setAño(AuxNodoUltimo.getFechaContrato().getAño());
+        AuxNodoUltimo.getFechaContrato().setAño(anio);
+
+        //ListaProductos
+        miLista1=devolverNodoContratos(miLista, i+1).getMiLista();
+        auxNodoi1=devolverNodoContratos(miLista, i+1);
         auxNodoi1.setMiLista(AuxNodoUltimo.getMiLista());
-        AuxNodoUltimo.setCiudadDestino(aux_intercambio.getCiudadDestino());
-        AuxNodoUltimo.getFechaContrato().setDia(aux_intercambio.getFechaContrato().getDia());
-        AuxNodoUltimo.getFechaContrato().setMes(aux_intercambio.getFechaContrato().getMes());
-        AuxNodoUltimo.getFechaContrato().setAño(aux_intercambio.getFechaContrato().getAño());
-        AuxNodoUltimo.setMiLista(aux_intercambio.getMiLista());      
+        AuxNodoUltimo.setMiLista(miLista1);
+                
+//        aux_intercambio=devolverNodoContratos(miLista, i+1);
+//        auxNodoi1=devolverNodoContratos(miLista, i+1);
+//        auxNodoi1.setCiudadDestino(AuxNodoUltimo.getCiudadDestino());
+//        auxNodoi1.getFechaContrato().setDia(AuxNodoUltimo.getFechaContrato().getDia());
+//        auxNodoi1.getFechaContrato().setMes(AuxNodoUltimo.getFechaContrato().getMes());
+//        auxNodoi1.getFechaContrato().setAño(AuxNodoUltimo.getFechaContrato().getAño());
+//        auxNodoi1.setMiLista(AuxNodoUltimo.getMiLista());
+//        AuxNodoUltimo.setCiudadDestino(aux_intercambio.getCiudadDestino());
+//        AuxNodoUltimo.getFechaContrato().setDia(aux_intercambio.getFechaContrato().getDia());
+//        AuxNodoUltimo.getFechaContrato().setMes(aux_intercambio.getFechaContrato().getMes());
+//        AuxNodoUltimo.getFechaContrato().setAño(aux_intercambio.getFechaContrato().getAño());
+//        AuxNodoUltimo.setMiLista(aux_intercambio.getMiLista());      
         return(i+1);
     }
     //-------------Fin quickSort Contratos
@@ -868,7 +946,11 @@ public class Ordenamientos {
 
     }
     public  int obtener_pivoteContratosFechas(ListaContratos miLista,int primero, int ultimo){
-        Contratos aux_intercambio;
+        
+        NodoCiudad aux_intercambio;
+        int dia, mes,anio;
+        ListaProductos miLista1;
+        Clientes miCliente;
         long aux_comparacion;
         int i,j;
         Contratos AuxNodoUltimo=new Contratos();
@@ -882,38 +964,101 @@ public class Ordenamientos {
             auxNodoj=devolverNodoContratos(miLista, j);
             if(auxNodoj.getFechaContrato().getTotal()<=aux_comparacion){
                 i++;
-                aux_intercambio=devolverNodoContratos(miLista, i);
+                         
+                //CiudadDestino
+                aux_intercambio=devolverNodoContratos(miLista, i).getCiudadDestino();
                 auxNodoi=devolverNodoContratos(miLista, i);
                 auxNodoi.setCiudadDestino(auxNodoj.getCiudadDestino());
-                auxNodoi.setMiLista(auxNodoj.getMiLista());
+                auxNodoj.setCiudadDestino(aux_intercambio);
                 
+                //Cliente
+                miCliente=devolverNodoContratos(miLista, i).getCliente();
+                auxNodoi=devolverNodoContratos(miLista, i);
+                auxNodoi.setCliente(auxNodoj.getCliente());
+                auxNodoi.setCliente(miCliente);
                 
-                
-                
-                
+                //DIA
+                dia=devolverNodoContratos(miLista, i).getFechaContrato().getDia();
+                auxNodoi=devolverNodoContratos(miLista, i);
                 auxNodoi.getFechaContrato().setDia(auxNodoj.getFechaContrato().getDia());
+                auxNodoj.getFechaContrato().setDia(dia);
+                
+                //MES
+                mes=devolverNodoContratos(miLista, i).getFechaContrato().getMes();
+                auxNodoi=devolverNodoContratos(miLista, i);
                 auxNodoi.getFechaContrato().setMes(auxNodoj.getFechaContrato().getMes());
+                auxNodoj.getFechaContrato().setMes(mes);
+                
+                //ANIO
+                anio=devolverNodoContratos(miLista, i).getFechaContrato().getAño();
+                auxNodoi=devolverNodoContratos(miLista, i);
                 auxNodoi.getFechaContrato().setAño(auxNodoj.getFechaContrato().getAño());
+                auxNodoj.getFechaContrato().setAño(anio);
+                
+                //ListaProductos
+                miLista1=devolverNodoContratos(miLista, i).getMiLista();
+                auxNodoi=devolverNodoContratos(miLista, i);
+                auxNodoi.setMiListaProductos(auxNodoj.getMiLista());
+                auxNodoj.setMiListaProductos(miLista1);
+                
+//                auxNodoi.getFechaContrato().setDia(auxNodoj.getFechaContrato().getDia());
+//                auxNodoi.getFechaContrato().setMes(auxNodoj.getFechaContrato().getMes());
+//                auxNodoi.getFechaContrato().setAño(auxNodoj.getFechaContrato().getAño());
+//
 
-                auxNodoj.setCiudadDestino(aux_intercambio.getCiudadDestino());
-                auxNodoj.getFechaContrato().setDia(aux_intercambio.getFechaContrato().getDia());
-                auxNodoj.getFechaContrato().setMes(aux_intercambio.getFechaContrato().getMes());
-                auxNodoj.getFechaContrato().setAño(aux_intercambio.getFechaContrato().getAño());
-                auxNodoj.setMiLista(aux_intercambio.getMiLista());
+//                auxNodoj.setCiudadDestino(aux_intercambio.getCiudadDestino());
+//                auxNodoj.getFechaContrato().setDia(aux_intercambio.getFechaContrato().getDia());
+//                auxNodoj.getFechaContrato().setMes(aux_intercambio.getFechaContrato().getMes());
+//                auxNodoj.getFechaContrato().setAño(aux_intercambio.getFechaContrato().getAño());
+//                auxNodoj.setMiLista(aux_intercambio.getMiLista());
              }
         }
-        aux_intercambio=devolverNodoContratos(miLista, i+1);
+        //CiudadDestino
+        aux_intercambio=devolverNodoContratos(miLista, i+1).getCiudadDestino();
         auxNodoi1=devolverNodoContratos(miLista, i+1);
         auxNodoi1.setCiudadDestino(AuxNodoUltimo.getCiudadDestino());
+        AuxNodoUltimo.setCiudadDestino(aux_intercambio);
+        
+        //Cliente
+        miCliente=devolverNodoContratos(miLista, i+1).getCliente();
+        auxNodoi1=devolverNodoContratos(miLista, i+1);
+        auxNodoi1.setCliente(AuxNodoUltimo.getCliente());
+        AuxNodoUltimo.setCliente(miCliente);
+        
+        //DIA
+        dia=devolverNodoContratos(miLista, i+1).getFechaContrato().getDia();
+        auxNodoi1=devolverNodoContratos(miLista, i+1);
         auxNodoi1.getFechaContrato().setDia(AuxNodoUltimo.getFechaContrato().getDia());
+        AuxNodoUltimo.getFechaContrato().setDia(dia);
+        
+        //MES
+        mes=devolverNodoContratos(miLista, i+1).getFechaContrato().getMes();
+        auxNodoi1=devolverNodoContratos(miLista, i+1);
         auxNodoi1.getFechaContrato().setMes(AuxNodoUltimo.getFechaContrato().getMes());
+        AuxNodoUltimo.getFechaContrato().setMes(mes);
+        
+        //ANIO
+        anio=devolverNodoContratos(miLista, i+1).getFechaContrato().getAño();
+        auxNodoi1=devolverNodoContratos(miLista, i+1);
         auxNodoi1.getFechaContrato().setAño(AuxNodoUltimo.getFechaContrato().getAño());
+        AuxNodoUltimo.getFechaContrato().setAño(anio);
+        
+        //LstaProductos
+        miLista1=devolverNodoContratos(miLista, i+1).getMiLista();
+        auxNodoi1=devolverNodoContratos(miLista, i+1);
         auxNodoi1.setMiLista(AuxNodoUltimo.getMiLista());
-        AuxNodoUltimo.setCiudadDestino(aux_intercambio.getCiudadDestino());
-        AuxNodoUltimo.getFechaContrato().setDia(aux_intercambio.getFechaContrato().getDia());
-        AuxNodoUltimo.getFechaContrato().setMes(aux_intercambio.getFechaContrato().getMes());
-        AuxNodoUltimo.getFechaContrato().setAño(aux_intercambio.getFechaContrato().getAño());
-        AuxNodoUltimo.setMiLista(aux_intercambio.getMiLista());      
+        AuxNodoUltimo.setMiLista(miLista1);
+
+//        auxNodoi1.getFechaContrato().setDia(AuxNodoUltimo.getFechaContrato().getDia());
+//        auxNodoi1.getFechaContrato().setMes(AuxNodoUltimo.getFechaContrato().getMes());
+//        auxNodoi1.getFechaContrato().setAño(AuxNodoUltimo.getFechaContrato().getAño());
+//        auxNodoi1.setMiLista(AuxNodoUltimo.getMiLista());
+//        
+//
+//        AuxNodoUltimo.getFechaContrato().setDia(aux_intercambio.getFechaContrato().getDia());
+//        AuxNodoUltimo.getFechaContrato().setMes(aux_intercambio.getFechaContrato().getMes());
+//        AuxNodoUltimo.getFechaContrato().setAño(aux_intercambio.getFechaContrato().getAño());
+//        AuxNodoUltimo.setMiLista(aux_intercambio.getMiLista());      
         return(i+1);
     }
         //Fin QuickSort

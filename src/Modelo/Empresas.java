@@ -123,6 +123,7 @@ public class Empresas {
                 miListaVehic.getTailVehiculos().setSiguienteVehiculo(nuevoVehiculo);
                 miListaVehic.setTailVehiculos(nuevoVehiculo);
             }
+            miListaVehic.setTamListaVehiculos(miListaVehic.getTamListaVehiculos()+1);
         }
     
     public Vehiculos consultarVehiculos(String placa){

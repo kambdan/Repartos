@@ -1,48 +1,43 @@
 
 package Modelo;
 
+import java.util.UUID;
+
 public class Contratos {
     
-    private String ciudadDestino;
+    
     private Fechas fechaContrato;
-
-    public Fechas getFechaContrato() {
-        return fechaContrato;
-    }
-
-    public void setFechaContrato(Fechas fechaContrato) {
-        this.fechaContrato = fechaContrato;
-    }
     private Contratos siguienteContrato;
-    private ListaProductos miLista;
-    
-    public ListaProductos getMiLista() {
-        return miLista;
+    private ListaProductos miListaProductos;
+    private NodoCiudad ciudadOrigen;
+    private NodoCiudad ciudadDestino;
+    private Vehiculos vehiculo;
+    private Clientes cliente;
+    private UUID id;
+
+    public UUID getId() {
+        return id;
     }
 
-    public void setMiLista(ListaProductos miLista) {
-        this.miLista = miLista;
-    }
-    public Contratos(){
-        
-    }
-    public Contratos(String ciudadDestino, int dia, int mes, int ano,ListaProductos miLista) {
-        this.ciudadDestino = ciudadDestino;
-        fechaContrato.setAño(ano);
-        fechaContrato.setMes(mes);
-        fechaContrato.setDia(dia);
-        this.miLista=miLista;
-        this.siguienteContrato=null;
-    }
-    
-    public String getCiudadDestino() {
-        return ciudadDestino;
+    public void setId() {
+        this.id = UUID.randomUUID();
     }
 
-    public void setCiudadDestino(String ciudadDestino) {
-        this.ciudadDestino = ciudadDestino;
+    public Clientes getCliente() {
+        return cliente;
     }
 
+    public void setCliente(Clientes cliente) {
+        this.cliente = cliente;
+    }
+
+    public Vehiculos getVehiculo() {
+        return vehiculo;
+    }
+
+    public void setVehiculo(Vehiculos vehiculo) {
+        this.vehiculo = vehiculo;
+    }
     
     
     public Contratos getSiguienteContrato() {
@@ -52,6 +47,72 @@ public class Contratos {
     public void setSiguienteContrato(Contratos siguienteContrato) {
         this.siguienteContrato = siguienteContrato;
     }
+
+    public ListaProductos getMiListaProductos() {
+        return miListaProductos;
+    }
+
+    public void setMiListaProductos(ListaProductos miListaProductos) {
+        this.miListaProductos = miListaProductos;
+    }
+
+    public NodoCiudad getCiudadOrigen() {
+        return ciudadOrigen;
+    }
+
+    public void setCiudadOrigen(NodoCiudad ciudadOrigen) {
+        this.ciudadOrigen = ciudadOrigen;
+    }
+
+    public NodoCiudad getCiudadDestino() {
+        return ciudadDestino;
+    }
+
+    public void setCiudadDestino(NodoCiudad ciudadDestino) {
+        this.ciudadDestino = ciudadDestino;
+    }
+   
+    
+    public Fechas getFechaContrato() {
+        return fechaContrato;
+    }
+
+    public void setFechaContrato(Fechas fechaContrato) {
+        this.fechaContrato = fechaContrato;
+    }
+    
+    
+    public ListaProductos getMiLista() {
+        return miListaProductos;
+    }
+
+    public void setMiLista(ListaProductos miListaProduct) {
+        this.miListaProductos = miListaProduct;
+    }
+    public Contratos(){
+        
+    }
+    
+    
+    
+    
+    public Contratos(NodoCiudad ciudadOrigen,NodoCiudad ciudadDestino, int dia, int mes, int ano,ListaProductos miListaProductos,Vehiculos vehiculo) {
+        
+        fechaContrato.setAño(ano);
+        fechaContrato.setMes(mes);
+        fechaContrato.setDia(dia);
+        this.ciudadOrigen=ciudadOrigen;
+        this.ciudadDestino=ciudadDestino;
+        this.miListaProductos=miListaProductos;
+        this.vehiculo=vehiculo;
+        this.siguienteContrato=null;
+        setId();
+    }
+    
+    
+    
+    
+    
     
     
     void alquilarViaje(){}

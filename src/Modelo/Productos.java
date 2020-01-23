@@ -9,7 +9,11 @@ public class Productos {
     private double Volumen;
     private Productos siguienteProducto;
     private ListaCaracteristicasEspeciales listaCaracteristicas;
+    private int cantidad;
 
+    
+    
+    
     public ListaCaracteristicasEspeciales getListaCaracteristicas() {
         return listaCaracteristicas;
     }
@@ -75,6 +79,14 @@ public class Productos {
 
     public void setVolumen(double Volumen) {
         this.Volumen = Volumen;
+    }
+    
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
     
 }

@@ -11,6 +11,12 @@ package Modelo;
  */
 public class Viajes {
     private Contratos contrato;
+    private Vehiculos vehiculo;
+    
+    
+
+    
+    
 
     public Contratos getContrato() {
         return contrato;
@@ -27,7 +33,7 @@ public class Viajes {
     public void setVehiculo(Vehiculos vehiculo) {
         this.vehiculo = vehiculo;
     }
-    private Vehiculos vehiculo;
+   
     
     
 }

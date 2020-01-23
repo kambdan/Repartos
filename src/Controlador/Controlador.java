@@ -172,8 +172,9 @@ public class Controlador implements ActionListener, KeyListener{
         //Fin clientes
 
     }       
-    public void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {                                            
-    }                                           
+public void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {                                            
+
+}                                           
    
     //Metodo para las acciones(Depende del boton Seleccionado)
             @Override
@@ -587,6 +588,7 @@ public class Controlador implements ActionListener, KeyListener{
             miViewViajes.rbtnNoProducto.setVisible(false);
             miLista=new ListaProductos();
             limpiarTextoContratos();
+            miViewViajes.btnAceptarViaje.setVisible(false);
         }
         
         if(miViewViajes.btnAgregarProducto==e.getSource()){
@@ -594,6 +596,7 @@ public class Controlador implements ActionListener, KeyListener{
             
             if(miViewViajes.txtCantidadProductosViajes.getText().length()==0){
                 JOptionPane.showMessageDialog(null,"Especificar cantidad del producto");
+                
             }else{
                 //Aqui se van a AGREGAR los productos en la lista de viajes
                 agregarProductosAlViaje(miLista);
@@ -601,6 +604,7 @@ public class Controlador implements ActionListener, KeyListener{
                 miViewViajes.jSeleccionar.setVisible(true);
                 miViewViajes.rbtnSIProducto.setVisible(true);
                 miViewViajes.rbtnNoProducto.setVisible(true);
+                miViewViajes.btnAceptarViaje.setVisible(true);
                 
             }
            
@@ -640,6 +644,7 @@ public class Controlador implements ActionListener, KeyListener{
         //Fin contratos
         
         //*********Solo clientes
+        
         if(e.getSource()==miViewPrincipal.btnClientes){
                viewCrud.setVisible(true);
                hacerVisible();
@@ -1245,7 +1250,7 @@ private void mostrarCiudades(){
             viewCrud.setVisible(false);
         }else{
             //AQUI VA AGREGAR VIAJE
-            miEmpresas.agregarContrato(ciudadD, dia, mes, anio, miLista);
+            //miEmpresas.agregarContrato(ciudadD, dia, mes, anio, miLista);
             miViewViajes.setVisible(false);
             viewCrud.setVisible(true);
             

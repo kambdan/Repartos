@@ -2,6 +2,7 @@
 
 package Modelo;
 
+import java.util.UUID;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -327,9 +328,11 @@ public class Empresas {
     
     
     
-    public void agregarContrato(String ciudad, int dia, int mes, int ano,ListaProductos miLista){
-    
-        Contratos nuevoContrato=new Contratos(ciudad,dia,mes,ano,miLista);
+    public void agregarContrato(NodoCiudad ciudadOrigen,NodoCiudad ciudadDestino, int dia, int mes, int año,ListaProductos miLista,Vehiculos vehiculo){
+        //agrego las fechas a los vehiculos ----la clase ListaFechas tiene su propio metodo para agregar y eliminar fechas
+        //con esto cada vez que contrate se podrá observar las fechas de los vehiculos
+        vehiculo.getListaFechas().agregarFechas(dia, mes, año);
+        Contratos nuevoContrato=new Contratos(ciudadOrigen,ciudadDestino,dia,mes,año,miLista,vehiculo);
         
         if(miListaContratos.getHeadContratos()==null){
             
@@ -343,6 +346,41 @@ public class Empresas {
         }
 
     }
+    
+    
+    
+    
+    public void cancelarContratos(UUID id){
+        if(miListaContratos.getHeadContratos()!=null){
+            Contratos  auxBorrar;
+            Contratos anterior=null;
+            auxBorrar=miListaContratos.getHeadContratos();
+            while((auxBorrar!=null)&&(auxBorrar.getId()!=id)){
+                anterior=auxBorrar;
+                auxBorrar=auxBorrar.getSiguienteContrato();
+            }
+            if(auxBorrar==null){
+                System.out.println("Elemento no existe");
+            }else{
+                if(anterior==null){//PARA ELIMINAR LA CABEZA
+                    miListaContratos.setHeadContratos(miListaContratos.getHeadContratos().getSiguienteContrato());
+                    //SE DEBE REDCORDAR QUE HAY QUE ELIMINAR LA FECHA DEL CARRO ,PARA QUE ESTE ,ésta disppnible para otro viaa
+                    //con esto nos aseguramos de librar las fechas
+                    auxBorrar.getVehiculo().getListaFechas().eliminarFecha(auxBorrar.getFechaContrato());
+                    auxBorrar=null;
+                    
+                }else{
+                    anterior.setSiguienteContrato(auxBorrar.getSiguienteContrato());
+                    auxBorrar=null;
+                    auxBorrar.getVehiculo().getListaFechas().eliminarFecha(auxBorrar.getFechaContrato());
+                }
+                System.out.println("Eliminado con exito");
+            }
+        
+        }
+    
+    }
+    
     
     
     //Fin Contratos
@@ -519,5 +557,16 @@ public class Empresas {
          
          }
      
-     }   
+     } 
+     
+     //*********************************FECHAS
+    
+     
+     
+     
+     
+     
+     
+     
+     
 }

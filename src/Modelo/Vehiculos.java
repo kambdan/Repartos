@@ -12,6 +12,17 @@ public class Vehiculos {
     private ListaCaracteristicasEspeciales CaracteristicasVehiculo;
     private Vehiculos siguienteVehiculo;
     private NodoCiudad ciudad;
+    private ListaFechas listaFechas;
+
+    public ListaFechas getListaFechas() {
+        return listaFechas;
+    }
+
+    public void setListaFechas(ListaFechas listaFechas) {
+        this.listaFechas = listaFechas;
+    }
+
+   
 
     public NodoCiudad getCiudad() {
         return ciudad;

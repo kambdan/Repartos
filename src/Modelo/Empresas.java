@@ -489,7 +489,6 @@ public class Empresas {
     
      public NodoCiudad consultarCiudad(String nombreCiudad){
         
-       
         NodoCiudad miNodo;
         miNodo=miListaCiudades.getHeadNodo();
         while(miNodo!=null && !miNodo.getNombre().equals(nombreCiudad)){
@@ -502,26 +501,7 @@ public class Empresas {
             return miNodo;
         }
     }
-     
-     
-    public int consultarCiudad1(String nombreCiudad){
-        
-         int bandera=0;
-        NodoCiudad miNodo;
-        miNodo=miListaCiudades.getHeadNodo();
-        while(miNodo!=null && !miNodo.getNombre().equals(nombreCiudad)){
-          miNodo=miNodo.getSigNodo();
-          bandera++;
-        }
-        if(miNodo==null){
-            return bandera=-1;
-        }else{
-            System.out.println("producto: "+miNodo.getNombre());
-            return bandera;
-        }
-    }
-     
-     
+          
      //aqui me recibe el nodo de la ciudad con la que se conecta
      public void ConectarCiudades(NodoCiudad miNodo){
          String ciudadEnlace=miNodo.getDistanciaEnlace().getNodoCiudad().getNombre();

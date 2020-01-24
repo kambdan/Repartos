@@ -5,10 +5,12 @@ import Modelo.BaseDatos;
 import Modelo.CaracteristicasEspeciales;
 import Modelo.Clientes;
 import Modelo.Conductores;
+import Modelo.Contratos;
 import Modelo.Dibujos;
 import Modelo.Empresas;
 import Modelo.ListaCaracteristicasEspeciales;
 import Modelo.ListaClientes;
+import Modelo.ListaContratos;
 import Modelo.ListaProductos;
 import Modelo.ListaVehiculos;
 import Modelo.NodoCiudad;
@@ -784,15 +786,17 @@ public void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {
                                 //Ordenar HEAP POR PLACA
                                 miOrdenamiento.heapVehiculos();
                                 nuevalista=miOrdenamiento.getMiListaOrdenadaVehiculos();
-                                mostrarReportes(miListaV);
+                                mostrarReportes(nuevalista);
                                 //System.out.println("Mi lista Ordenada");
                                 //miOrdenamiento.imprimirLista(nuevalista);
                                 //
                                 //mostrarReporteHeap(miOrdenamiento.getMiListaOrdenadaVehiculos());
                             }else if(miViewOrdenamientos.comboReportes.getSelectedItem().toString().equals("Contrato - Ciudad destino")){
                                 //Ordenar HEAP POR CONTRATO
+                                ///mostrarReportesContratos(miLista);
                             }else if(miViewOrdenamientos.comboReportes.getSelectedItem().toString().equals("Fecha")){
                                 //Ordenar HEAP POR FECHA
+                                ///mostrarReportesContratos(miLista);
                             }
                         }else{
                             if(miViewOrdenamientos.comboOrdenamiento.getSelectedItem().toString().equals("Quick Sort")){
@@ -800,15 +804,17 @@ public void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {
                                 
                                 if(miViewOrdenamientos.comboReportes.getSelectedItem().toString().equals("Placa")){
                                     //Ordenar QUICK POR PLACA
-                                    miOrdenamiento.ordenarQuickSortVehiculos(miListaV, 0, miListaV.getTamListaVehiculos()-1);
+                                    miOrdenamiento.ordenarQuickSortVehiculos(nuevalista, 0, nuevalista.getTamListaVehiculos()-1);
                                     mostrarReportes(nuevalista);
                                     //Obtener el valor de la tabla
                                     
                                     //miOrdenamiento.imprimirLista(miListaV);
                                 }else if(miViewOrdenamientos.comboReportes.getSelectedItem().toString().equals("Contrato - Ciudad destino")){
                                     //Ordenar QUICK POR CONTRATO
+                                    ///mostrarReportesContratos(miLista);
                                 }else if(miViewOrdenamientos.comboReportes.getSelectedItem().toString().equals("Fecha")){
                                     //Ordenar QUICK POR FECHA
+                                    ///mostrarReportesContratos(miLista);
                                     
                                 }
                             }else{
@@ -817,18 +823,21 @@ public void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {
                                     
                                     if(miViewOrdenamientos.comboReportes.getSelectedItem().toString().equals("Placa")){
                                         //Ordenar MERGE POR PLACA
-                                        miOrdenamiento.ordenarMergeSortVehiculos(miListaV, 0, miListaV.getTamListaVehiculos()-1);
-                                        miOrdenamiento.imprimirLista(miListaV);
+                                        miOrdenamiento.ordenarMergeSortVehiculos(nuevalista, 0, nuevalista.getTamListaVehiculos()-1);
+                                        mostrarReportes(nuevalista);
+                                        //miOrdenamiento.imprimirLista(miListaV);
                                     }else if(miViewOrdenamientos.comboReportes.getSelectedItem().toString().equals("Contrato - Ciudad destino")){
                                         //Ordenar MERGE POR CONTRATO
+                                        ///mostrarReportesContratos(miLista);
                                     }else if(miViewOrdenamientos.comboReportes.getSelectedItem().toString().equals("Fecha")){
                                         //Ordenar MERGE POR FECHA
+                                        ///mostrarReportesContratos(miLista);
                                     }
                                 }
                             }
                         }
                         miViewReportes.setVisible(true);
-                        miViewReportes.table1.setEnabled(true);
+                        miViewReportes.table1.setEnabled(false);
                     }
             }else{ 
                 if(miViewOrdenamientos.btnAtras==e.getSource()){
@@ -1167,6 +1176,11 @@ private void mostrarCiudades(){
                 miViewVehiculos.setVisible(true);
                 viewCrud.setVisible(false);
             }else{
+                
+                
+                
+                
+                
                 miEmpresas.agregarVehiculo(miViewVehiculos.txtPlacaVehiculo.getText(), miViewVehiculos.txtMarcaVehiculo.getText(), miViewVehiculos.txtModeloVehiculo.getText(),Double.parseDouble(miViewVehiculos.txtPesoMaximoVehiculo.getText()),
                         Double.parseDouble(miViewVehiculos.txtVolumneMaximoVehiculo.getText()),miViewVehiculos.comboCiudad.getSelectedItem().toString(),miListaCaract);
                 miViewVehiculos.setVisible(false);
@@ -1555,7 +1569,30 @@ private void mostrarReportes(ListaVehiculos miLista){
 }
 
 
+private void mostrarReportesContratos(ListaContratos miLista){
     
+    DefaultTableModel modelo=new DefaultTableModel();
+    modelo.addColumn("Dia");
+    modelo.addColumn("Mes");
+    modelo.addColumn("Año");
+    modelo.addColumn("Cliente");
+    modelo.addColumn("Ciudad Origen");
+    modelo.addColumn("Ciudad Destino");
+    this.miViewReportes.table1.setModel(modelo);
+    
+    Contratos miContrato=new Contratos();
+    miContrato=miLista.getHeadContratos();
+    while(miContrato!=null){
+        String []info=new String[7];
+        info[0]=String.valueOf(miContrato.getFechaContrato().getDia());
+        info[1]=String.valueOf(miContrato.getFechaContrato().getMes());
+        info[2]=String.valueOf(miContrato.getFechaContrato().getAño());
+        info[3]=miContrato.getCiudadOrigen().getNombre();
+        info[4]=miContrato.getCiudadDestino().getNombre();       
+        modelo.addRow(info);
+        miContrato=miContrato.getSiguienteContrato();
+    }
+}    
     
     //fin ComBobox
     @Override

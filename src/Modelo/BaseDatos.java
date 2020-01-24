@@ -54,7 +54,7 @@ public class BaseDatos {
         
         
         //****************para ciudades
-        miEmpresas.agregarCiudad("Cuenca", 10, 10, "Quito",100,100, 2);
+        miEmpresas.agregarCiudad("Cuenca", 10, 10, "quevedo",100,100, 2);
         miEmpresas.agregarCiudad("Quevedo", 400, 300, "Quito",100,100, 2);
         miEmpresas.agregarCiudad("Manta", 150, 150, "Cuenca",10,10, 52);
         miEmpresas.agregarCiudad("Quito", 100, 100, "Guayaquil",500,75, 2);

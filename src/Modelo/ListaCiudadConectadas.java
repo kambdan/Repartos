@@ -9,9 +9,18 @@ package Modelo;
  *
  * @author STRIX
  */
-public class ListaCiudadConectadas {
+public class ListaCiudadConectadas extends NodoCiudad {
     private NodoCiudad headVetice;
     private NodoCiudad tailVertice;
+    private int tam;
+
+    public int getTam() {
+        return tam;
+    }
+
+    public void setTam(int tam) {
+        this.tam = tam;
+    }
     public NodoCiudad getHeadVetice() {
         return headVetice;
     }
@@ -29,24 +38,26 @@ public class ListaCiudadConectadas {
     }
     
     
-    public void agregarCiudadesConectadas(NodoCiudad miNodo){
+    public void agregarCiudadesConectadas(ListaCiudadConectadas lista,NodoCiudad miNodo){
          
-         if(headVetice==null){
-             headVetice=miNodo;
-             tailVertice=miNodo;
+        NodoCiudad aux=new NodoCiudad();
+        aux=lista.getHeadVetice();
+         if(lista.getHeadVetice()==null){
              
+             lista.setHeadVetice(miNodo);
+             lista.setTailVertice(miNodo);
              //conecttamos la cabeza con la distancia ,eso quiere decir
              //que la raiz ssabe cuanto tiempo tendrá con el siguiente nodo
              //mirar dibujo 
              
             
          }else{
-             tailVertice.setSigVertice(miNodo);
-             tailVertice=miNodo;
-             
+            
+             lista.getTailVertice().setSigVertice(miNodo);
+             lista.setTailVertice(miNodo);
              
          }
-         
+         tam++;
      
      }
 }

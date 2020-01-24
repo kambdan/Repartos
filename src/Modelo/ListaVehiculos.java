@@ -54,9 +54,45 @@ public class ListaVehiculos {
             if(miListaVehic.getHeadVehiculos()==null){
                 miListaVehic.setHeadVehiculos(nuevoVehiculo);
                 miListaVehic.setTailVehiculos(nuevoVehiculo);
+               
             }else{
                 miListaVehic.getTailVehiculos().setSiguienteVehiculo(nuevoVehiculo);
                 miListaVehic.setTailVehiculos(nuevoVehiculo);
+                
             }
-        }   
+             tamListaVehiculos++;
+    }
+    
+    public Vehiculos consultarVehiculos(ListaVehiculos listaVehiculos,String placa){
+        
+        Vehiculos miVehiculo;
+        miVehiculo=listaVehiculos.getHeadVehiculos();
+        while(miVehiculo!=null && !miVehiculo.getPlaca().equals(placa)){
+          miVehiculo=miVehiculo.getSiguienteVehiculo();
+        }
+        if(miVehiculo==null){
+            return miVehiculo;
+        }else{
+            return miVehiculo;
+        }
+    }
+       //Fin vehiculos
+    
+    
+    
+    //****************************** validacion para contratos
+    
+    
+    public void consultarAgregarVehiculoLista(ListaVehiculos listaVehiculos, Vehiculos vehiculo){
+        Vehiculos aux;
+        aux=consultarVehiculos(listaVehiculos,vehiculo.getPlaca());
+        if(aux==null){
+            agregarVehiculo(listaVehiculos,vehiculo);
+        }else{
+        
+        }
+    }
+    
+    
+    
     }

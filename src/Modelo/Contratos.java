@@ -11,7 +11,15 @@ public class Contratos {
     private ListaProductos miListaProductos;
     private NodoCiudad ciudadOrigen;
     private NodoCiudad ciudadDestino;
-    private Vehiculos vehiculo;
+    private ListaVehiculos listaVehiculo;
+
+    public ListaVehiculos getListaVehiculo() {
+        return listaVehiculo;
+    }
+
+    public void setListaVehiculo(ListaVehiculos listaVehiculo) {
+        this.listaVehiculo = listaVehiculo;
+    }
     private Clientes cliente;
     private UUID id;
 
@@ -31,13 +39,6 @@ public class Contratos {
         this.cliente = cliente;
     }
 
-    public Vehiculos getVehiculo() {
-        return vehiculo;
-    }
-
-    public void setVehiculo(Vehiculos vehiculo) {
-        this.vehiculo = vehiculo;
-    }
     
     
     public Contratos getSiguienteContrato() {
@@ -96,7 +97,7 @@ public class Contratos {
     
     
     
-    public Contratos(NodoCiudad ciudadOrigen,NodoCiudad ciudadDestino, int dia, int mes, int ano,ListaProductos miListaProductos,Vehiculos vehiculo) {
+    public Contratos(NodoCiudad ciudadOrigen,NodoCiudad ciudadDestino, int dia, int mes, int ano,ListaProductos miListaProductos,ListaVehiculos listaVehiculo) {
         
         fechaContrato.setAño(ano);
         fechaContrato.setMes(mes);
@@ -104,7 +105,7 @@ public class Contratos {
         this.ciudadOrigen=ciudadOrigen;
         this.ciudadDestino=ciudadDestino;
         this.miListaProductos=miListaProductos;
-        this.vehiculo=vehiculo;
+        this.listaVehiculo=listaVehiculo;
         this.siguienteContrato=null;
         setId();
     }

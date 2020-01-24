@@ -10,6 +10,7 @@ import Modelo.Empresas;
 import Modelo.ListaCaracteristicasEspeciales;
 import Modelo.ListaClientes;
 import Modelo.ListaProductos;
+import Modelo.ListaVehiculos;
 import Modelo.NodoCiudad;
 import Modelo.Productos;
 import Modelo.Vehiculos;
@@ -54,6 +55,7 @@ public class Controlador implements ActionListener, KeyListener{
     private VentanaDibujo miViewDibujo;
     private ListaProductos miLista;
     private ListaCaracteristicasEspeciales miListaCaract;
+    private ListaVehiculos miListaVehiculos;
     private BaseDatos miBase;
 
     private VentanaEntradaViajes miViewViajes;
@@ -80,6 +82,8 @@ public class Controlador implements ActionListener, KeyListener{
         miViewViajes=new VentanaEntradaViajes();
         miViewOrdenamientos=new VentanaOrdenamientos();
         miViewReportes=new VentanaReportes();
+        miListaVehiculos=new ListaVehiculos();
+        
         this.miEmpresas=miEmpresas;
         
         miBase=new BaseDatos(miEmpresas);
@@ -642,7 +646,9 @@ public void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {
         }
         
         if(miViewViajes.btnAceptarViaje==e.getSource()){
-            //validarVacioViajes(miViewViajes.txtClienteConViaje.getText());
+            System.out.println("siiii");
+            validarVacioViajes();
+            //validarContrato();
             
         }else{
             if(miViewViajes.btnCancelarViaje==e.getSource()){
@@ -1228,8 +1234,8 @@ private void mostrarCiudades(){
             viewCrud.setVisible(false);   
         }else{
             //AQUI VA AGREGAR CIUDAD
-            miEmpresas.agregarCiudad(miViewCiudades.txtNombreCiudad.getText(),Integer.parseInt(miViewCiudades.txtCordenadaX.getText()),Integer.parseInt(miViewCiudades.txtCordenadaY.getText()),miViewCiudades.txtCiudadAEnlazar.getText(), Double.parseDouble(miViewCiudades.txtTiempo.getText()),
-                    Integer.parseInt(miViewCiudades.txtCoordX.getText()),Integer.parseInt(miViewCiudades.txtCoordY.getText()));
+            miEmpresas.agregarCiudad(miViewCiudades.txtNombreCiudad.getText(),Integer.parseInt(miViewCiudades.txtCordenadaX.getText()),Integer.parseInt(miViewCiudades.txtCordenadaY.getText()),miViewCiudades.txtCiudadAEnlazar.getText(), 
+                   Integer.parseInt(miViewCiudades.txtCoordX.getText()),Integer.parseInt(miViewCiudades.txtCoordY.getText()),Double.parseDouble(miViewCiudades.txtTiempo.getText()));
             
             miViewCiudades.setVisible(false);
             viewCrud.setVisible(true);
@@ -1312,9 +1318,9 @@ private void mostrarCiudades(){
     
     
     
-    public void validarVacioViajes(String cliente, String ciudadO, String ciudadD){
+    public void validarVacioViajes(){
         int dia,mes,anio;
-        
+        String cliente,ciudadO,ciudadD;
         cliente=miViewViajes.txtClienteConViaje.getText();
         ciudadO=miViewViajes.comboCiudadOrigen.getSelectedItem().toString();
         ciudadD=miViewViajes.comboCiudadDestino.getSelectedItem().toString();
@@ -1332,6 +1338,8 @@ private void mostrarCiudades(){
         }else{
             //AQUI VA AGREGAR VIAJE
             //miEmpresas.agregarContrato(ciudadD, dia, mes, anio, miLista);
+            
+            validarContrato();
             miViewViajes.setVisible(false);
             viewCrud.setVisible(true);
             
@@ -1394,6 +1402,77 @@ private void mostrarCiudades(){
         miViewViajes.txtMesViaje.setText("");
         miViewViajes.txtAnioViaje.setText("");
     }
+    
+    
+    public void validarContrato(){
+        // en empresas cnsultarConexionCiudades=1 si estan conectadas las ciudades se puede hacer el viaje
+        
+        int bandera1=miEmpresas.consultarConexionCiudades(miViewViajes.comboCiudadOrigen.getSelectedItem().toString(),
+                miViewViajes.comboCiudadDestino.getSelectedItem().toString());
+        // en empresas consultarFechaDisponible=1 si hay fecha disponible para hacer viajes
+       // int bandera2=miEmpresas.consultarFechaDisponible(miListaCaract,Integer.parseInt(miViewViajes.txtDiaViaje.getText()),Integer.parseInt(miViewViajes.txtMesViaje.getText()),
+                //Integer.parseInt(miViewViajes.txtAnioViaje.getText()));
+        int bandera=verificarVehiculosDisponibles(Integer.parseInt(miViewViajes.txtDiaViaje.getText()),Integer.parseInt(miViewViajes.txtMesViaje.getText()),
+                Integer.parseInt(miViewViajes.txtAnioViaje.getText()));
+        if(bandera1==1&&bandera==0){//esta validado y puedo hacer el contrato
+            System.out.println("Es posible realizar el contrato");
+        }else{//no puedo hacer el contrato
+            JOptionPane.showMessageDialog(null, "No puede realizar el contrato");
+        }
+        
+    
+    
+    }
+    
+    
+    
+    
+    //**************************creo un metodo para que me recorra la lista de productos
+    public int verificarVehiculosDisponibles(int dia,int mes,int año){
+        Productos producto=miLista.getHeadProducto();
+        int bandera=0;
+        int b=0;
+        //en esta variable se me va a guardar el vehiculo con las caracteristicas
+        Vehiculos vehiculo=new Vehiculos();
+        //luego debo añadir a una lista de vehiculo
+        //que luego será enviado a la lista de contratos
+        while(producto!=null){
+            //aqui debo mandar la lista de Caracteristicas del producto
+            
+            
+            vehiculo=miEmpresas.consultarVehiculoPorCaracteristicas(producto.getListaCaracteristicas());
+            System.out.println("vehiculo "+vehiculo);
+            if(vehiculo!=null){
+              
+            //vehiculo.getListaFechas().agregarFechas(Integer.parseInt(miViewViajes.txtDiaViaje.toString()),Integer.parseInt(miViewViajes.txtMesViaje.toString()), Integer.parseInt(miViewViajes.txtAnioViaje.toString()));
+            //ahora como creo una nueva lista de vehiculos tengo que controlar que si esta en la lista no agrego ,caso contrario le agrego
+           
+                 b=b+miEmpresas.consultarFechaDisponible(vehiculo.getCaracteristicasVehiculo(),dia,mes,año);
+                    System.out.println("si hay vehiculo**********");     
+                 miListaVehiculos.consultarAgregarVehiculoLista(miListaVehiculos, vehiculo);
+                 System.out.println("vehiculo: "+miListaVehiculos.getHeadVehiculos().getMarca()+"igual a"+vehiculo.getMarca());
+            }else{//caso contrario que no exista vehiculos
+                System.out.println("No hay vechiculo");
+                bandera++;//aumentamos la bandera como señal de que no hay vehiculos para los productos
+            }
+              
+            producto=producto.getSiguienteProducto();
+        }
+        if(b==0){
+            System.out.println("Si hay fechas");
+        }
+        return bandera;//bandera= 0 que si hay vehiculos para todos los vehiculos 
+                       // bandera>0 que no hay vehiculos;         
+    }
+    
+
+    
+    
+    
+    
+    
+    
+    
 
     //******CLIENTES
     public void limpiarTextoClientes(){
@@ -1406,6 +1485,8 @@ private void mostrarCiudades(){
     //Fin de funciones de limpiar texto
     
     //funciones para Agregar los textos a los jComboBox
+    
+    
     ///*************ventanas viajes
     public void AgregarComboboxProductos(){
         Productos miProducto=new Productos();
@@ -1512,4 +1593,6 @@ private void mostrarCiudades(){
     @Override
     public void keyReleased(KeyEvent e) {   
     }
+    
+    
  }

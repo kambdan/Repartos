@@ -41,7 +41,7 @@ public class ListaContratos {
     public void agregarContrato(ListaContratos miListaContratos,Contratos contrato){
     
         Contratos nuevoContrato=new Contratos(contrato.getCiudadOrigen(),contrato.getCiudadDestino(),contrato.getFechaContrato().getDia(),
-                contrato.getFechaContrato().getMes(),contrato.getFechaContrato().getAño(),contrato.getMiLista(),contrato.getVehiculo());
+                contrato.getFechaContrato().getMes(),contrato.getFechaContrato().getAño(),contrato.getMiLista(),contrato.getListaVehiculo());
         
         if(miListaContratos.getHeadContratos()==null){
             

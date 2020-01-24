@@ -119,10 +119,12 @@ public class Empresas {
             if(miListaVehic.getHeadVehiculos()==null){
                 miListaVehic.setHeadVehiculos(nuevoVehiculo);
                 miListaVehic.setTailVehiculos(nuevoVehiculo);
+                
             }else{
                 miListaVehic.getTailVehiculos().setSiguienteVehiculo(nuevoVehiculo);
                 miListaVehic.setTailVehiculos(nuevoVehiculo);
             }
+            miListaVehic.setTamListaVehiculos(miListaVehic.getTamListaVehiculos()+1);
         }
     
     public Vehiculos consultarVehiculos(String placa){
@@ -138,18 +140,40 @@ public class Empresas {
             return miVehiculo;
         }
     }
+       //Fin vehiculos
     
-    //**************
+    
+    
+    //****************************** validacion para contratos
+    
+    
+    public void consultarAgregarVehiculoLista(Vehiculos vehiculo){
+        Vehiculos aux;
+        aux=consultarVehiculos(vehiculo.getPlaca());
+        if(aux!=null){
+            agregarVehiculo(vehiculo.getPlaca(),vehiculo.getMarca(), vehiculo.getModelo(), vehiculo.getPesoMaximo(), vehiculo.getVolumenMaximo(),
+                    vehiculo.getCiudad().getNombre(),vehiculo.getCaracteristicasVehiculo());
+        }else{
+        
+        }
+    }
+    
+    
+    
+    
+    
+    
     public int consultarCaracter(ListaCaracteristicasEspeciales lista1,ListaCaracteristicasEspeciales lista2){
         int cont=0;
         CaracteristicasEspeciales aux=lista1.getHeadCaracteristica();
         CaracteristicasEspeciales aux1=lista2.getHeadCaracteristica();
         while(aux!=null){
             if(aux.getCaracteristicas().equals(aux1.getCaracteristicas())){
-                aux=aux.getSiguienteCaracteristica();
-                aux1=aux.getSiguienteCaracteristica();
+                
                 cont++;
             }
+            aux=aux.getSiguienteCaracteristica();
+            aux1=aux1.getSiguienteCaracteristica();
         
         }
         return cont;
@@ -158,11 +182,14 @@ public class Empresas {
     
     public Vehiculos consultarVehiculoPorCaracteristicas(ListaCaracteristicasEspeciales lista){
         Vehiculos vehiculo=miListaVehic.getHeadVehiculos();
-        while(vehiculo!=null&&consultarCaracter(lista, vehiculo.getCaracteristicasVehiculo())==vehiculo.getCaracteristicasVehiculo().getTam()){
+        int tam=vehiculo.getCaracteristicasVehiculo().getTam();
+        int bandera=consultarCaracter(lista, vehiculo.getCaracteristicasVehiculo());
+        while(vehiculo!=null&&bandera!=tam){
+            bandera=consultarCaracter(lista, vehiculo.getCaracteristicasVehiculo());
             vehiculo=vehiculo.getSiguienteVehiculo();
         }
         if(vehiculo==null){
-            return vehiculo;
+            return null;
         }else{
             return vehiculo;
         }
@@ -170,15 +197,20 @@ public class Empresas {
     }
     
     public int compararFechas(ListaFechas lista1,Fechas fecha){
-        Fechas aux=lista1.getHeadFecha();
         int bandera=0;
-        while(aux!=null){
-            if(aux.getAño()==fecha.getDia() && aux.getMes()==fecha.getMes() && aux.getDia()==fecha.getDia()){
-                bandera++;
+        if(lista1!=null){
+            Fechas aux=lista1.getHeadFecha();
+        
+            while(aux!=null){
+                if(aux.getAño()==fecha.getDia() && aux.getMes()==fecha.getMes() && aux.getDia()==fecha.getDia()){
+                    bandera++;
+                }
+                aux=aux.getSigFecha();
             }
-            aux=aux.getSigFecha();
         }
-        return bandera;
+        
+        return bandera;//retorna 0 si hay fechas disponibles
+                        //retorna 1 si no hay fechas disponibles
     }
     
     
@@ -189,18 +221,41 @@ public class Empresas {
         Fechas fecha=new Fechas(dia, mes, año);
         Vehiculos vehiculo;
         vehiculo=consultarVehiculoPorCaracteristicas(miLista);
-        if(vehiculo!=null){
-            bandera=compararFechas(vehiculo.getListaFechas(), fecha);
+        if(vehiculo!=null){//cuando si existe un vehiculo
+            
+            //me devuelve cero si  hay fechas dsiponibles 
+            bandera=bandera+compararFechas(vehiculo.getListaFechas(), fecha);
         }
         
-        return bandera;
+        return bandera;// bandera>1 no hay fecha ......bandera=0 si hay fecha
+    }
+    
+    //esta funcion me ayuda a comparar si las ciudades a viajar estan disponibles
+    public int consultarConexionCiudades(String ciudadOrigen, String ciudadDestino){
+        int bandera=0;
+        //obtenemos la ciudad de la columna la ciudad origen del pedido
+        NodoCiudad ciudad=consultarCiudad(ciudadOrigen);
+        //obtenemos la lista de las ciudades con las que estan conectadas miNodo de la columna
+        ciudad=ciudad.getMiListaConectada().getHeadVetice();
+        NodoCiudad aux=ciudad.getMiListaConectada().getHeadVetice();
+        System.out.println(ciudad.getSigVertice());
+        while(ciudad!=null){
+            if(ciudad.getNombre().equals(ciudadDestino)){
+                bandera++;
+            }
+            ciudad=ciudad.getSigVertice();
+        }
+                
+        
+        return bandera;/// bandera=1 si hay conexiones si se puede realizar los viajes
+                        // bandera=0 no hay conexiones 
     }
     
     
     
     
     
-    //Fin vehiculos
+ 
     
     //*********Funciones Conductores
     public void agregarConductor(String Nombre,long cedula,String Ciudad){
@@ -390,11 +445,11 @@ public class Empresas {
     
     
     
-    public void agregarContrato(NodoCiudad ciudadOrigen,NodoCiudad ciudadDestino, int dia, int mes, int año,ListaProductos miLista,Vehiculos vehiculo){
+    public void agregarContrato(NodoCiudad ciudadOrigen,NodoCiudad ciudadDestino, int dia, int mes, int año,ListaProductos miLista,ListaVehiculos listaVehiculos){
         //agrego las fechas a los vehiculos ----la clase ListaFechas tiene su propio metodo para agregar y eliminar fechas
         //con esto cada vez que contrate se podrá observar las fechas de los vehiculos
-        vehiculo.getListaFechas().agregarFechas(dia, mes, año);
-        Contratos nuevoContrato=new Contratos(ciudadOrigen,ciudadDestino,dia,mes,año,miLista,vehiculo);
+       // vehiculo.getListaFechas().agregarFechas(dia, mes, año);
+        Contratos nuevoContrato=new Contratos(ciudadOrigen,ciudadDestino,dia,mes,año,miLista,listaVehiculos);
         
         if(miListaContratos.getHeadContratos()==null){
             
@@ -409,7 +464,14 @@ public class Empresas {
 
     }
     
+    public void limpiarFechas(Fechas fecha){
+        Vehiculos vehiculo=miListaVehic.getHeadVehiculos();
+        while(vehiculo!=null){
+            vehiculo.getListaFechas().eliminarFecha(fecha);
+            vehiculo=vehiculo.getSiguienteVehiculo();
+        }
     
+    }
     
     
     public void cancelarContratos(UUID id){
@@ -428,13 +490,15 @@ public class Empresas {
                     miListaContratos.setHeadContratos(miListaContratos.getHeadContratos().getSiguienteContrato());
                     //SE DEBE REDCORDAR QUE HAY QUE ELIMINAR LA FECHA DEL CARRO ,PARA QUE ESTE ,ésta disppnible para otro viaa
                     //con esto nos aseguramos de librar las fechas
-                    auxBorrar.getVehiculo().getListaFechas().eliminarFecha(auxBorrar.getFechaContrato());
+                    
+                    limpiarFechas(auxBorrar.getFechaContrato());
                     auxBorrar=null;
                     
                 }else{
                     anterior.setSiguienteContrato(auxBorrar.getSiguienteContrato());
+                     limpiarFechas(auxBorrar.getFechaContrato());
                     auxBorrar=null;
-                    auxBorrar.getVehiculo().getListaFechas().eliminarFecha(auxBorrar.getFechaContrato());
+                    
                 }
                 System.out.println("Eliminado con exito");
             }
@@ -528,25 +592,82 @@ public class Empresas {
     
     
     // ********FUNCIONES CIUDADES
-     public void agregarCiudad(String nombre,int x,int y,String otraCiudad,double t,int x1,int y1){
+     public void agregarCiudad(String nombre,int x,int y,String otraCiudad,int x1,int y1,double t){
+        NodoCiudad consulta=consultarCiudad(nombre);
         NodoCiudad miNodo=new NodoCiudad(nombre, x, y, otraCiudad,x1,y1,t);
-        if(miListaCiudades.getHeadNodo()==null){
-            miListaCiudades.setHeadNodo(miNodo);
-            miListaCiudades.setTailNodo(miNodo);
+        if(consulta==null){
+             
+                if(miListaCiudades.getHeadNodo()==null){
+                    miListaCiudades.setHeadNodo(miNodo);
+                    miListaCiudades.setTailNodo(miNodo);
+
+                }else{
+                    miListaCiudades.getTailNodo().setSigNodo(miNodo);
+
+
+                    //si es diferente de null  quiere decir que se trata de un grafo
+                    miListaCiudades.setTailNodo(miNodo);
+                }
+                
+                
+        }else{//si ya esta agregado solo conecto
             
-        }else{
-            miListaCiudades.getTailNodo().setSigNodo(miNodo);
-            
-            
-            //si es diferente de null  quiere decir que se trata de un grafo
-            miListaCiudades.setTailNodo(miNodo);
-            
-        
-        }
-        if(miListaCiudades.getTailNodo()!=null&&miNodo.getDistanciaEnlace().getNodoCiudad()!=null){
-                ConectarCiudades(miNodo);
+          
+        } 
+       
+        if(miListaCiudades.getTailNodo()!=null&&otraCiudad!=null){
+               // ConectarCiudades(miNodo);
+                agregarCiudadesConectadas(miNodo.getMiListaConectada(), miNodo.getDistanciaEnlace().getNodoCiudad());
+                
          }
+        
     }
+     
+     public ListaCiudadConectadas agregarCiudadesConectadas(ListaCiudadConectadas lista,NodoCiudad miNodo){
+       
+        NodoCiudad aux=new NodoCiudad();
+        aux=lista.getHeadVetice();
+         if(lista.getHeadVetice()==null){
+             
+             lista.setHeadVetice(miNodo);
+             lista.setTailVertice(miNodo);
+             //conecttamos la cabeza con la distancia ,eso quiere decir
+             //que la raiz ssabe cuanto tiempo tendrá con el siguiente nodo
+             //mirar dibujo 
+             
+            
+         }else{
+            
+             lista.getTailVertice().setSigVertice(miNodo);
+             lista.setTailVertice(miNodo);
+             
+         }
+         lista.setTam(lista.getTam() +1);
+         return lista;
+     }
+     
+     
+     
+     
+     public void imprimir(){
+         NodoCiudad nod=miListaCiudades.getHeadNodo();
+         NodoCiudad aux;
+         while(nod!=null){
+             aux=nod.getMiListaConectada().getHeadVetice();
+            
+             if(aux!=null){
+                 while(aux!=null){
+                 System.out.print(" "+aux.getNombre());
+                 System.out.print("-->"+aux.getNombre());
+                 aux=aux.getSigVertice();
+                 }
+             }
+             
+             
+             nod=nod.getSigNodo();
+         }
+     
+     }
     
      public NodoCiudad consultarCiudad(String nombreCiudad){
         
@@ -567,9 +688,14 @@ public class Empresas {
      
      //aqui me recibe el nodo de la ciudad con la que se conecta
      public void ConectarCiudades(NodoCiudad miNodo){
+         //String ciudadEnlace=miNodo.getDistanciaEnlace().getNodoCiudad().getNombre();
+         NodoCiudad nodAux=new NodoCiudad();
+         nodAux=miNodo;
          String ciudadEnlace=miNodo.getDistanciaEnlace().getNodoCiudad().getNombre();
          System.out.println("ciudad: "+ciudadEnlace);
-         NodoCiudad nodAux;
+         
+         ListaCiudadConectadas miListaConectada=new ListaCiudadConectadas();
+         //miListaConectada=miNodo.getMiListaConectada();
          if(ciudadEnlace!=null){
              nodAux=consultarCiudad(ciudadEnlace);
 
@@ -582,17 +708,30 @@ public class Empresas {
                    //esta añade las listas horizontales
                    //ListaCiudadConectadas miLista=new ListaCiudadConectadas();
                    //miLista=miNodo.getMiListaConectada();
+                  
 
-
-                  nodAux.getMiListaConectada().agregarCiudadesConectadas(miNodo);
-                  System.out.println(nodAux.getMiListaConectada().getHeadVetice().getNombre()+" ::"+nodAux.getMiListaConectada().getHeadVetice().getCoordX());
+                 // miNodo.getMiListaConectada().agregarCiudadesConectadas(miNodo.getMiListaConectada(),miNodo.getDistanciaEnlace().getNodoCiudad());
+                  
+                  miListaConectada=miNodo.getMiListaConectada();
+                  ListaCiudadConectadas auxLista=new ListaCiudadConectadas();
+                  auxLista=agregarCiudadesConectadas(miListaConectada, miNodo.getDistanciaEnlace().getNodoCiudad());
+                  miNodo.setMiListaConectada(miListaConectada);
+// System.out.println(nodAux.getMiListaConectada().getHeadVetice().getNombre()+" ::"+nodAux.getMiListaConectada().getHeadVetice().getCoordX());
                   ///miNodo.getMiListaConectada().agregarCiudadesConectadas(nodAux, tiempo);
                   // nodAux.getMiListaConectada().agregarCiudadesConectadas(miNodo, tiempo);
                    //agregarCiudadesConectadas(nodAux, tiempo);
                }else{
                 System.out.println("aquiiiii");
                 agregarCiudad(miNodo.getDistanciaEnlace().getNodoCiudad().getNombre(),miNodo.getDistanciaEnlace().getNodoCiudad().getCoordX(),
-               miNodo.getDistanciaEnlace().getNodoCiudad().getCoordY(),null, miNodo.getDistanciaEnlace().getTiempo(),0,0);
+                miNodo.getDistanciaEnlace().getNodoCiudad().getCoordY(),null,0,0, miNodo.getDistanciaEnlace().getTiempo());
+               
+                //miNodo.getMiListaConectada().agregarCiudadesConectadas(miNodo.getMiListaConectada(),miNodo.getDistanciaEnlace().getNodoCiudad());
+                miListaConectada=miNodo.getMiListaConectada();
+                ListaCiudadConectadas auxLista=new ListaCiudadConectadas();
+                auxLista=agregarCiudadesConectadas(miListaConectada, miNodo.getDistanciaEnlace().getNodoCiudad());
+               
+                 
+                 miNodo.setMiListaConectada(miListaConectada);
             }
          
          }

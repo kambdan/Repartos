@@ -22,13 +22,13 @@ public class BaseDatos {
         //******para productos
         ListaCaracteristicasEspeciales miLista=new ListaCaracteristicasEspeciales();
         CaracteristicasEspeciales nodo=new CaracteristicasEspeciales();
-         nodo.setCaracteristicas("a mano");
-        nodo.setDescripcion("SOLO pequeños");
-        miLista.setHeadCaracteristica(nodo);
+        
+        
+        miLista.agregarCaracteristica(miLista,"congelador","SOLO pequeños");
         miEmpresas.agregarProducto("Manzanas", "fundas", 1.0, 0,miLista);
         miEmpresas.agregarProducto("Peras", "quintales", 1.0, 0,miLista);
         miEmpresas.agregarProducto("Papas", "quintales", 1.0, 0,miLista);
-        miEmpresas.agregarProducto("Papayas", "fundas", 1.0, 0,miLista);
+        miEmpresas.agregarProducto("Papayas", "cajonera", 1.0, 0,miLista);
         miEmpresas.agregarProducto("Aguacates", "quintales", 1.0, 0,miLista);
         miEmpresas.agregarProducto("Tomates", "quintales", 1.0, 0,miLista);
         miEmpresas.agregarProducto("Guineos", "fundas", 1.0, 0,miLista);
@@ -55,15 +55,16 @@ public class BaseDatos {
         
         //****************para ciudades
         miEmpresas.agregarCiudad("Cuenca", 10, 10, "Quito",100,100, 2);
-        miEmpresas.agregarCiudad("Quevedo", 400, 300, "Quito",100,100, 2);
+        miEmpresas.agregarCiudad("Quevedo", 400, 300, "Quito",300,100, 2);
         miEmpresas.agregarCiudad("Manta", 150, 150, "Cuenca",10,10, 52);
-        miEmpresas.agregarCiudad("Quito", 100, 100, "Guayaquil",500,75, 2);
-        miEmpresas.agregarCiudad("Cuenca", 10, 10, "Azoguez",700,60, 2);
-        miEmpresas.agregarCiudad("Azoguez", 700, 60, "Quito",100,100, 32);
+        miEmpresas.agregarCiudad("Quito", 300, 100, "Guayaquil",500,200, 2);
+        miEmpresas.agregarCiudad("Cuenca", 10, 10, "Azoguez",700,300, 2);
+        miEmpresas.agregarCiudad("Azoguez", 700, 300, "Quito",300,100, 32);
         miEmpresas.agregarCiudad("Riobamba", 200, 140, "Cuenca",10,10, 22);
-        miEmpresas.agregarCiudad("Guayaquil", 500, 75, "Azoguez",700,60, 22);
-        miEmpresas.agregarCiudad("Gualaquiza", 600, 200, "Quito",100,100, 32);
-                
+        miEmpresas.agregarCiudad("Guayaquil", 500, 200, "Azoguez",700,300, 22);
+        miEmpresas.agregarCiudad("Gualaquiza", 600, 200, "Quito",300,100, 32);
+        
+        miEmpresas.imprimir();
         
         
         

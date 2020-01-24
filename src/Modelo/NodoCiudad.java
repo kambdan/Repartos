@@ -13,7 +13,12 @@ public class NodoCiudad {
    private NodoCiudad sigVertice;
    private NodoCiudad sigNodo;
    private Enlaces distanciaEnlace;
-
+    private String nombre;
+   private int coordX;
+   private int coordY;
+   
+   private String ciudadEnlace;
+   private  ListaCiudadConectadas  miListaConectada;
     public Enlaces getDistanciaEnlace() {
         return distanciaEnlace;
     }
@@ -21,12 +26,7 @@ public class NodoCiudad {
     public void setDistanciaEnlace(Enlaces distanciaEnlace) {
         this.distanciaEnlace = distanciaEnlace;
     }
-   private String nombre;
-   private int coordX;
-   private int coordY;
-   
-   private String ciudadEnlace;
-   private ListaCiudadConectadas miListaConectada;
+  
 
     public ListaCiudadConectadas getMiListaConectada() {
         return miListaConectada;

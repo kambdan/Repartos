@@ -37,7 +37,7 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="comboOrdenamiento" pref="171" max="32767" attributes="0"/>
+                          <Component id="comboOrdenamiento" max="32767" attributes="0"/>
                           <Component id="comboReportes" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -50,7 +50,7 @@
                       <Component id="btnObtenerReporte" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="116" max="32767" attributes="0"/>
+              <EmptySpace pref="114" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -119,7 +119,7 @@
           <StringArray count="4">
             <StringItem index="0" value="Seleccionar..."/>
             <StringItem index="1" value="Placa"/>
-            <StringItem index="2" value="Contrato -Ciudad destino"/>
+            <StringItem index="2" value="Contrato - Ciudad destino"/>
             <StringItem index="3" value="Fecha"/>
           </StringArray>
         </Property>

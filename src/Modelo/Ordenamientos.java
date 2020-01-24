@@ -5,8 +5,8 @@ public class Ordenamientos {
     private ListaContratos miListaViajesContratados;
 
     //Metodos contrsuctor
-    public Ordenamientos(ListaVehiculos miListaOrdenadaVehiculos){
-        this.miListaOrdenadaVehiculos=miListaOrdenadaVehiculos;
+    public Ordenamientos(){
+        this.miListaOrdenadaVehiculos=new ListaVehiculos();
     }
     
     public Ordenamientos(ListaContratos miListaViajesContratos){
@@ -34,6 +34,7 @@ public class Ordenamientos {
     //********************Funciones de metodos para ordenamientos de Vehiculos
     //InicioHeap
     public void heapVehiculos(){
+       String padre,hijoIzquierdo,hijoderecho;
        int posPadre;
        Vehiculos nodoPosPadre=new Vehiculos();
        int posHijoIzquierdo;
@@ -42,7 +43,7 @@ public class Ordenamientos {
        Vehiculos nodoPosHijoderecho=new Vehiculos();
        int n;
        n=miListaOrdenadaVehiculos.getTamListaVehiculos()-1;
-       
+        System.out.println("Tamano Lista: "+miListaOrdenadaVehiculos.getTamListaVehiculos());
        do{
        posPadre=n/2;
        posHijoIzquierdo=2*posPadre+1;
@@ -59,7 +60,9 @@ public class Ordenamientos {
               
           }else if(posHijoIzquierdo<=n && posHijoDrecho>n){//quiere decir que solo tiene hijo izquierdo
               nodoPosPadre=devolverNodo(miListaOrdenadaVehiculos,posPadre);
+              padre=nodoPosPadre.getPlaca();
               nodoPosHijoIzquierdo=devolverNodo(miListaOrdenadaVehiculos, posHijoIzquierdo);
+              hijoIzquierdo=nodoPosHijoIzquierdo.getPlaca();
               //Debe hacer una comparacion con el hijo izquierdo
               if(nodoPosPadre.getPlaca().compareTo(nodoPosHijoIzquierdo.getPlaca())<0){
                   //Se deben intercambiarVehiculos
@@ -81,9 +84,12 @@ public class Ordenamientos {
                 nodoPosPadre=devolverNodo(miListaOrdenadaVehiculos,posPadre);
                 nodoPosHijoIzquierdo=devolverNodo(miListaOrdenadaVehiculos, posHijoIzquierdo);
                 nodoPosHijoderecho=devolverNodo(miListaOrdenadaVehiculos, posHijoDrecho);
-                if(nodoPosPadre.getPlaca().compareTo(nodoPosHijoIzquierdo.getPlaca())<0){//Se pregunta si el padre es menor que el hijo izquierdo
+                padre=nodoPosPadre.getPlaca();
+                hijoIzquierdo=nodoPosHijoIzquierdo.getPlaca();
+                hijoderecho=nodoPosHijoderecho.getPlaca();
+                if(padre.compareTo(hijoIzquierdo)<0){//Se pregunta si el padre es menor que el hijo izquierdo
                     //Quiere decir que el hijo izquiero es mayor que el padre
-                    if(nodoPosHijoIzquierdo.getPlaca().compareTo(nodoPosHijoderecho.getPlaca())>0){
+                    if(hijoIzquierdo.compareTo(hijoderecho)>0){
                         //Esto quiere decir que el mayor de los 3 es el hijo izquierdo
                         //Se debe intercambiarVehiculos el padre por el hijo izquierdo
                         intercambiarVehiculos(posPadre, posHijoIzquierdo);
@@ -100,8 +106,8 @@ public class Ordenamientos {
                             
                     }
                     
-                }else if(nodoPosPadre.getPlaca().compareTo(nodoPosHijoderecho.getPlaca())<0){//Se pregunta si el padre es menor que el hijo derecho
-                    if(nodoPosHijoderecho.getPlaca().compareTo(nodoPosHijoIzquierdo.getPlaca())>0){//Quiere decir que el hijo derecho es el mayor de los 3
+                }else if(padre.compareTo(hijoderecho)<0){//Se pregunta si el padre es menor que el hijo derecho
+                    if(hijoderecho.compareTo(hijoIzquierdo)>0){//Quiere decir que el hijo derecho es el mayor de los 3
                         //Se debe intercambiarVehiculos el padre por el hijo derecho
                             intercambiarVehiculos(posPadre, posHijoDrecho);
                             posPadre=posPadre-1;
@@ -132,14 +138,29 @@ public class Ordenamientos {
            intercambiarVehiculos(0, n);
            n=n-1;
        }while(n!=0);
+       
+        System.out.println("Lista Ordenada");
    }
     public void intercambiarVehiculos(int posPadre,int posHijoMayor){
+        String placa,placa1,marca,modelo;
+        NodoCiudad miCiudad=new NodoCiudad();
+        double pesoM,volumenM;
+        ListaCaracteristicasEspeciales miListaC=new ListaCaracteristicasEspeciales();
+        ListaFechas misFechas=new ListaFechas();
+        //*****
         Vehiculos nodoPosPadre=new Vehiculos();
         Vehiculos nodoPoshijoMayor=new Vehiculos();
         nodoPosPadre=devolverNodo(miListaOrdenadaVehiculos, posPadre);
         nodoPoshijoMayor=devolverNodo(miListaOrdenadaVehiculos, posHijoMayor);
-        Vehiculos aux=new Vehiculos();
-        aux=nodoPosPadre;//Toma el valor del padre
+        placa=nodoPosPadre.getPlaca();
+        marca=nodoPosPadre.getMarca();
+        modelo=nodoPosPadre.getModelo();
+        miCiudad=nodoPosPadre.getCiudad();
+        pesoM=nodoPosPadre.getPesoMaximo();
+        volumenM=nodoPosPadre.getVolumenMaximo();
+        miListaC=nodoPosPadre.getCaracteristicasVehiculo();
+        misFechas=nodoPosPadre.getListaFechas();
+        //Toma el valor del padre
         nodoPosPadre.setPlaca(nodoPoshijoMayor.getPlaca());
         nodoPosPadre.setMarca(nodoPoshijoMayor.getMarca());
         nodoPosPadre.setModelo(nodoPoshijoMayor.getModelo());
@@ -148,14 +169,15 @@ public class Ordenamientos {
         nodoPosPadre.setVolumenMaximo(nodoPoshijoMayor.getVolumenMaximo());
         nodoPosPadre.setCaracteristicasVehiculo(nodoPoshijoMayor.getCaracteristicasVehiculo());
         nodoPosPadre.setListaFechas(nodoPoshijoMayor.getListaFechas());
-        nodoPoshijoMayor.setPlaca(aux.getPlaca());
-        nodoPoshijoMayor.setMarca(aux.getMarca());
-        nodoPoshijoMayor.setModelo(aux.getModelo());
-        nodoPoshijoMayor.setCiudad(aux.getCiudad());
-        nodoPoshijoMayor.setPesoMaximo(aux.getPesoMaximo());
-        nodoPoshijoMayor.setVolumenMaximo(aux.getVolumenMaximo());
-        nodoPoshijoMayor.setCaracteristicasVehiculo(aux.getCaracteristicasVehiculo());
-        nodoPoshijoMayor.setListaFechas(aux.getListaFechas());
+        //*****Para aux
+        nodoPoshijoMayor.setPlaca(placa);
+        nodoPoshijoMayor.setMarca(marca);
+        nodoPoshijoMayor.setModelo(modelo);
+        nodoPoshijoMayor.setCiudad(miCiudad);
+        nodoPoshijoMayor.setPesoMaximo(pesoM);
+        nodoPoshijoMayor.setVolumenMaximo(volumenM);
+        nodoPoshijoMayor.setCaracteristicasVehiculo(miListaC);
+        nodoPoshijoMayor.setListaFechas(misFechas);
     }
     //Fin HeapSort
     
@@ -168,10 +190,16 @@ public class Ordenamientos {
             ordenarQuickSortVehiculos(miLista, pivote+1,ultimo);
 
         }
-
     }
     public  int obtener_pivoteVehiculos(ListaVehiculos miLista,int primero, int ultimo){
-        Vehiculos aux_intercambio=new Vehiculos();
+        
+        String aux_intercambio, marca, modelo;
+        NodoCiudad miCiudad;
+        ListaProductos miLista0;
+        ListaCaracteristicasEspeciales milista1;
+        ListaFechas miLista2;
+        double pesoMaximo, volumen;
+        
         String aux_comparacion;
         int i,j;
         Vehiculos AuxNodoUltimo=new Vehiculos();
@@ -179,50 +207,130 @@ public class Ordenamientos {
         Vehiculos auxNodoi1=new Vehiculos();
         Vehiculos auxNodoj=new Vehiculos();
         AuxNodoUltimo=devolverNodo(miLista, ultimo);
-        aux_comparacion=AuxNodoUltimo.getPlaca();
+        aux_comparacion=AuxNodoUltimo.getPlaca();        
         i=primero-1;
         for(j=primero;j<=ultimo-1;j++){
             auxNodoj=devolverNodo(miLista, j);
             if(auxNodoj.getPlaca().compareTo(aux_comparacion)<=0){
                 i++;
-                aux_intercambio=devolverNodo(miLista, i);
+                //Placa
+                aux_intercambio=devolverNodo(miLista, i).getPlaca();
                 auxNodoi=devolverNodo(miLista, i);
                 auxNodoi.setPlaca(auxNodoj.getPlaca());
+                auxNodoj.setPlaca(aux_intercambio);
+                //Marca
+                marca=devolverNodo(miLista, i).getMarca();
+                auxNodoi=devolverNodo(miLista, i);
                 auxNodoi.setMarca(auxNodoj.getMarca());
+                auxNodoj.setMarca(marca);
+                //Modelo
+                modelo=devolverNodo(miLista, i).getModelo();
+                auxNodoi=devolverNodo(miLista, i);
                 auxNodoi.setModelo(auxNodoj.getModelo());
+                auxNodoj.setModelo(modelo);
+                //Ciudad
+                miCiudad=devolverNodo(miLista, i).getCiudad();
+                auxNodoi=devolverNodo(miLista, i);
                 auxNodoi.setCiudad(auxNodoj.getCiudad());
+                auxNodoj.setCiudad(miCiudad);
+                //PesoMaximo
+                pesoMaximo=devolverNodo(miLista, i).getPesoMaximo();
+                auxNodoi=devolverNodo(miLista, i);
                 auxNodoi.setPesoMaximo(auxNodoj.getPesoMaximo());
+                auxNodoj.setPesoMaximo(pesoMaximo);
+                //Volumen
+                volumen=devolverNodo(miLista, i).getVolumenMaximo();
+                auxNodoi=devolverNodo(miLista, i);
                 auxNodoi.setVolumenMaximo(auxNodoj.getVolumenMaximo());
+                auxNodoj.setVolumenMaximo(volumen);
+                //Caracteristica
+                milista1=devolverNodo(miLista, i).getCaracteristicasVehiculo();
+                auxNodoi=devolverNodo(miLista, i);
                 auxNodoi.setCaracteristicasVehiculo(auxNodoj.getCaracteristicasVehiculo());
+                auxNodoj.setCaracteristicasVehiculo(milista1);
+                //Fecha
+                miLista2=devolverNodo(miLista, i).getListaFechas();
+                auxNodoi=devolverNodo(miLista, i);
                 auxNodoi.setListaFechas(auxNodoj.getListaFechas());
-                auxNodoj.setPlaca(aux_intercambio.getPlaca());
-                auxNodoj.setMarca(aux_intercambio.getMarca());
-                auxNodoj.setModelo(aux_intercambio.getModelo());
-                auxNodoj.setCiudad(aux_intercambio.getCiudad());
-                auxNodoj.setPesoMaximo(aux_intercambio.getPesoMaximo());
-                auxNodoj.setVolumenMaximo(aux_intercambio.getVolumenMaximo());
-                auxNodoj.setCaracteristicasVehiculo(aux_intercambio.getCaracteristicasVehiculo());
-                auxNodoj.setListaFechas(aux_intercambio.getListaFechas());
+                auxNodoj.setListaFechas(miLista2);
+
+                
+                
+                
+                
+//                auxNodoi.setMarca(auxNodoj.getMarca());
+//                auxNodoi.setModelo(auxNodoj.getModelo());
+//                auxNodoi.setCiudad(auxNodoj.getCiudad());
+//                auxNodoi.setPesoMaximo(auxNodoj.getPesoMaximo());
+//                auxNodoi.setVolumenMaximo(auxNodoj.getVolumenMaximo());
+//                auxNodoi.setCaracteristicasVehiculo(auxNodoj.getCaracteristicasVehiculo());
+//                auxNodoi.setListaFechas(auxNodoj.getListaFechas());
+                
+//                auxNodoj.setMarca(auxilia.getMarca());
+//                auxNodoj.setModelo(auxilia.getModelo());
+//                auxNodoj.setCiudad(auxilia.getCiudad());
+//                auxNodoj.setPesoMaximo(auxilia.getPesoMaximo());
+//                auxNodoj.setVolumenMaximo(auxilia.getVolumenMaximo());
+//                auxNodoj.setCaracteristicasVehiculo(auxilia.getCaracteristicasVehiculo());
+//                auxNodoj.setListaFechas(auxilia.getListaFechas());
              }
         }
-        aux_intercambio=devolverNodo(miLista, i+1);
+        aux_intercambio=devolverNodo(miLista, i+1).getPlaca();
         auxNodoi1=devolverNodo(miLista, i+1);
         auxNodoi1.setPlaca(AuxNodoUltimo.getPlaca());
+        AuxNodoUltimo.setPlaca(aux_intercambio);
+        
+        marca=devolverNodo(miLista, i+1).getMarca();
+        auxNodoi1=devolverNodo(miLista, i+1);
         auxNodoi1.setMarca(AuxNodoUltimo.getMarca());
+        AuxNodoUltimo.setMarca(marca);
+        
+        modelo=devolverNodo(miLista, i+1).getModelo();
+        auxNodoi1=devolverNodo(miLista, i+1);
         auxNodoi1.setModelo(AuxNodoUltimo.getModelo());
+        AuxNodoUltimo.setModelo(modelo);
+        
+        miCiudad=devolverNodo(miLista, i+1).getCiudad();
+        auxNodoi1=devolverNodo(miLista, i+1);
         auxNodoi1.setCiudad(AuxNodoUltimo.getCiudad());
+        AuxNodoUltimo.setCiudad(miCiudad);
+        
+        pesoMaximo=devolverNodo(miLista, i+1).getPesoMaximo();
+        auxNodoi1=devolverNodo(miLista, i+1);
         auxNodoi1.setPesoMaximo(AuxNodoUltimo.getPesoMaximo());
+        AuxNodoUltimo.setPesoMaximo(pesoMaximo);
+   
+        volumen=devolverNodo(miLista, i+1).getVolumenMaximo();
+        auxNodoi1=devolverNodo(miLista, i+1);
         auxNodoi1.setVolumenMaximo(AuxNodoUltimo.getVolumenMaximo());
+        AuxNodoUltimo.setVolumenMaximo(volumen);
+
+        milista1=devolverNodo(miLista, i+1).getCaracteristicasVehiculo();
+        auxNodoi1=devolverNodo(miLista, i+1);
         auxNodoi1.setCaracteristicasVehiculo(AuxNodoUltimo.getCaracteristicasVehiculo());
+        AuxNodoUltimo.setCaracteristicasVehiculo(milista1);
+        
+        miLista2=devolverNodo(miLista, i+1).getListaFechas();
+        auxNodoi1=devolverNodo(miLista, i+1);
         auxNodoi1.setListaFechas(AuxNodoUltimo.getListaFechas());
-        AuxNodoUltimo.setPlaca(aux_intercambio.getPlaca());
-        AuxNodoUltimo.setMarca(aux_intercambio.getMarca());
-        AuxNodoUltimo.setModelo(aux_intercambio.getModelo());
-        AuxNodoUltimo.setCiudad(aux_intercambio.getCiudad());
-        AuxNodoUltimo.setPesoMaximo(aux_intercambio.getPesoMaximo());
-        AuxNodoUltimo.setVolumenMaximo(aux_intercambio.getVolumenMaximo());
-        AuxNodoUltimo.setCaracteristicasVehiculo(aux_intercambio.getCaracteristicasVehiculo());
-        AuxNodoUltimo.setListaFechas(aux_intercambio.getListaFechas());
+        AuxNodoUltimo.setListaFechas(miLista2);
+        
+        
+//        auxNodoi1.setMarca(AuxNodoUltimo.getMarca());
+//        auxNodoi1.setModelo(AuxNodoUltimo.getModelo());
+//        auxNodoi1.setCiudad(AuxNodoUltimo.getCiudad());
+//        auxNodoi1.setPesoMaximo(AuxNodoUltimo.getPesoMaximo());
+//        auxNodoi1.setVolumenMaximo(AuxNodoUltimo.getVolumenMaximo());
+//        auxNodoi1.setCaracteristicasVehiculo(AuxNodoUltimo.getCaracteristicasVehiculo());
+//        auxNodoi1.setListaFechas(AuxNodoUltimo.getListaFechas());
+
+//        AuxNodoUltimo.setMarca(aux_intercambio.getMarca());
+//        AuxNodoUltimo.setModelo(aux_intercambio.getModelo());
+//        AuxNodoUltimo.setCiudad(aux_intercambio.getCiudad());
+//        AuxNodoUltimo.setPesoMaximo(aux_intercambio.getPesoMaximo());
+//        AuxNodoUltimo.setVolumenMaximo(aux_intercambio.getVolumenMaximo());
+//        AuxNodoUltimo.setCaracteristicasVehiculo(aux_intercambio.getCaracteristicasVehiculo());
+//        AuxNodoUltimo.setListaFechas(aux_intercambio.getListaFechas());
         return(i+1);
     }
     //----------------------------Fin quickSort
@@ -435,22 +543,33 @@ public class Ordenamientos {
        }while(n!=0);
    }
     public void intercambiarContratos(int posPadre,int posHijoMayor){
+        int dia,mes,ano;
+        NodoCiudad miCiudad=new NodoCiudad();
+        ListaProductos miListaP=new ListaProductos();
+        //Fin variables
         Contratos nodoPosPadre=new Contratos();
         Contratos nodoPoshijoMayor=new Contratos();
+        
         nodoPosPadre=devolverNodoContratos(miListaViajesContratados, posPadre);
         nodoPoshijoMayor=devolverNodoContratos(miListaViajesContratados, posHijoMayor);
-        Contratos aux=new Contratos();
-        aux=nodoPosPadre;//Toma el valor del padre
+        //Toma el valor del padre
+        dia=nodoPosPadre.getFechaContrato().getDia();
+        mes=nodoPosPadre.getFechaContrato().getMes();
+        ano=nodoPosPadre.getFechaContrato().getAño();
+        miCiudad=nodoPosPadre.getCiudadDestino();
+        miListaP=nodoPosPadre.getMiLista();
+        
         nodoPosPadre.getFechaContrato().setDia(nodoPoshijoMayor.getFechaContrato().getDia());
         nodoPosPadre.getFechaContrato().setMes(nodoPoshijoMayor.getFechaContrato().getMes());
         nodoPosPadre.getFechaContrato().setAño(nodoPoshijoMayor.getFechaContrato().getAño());
         nodoPosPadre.setCiudadDestino(nodoPoshijoMayor.getCiudadDestino());
         nodoPosPadre.setMiLista(nodoPoshijoMayor.getMiLista());
-        nodoPoshijoMayor.getFechaContrato().setDia(aux.getFechaContrato().getDia());
-        nodoPoshijoMayor.getFechaContrato().setMes(aux.getFechaContrato().getMes());
-        nodoPoshijoMayor.getFechaContrato().setAño(aux.getFechaContrato().getAño());
-        nodoPoshijoMayor.setCiudadDestino(aux.getCiudadDestino());
-        nodoPoshijoMayor.setMiLista(aux.getMiLista());
+
+        nodoPoshijoMayor.getFechaContrato().setDia(dia);
+        nodoPoshijoMayor.getFechaContrato().setMes(mes);
+        nodoPoshijoMayor.getFechaContrato().setAño(ano);
+        nodoPoshijoMayor.setCiudadDestino(miCiudad);
+        nodoPoshijoMayor.setMiLista(miListaP);
     }
             //Fin del metodo heapsort
     
@@ -465,8 +584,12 @@ public class Ordenamientos {
         }
 
     }
+    
     public  int obtener_pivoteContratos(ListaContratos miLista,int primero, int ultimo){
-        Contratos aux_intercambio=new Contratos();
+        NodoCiudad aux_intercambio;
+        int dia, mes,anio;
+        ListaProductos miLista1;
+        Clientes miCliente;
         String aux_comparacion;
         int i,j;
         Contratos AuxNodoUltimo=new Contratos();
@@ -480,32 +603,106 @@ public class Ordenamientos {
             auxNodoj=devolverNodoContratos(miLista, j);
             if(auxNodoj.getCiudadDestino().getNombre().compareTo(aux_comparacion)<=0){
                 i++;
-                aux_intercambio=devolverNodoContratos(miLista, i);
+                
+                //CiudadDestino
+                aux_intercambio=devolverNodoContratos(miLista, i).getCiudadDestino();
                 auxNodoi=devolverNodoContratos(miLista, i);
                 auxNodoi.setCiudadDestino(auxNodoj.getCiudadDestino());
+                auxNodoj.setCiudadDestino(aux_intercambio);
+                
+                //Cliente
+                miCliente=devolverNodoContratos(miLista, i).getCliente();
+                auxNodoi=devolverNodoContratos(miLista, i);
+                auxNodoi.setCliente(auxNodoj.getCliente());
+                auxNodoi.setCliente(miCliente);
+                
+                //DIA
+                dia=devolverNodoContratos(miLista, i).getFechaContrato().getDia();
+                auxNodoi=devolverNodoContratos(miLista, i);
                 auxNodoi.getFechaContrato().setDia(auxNodoj.getFechaContrato().getDia());
+                auxNodoj.getFechaContrato().setDia(dia);
+                
+                //MES
+                mes=devolverNodoContratos(miLista, i).getFechaContrato().getMes();
+                auxNodoi=devolverNodoContratos(miLista, i);
                 auxNodoi.getFechaContrato().setMes(auxNodoj.getFechaContrato().getMes());
+                auxNodoj.getFechaContrato().setMes(mes);
+                
+                //ANIO
+                anio=devolverNodoContratos(miLista, i).getFechaContrato().getAño();
+                auxNodoi=devolverNodoContratos(miLista, i);
                 auxNodoi.getFechaContrato().setAño(auxNodoj.getFechaContrato().getAño());
-                auxNodoi.setMiLista(auxNodoj.getMiLista());
-                auxNodoj.setCiudadDestino(aux_intercambio.getCiudadDestino());
-                auxNodoj.getFechaContrato().setDia(aux_intercambio.getFechaContrato().getDia());
-                auxNodoj.getFechaContrato().setMes(aux_intercambio.getFechaContrato().getMes());
-                auxNodoj.getFechaContrato().setAño(aux_intercambio.getFechaContrato().getAño());
-                auxNodoj.setMiLista(aux_intercambio.getMiLista());
+                auxNodoj.getFechaContrato().setAño(anio);
+                
+                //ListaProductos
+                miLista1=devolverNodoContratos(miLista, i).getMiLista();
+                auxNodoi=devolverNodoContratos(miLista, i);
+                auxNodoi.setMiListaProductos(auxNodoj.getMiLista());
+                auxNodoj.setMiListaProductos(miLista1);
+                                
+//                aux_intercambio=devolverNodoContratos(miLista, i);
+//                auxNodoi=devolverNodoContratos(miLista, i);
+//                auxNodoi.setCiudadDestino(auxNodoj.getCiudadDestino());
+//                auxNodoi.getFechaContrato().setDia(auxNodoj.getFechaContrato().getDia());
+//                auxNodoi.getFechaContrato().setMes(auxNodoj.getFechaContrato().getMes());
+//                auxNodoi.getFechaContrato().setAño(auxNodoj.getFechaContrato().getAño());
+//                auxNodoi.setMiLista(auxNodoj.getMiLista());
+//                auxNodoj.setCiudadDestino(aux_intercambio.getCiudadDestino());
+//                auxNodoj.getFechaContrato().setDia(aux_intercambio.getFechaContrato().getDia());
+//                auxNodoj.getFechaContrato().setMes(aux_intercambio.getFechaContrato().getMes());
+//                auxNodoj.getFechaContrato().setAño(aux_intercambio.getFechaContrato().getAño());
+//                auxNodoj.setMiLista(aux_intercambio.getMiLista());
              }
         }
-        aux_intercambio=devolverNodoContratos(miLista, i+1);
+        
+        //CiudadDestino
+        aux_intercambio=devolverNodoContratos(miLista, i+1).getCiudadDestino();
         auxNodoi1=devolverNodoContratos(miLista, i+1);
         auxNodoi1.setCiudadDestino(AuxNodoUltimo.getCiudadDestino());
+        AuxNodoUltimo.setCiudadDestino(aux_intercambio);
+        
+        //Cliente
+        miCliente=devolverNodoContratos(miLista, i+1).getCliente();
+        auxNodoi1=devolverNodoContratos(miLista, i+1);
+        auxNodoi1.setCliente(AuxNodoUltimo.getCliente());
+        AuxNodoUltimo.setCliente(miCliente);
+        
+        //DIA
+        dia=devolverNodoContratos(miLista, i+1).getFechaContrato().getDia();
+        auxNodoi1=devolverNodoContratos(miLista, i+1);
         auxNodoi1.getFechaContrato().setDia(AuxNodoUltimo.getFechaContrato().getDia());
+        AuxNodoUltimo.getFechaContrato().setDia(dia);
+        
+        //MES
+        mes=devolverNodoContratos(miLista, i+1).getFechaContrato().getMes();
+        auxNodoi1=devolverNodoContratos(miLista, i+1);
         auxNodoi1.getFechaContrato().setMes(AuxNodoUltimo.getFechaContrato().getMes());
+        AuxNodoUltimo.getFechaContrato().setMes(mes);
+        
+        //ANIO
+        anio=devolverNodoContratos(miLista, i+1).getFechaContrato().getAño();
+        auxNodoi1=devolverNodoContratos(miLista, i+1);
         auxNodoi1.getFechaContrato().setAño(AuxNodoUltimo.getFechaContrato().getAño());
+        AuxNodoUltimo.getFechaContrato().setAño(anio);
+
+        //ListaProductos
+        miLista1=devolverNodoContratos(miLista, i+1).getMiLista();
+        auxNodoi1=devolverNodoContratos(miLista, i+1);
         auxNodoi1.setMiLista(AuxNodoUltimo.getMiLista());
-        AuxNodoUltimo.setCiudadDestino(aux_intercambio.getCiudadDestino());
-        AuxNodoUltimo.getFechaContrato().setDia(aux_intercambio.getFechaContrato().getDia());
-        AuxNodoUltimo.getFechaContrato().setMes(aux_intercambio.getFechaContrato().getMes());
-        AuxNodoUltimo.getFechaContrato().setAño(aux_intercambio.getFechaContrato().getAño());
-        AuxNodoUltimo.setMiLista(aux_intercambio.getMiLista());      
+        AuxNodoUltimo.setMiLista(miLista1);
+                
+//        aux_intercambio=devolverNodoContratos(miLista, i+1);
+//        auxNodoi1=devolverNodoContratos(miLista, i+1);
+//        auxNodoi1.setCiudadDestino(AuxNodoUltimo.getCiudadDestino());
+//        auxNodoi1.getFechaContrato().setDia(AuxNodoUltimo.getFechaContrato().getDia());
+//        auxNodoi1.getFechaContrato().setMes(AuxNodoUltimo.getFechaContrato().getMes());
+//        auxNodoi1.getFechaContrato().setAño(AuxNodoUltimo.getFechaContrato().getAño());
+//        auxNodoi1.setMiLista(AuxNodoUltimo.getMiLista());
+//        AuxNodoUltimo.setCiudadDestino(aux_intercambio.getCiudadDestino());
+//        AuxNodoUltimo.getFechaContrato().setDia(aux_intercambio.getFechaContrato().getDia());
+//        AuxNodoUltimo.getFechaContrato().setMes(aux_intercambio.getFechaContrato().getMes());
+//        AuxNodoUltimo.getFechaContrato().setAño(aux_intercambio.getFechaContrato().getAño());
+//        AuxNodoUltimo.setMiLista(aux_intercambio.getMiLista());      
         return(i+1);
     }
     //-------------Fin quickSort Contratos
@@ -603,10 +800,11 @@ public class Ordenamientos {
 }
         //Fin MergSort
     //*******************Fin funciones de ordenamiento para los contratos Segun la ciudad Destino
-
+    
+    
     //*******************Funciones de Ordenamientos para los contratos segun la fecha
         //InicioHeapSort
-       public void heapContratosFechas(){
+    public void heapContratosFechas(){
        int posPadre;
        Contratos nodoPosPadre=new Contratos();
        int posHijoIzquierdo;
@@ -707,22 +905,32 @@ public class Ordenamientos {
        }while(n!=0);
    }
     public void intercambiarContratosFechas(int posPadre,int posHijoMayor){
+        int dia,mes,ano;
+        NodoCiudad miCiudad=new NodoCiudad();
+        ListaProductos miListaP=new ListaProductos();
+        //Fin variables
         Contratos nodoPosPadre=new Contratos();
         Contratos nodoPoshijoMayor=new Contratos();
         nodoPosPadre=devolverNodoContratos(miListaViajesContratados, posPadre);
         nodoPoshijoMayor=devolverNodoContratos(miListaViajesContratados, posHijoMayor);
-        Contratos aux=new Contratos();
-        aux=nodoPosPadre;//Toma el valor del padre
+        
+        dia=nodoPosPadre.getFechaContrato().getDia();
+        mes=nodoPosPadre.getFechaContrato().getMes();
+        ano=nodoPosPadre.getFechaContrato().getAño();
+        miCiudad=nodoPosPadre.getCiudadDestino();
+        miListaP=nodoPosPadre.getMiLista();
+        
         nodoPosPadre.getFechaContrato().setDia(nodoPoshijoMayor.getFechaContrato().getDia());
         nodoPosPadre.getFechaContrato().setMes(nodoPoshijoMayor.getFechaContrato().getMes());
         nodoPosPadre.getFechaContrato().setAño(nodoPoshijoMayor.getFechaContrato().getAño());
         nodoPosPadre.setCiudadDestino(nodoPoshijoMayor.getCiudadDestino());
         nodoPosPadre.setMiLista(nodoPoshijoMayor.getMiLista());
-        nodoPoshijoMayor.getFechaContrato().setDia(aux.getFechaContrato().getDia());
-        nodoPoshijoMayor.getFechaContrato().setMes(aux.getFechaContrato().getMes());
-        nodoPoshijoMayor.getFechaContrato().setAño(aux.getFechaContrato().getAño());
-        nodoPoshijoMayor.setCiudadDestino(aux.getCiudadDestino());
-        nodoPoshijoMayor.setMiLista(aux.getMiLista());
+
+        nodoPoshijoMayor.getFechaContrato().setDia(dia);
+        nodoPoshijoMayor.getFechaContrato().setMes(mes);
+        nodoPoshijoMayor.getFechaContrato().setAño(ano);
+        nodoPoshijoMayor.setCiudadDestino(miCiudad);
+        nodoPoshijoMayor.setMiLista(miListaP);
     }
         //Fin heapSort
     
@@ -738,7 +946,11 @@ public class Ordenamientos {
 
     }
     public  int obtener_pivoteContratosFechas(ListaContratos miLista,int primero, int ultimo){
-        Contratos aux_intercambio=new Contratos();
+        
+        NodoCiudad aux_intercambio;
+        int dia, mes,anio;
+        ListaProductos miLista1;
+        Clientes miCliente;
         long aux_comparacion;
         int i,j;
         Contratos AuxNodoUltimo=new Contratos();
@@ -752,32 +964,101 @@ public class Ordenamientos {
             auxNodoj=devolverNodoContratos(miLista, j);
             if(auxNodoj.getFechaContrato().getTotal()<=aux_comparacion){
                 i++;
-                aux_intercambio=devolverNodoContratos(miLista, i);
+                         
+                //CiudadDestino
+                aux_intercambio=devolverNodoContratos(miLista, i).getCiudadDestino();
                 auxNodoi=devolverNodoContratos(miLista, i);
                 auxNodoi.setCiudadDestino(auxNodoj.getCiudadDestino());
+                auxNodoj.setCiudadDestino(aux_intercambio);
+                
+                //Cliente
+                miCliente=devolverNodoContratos(miLista, i).getCliente();
+                auxNodoi=devolverNodoContratos(miLista, i);
+                auxNodoi.setCliente(auxNodoj.getCliente());
+                auxNodoi.setCliente(miCliente);
+                
+                //DIA
+                dia=devolverNodoContratos(miLista, i).getFechaContrato().getDia();
+                auxNodoi=devolverNodoContratos(miLista, i);
                 auxNodoi.getFechaContrato().setDia(auxNodoj.getFechaContrato().getDia());
+                auxNodoj.getFechaContrato().setDia(dia);
+                
+                //MES
+                mes=devolverNodoContratos(miLista, i).getFechaContrato().getMes();
+                auxNodoi=devolverNodoContratos(miLista, i);
                 auxNodoi.getFechaContrato().setMes(auxNodoj.getFechaContrato().getMes());
+                auxNodoj.getFechaContrato().setMes(mes);
+                
+                //ANIO
+                anio=devolverNodoContratos(miLista, i).getFechaContrato().getAño();
+                auxNodoi=devolverNodoContratos(miLista, i);
                 auxNodoi.getFechaContrato().setAño(auxNodoj.getFechaContrato().getAño());
-                auxNodoi.setMiLista(auxNodoj.getMiLista());
-                auxNodoj.setCiudadDestino(aux_intercambio.getCiudadDestino());
-                auxNodoj.getFechaContrato().setDia(aux_intercambio.getFechaContrato().getDia());
-                auxNodoj.getFechaContrato().setMes(aux_intercambio.getFechaContrato().getMes());
-                auxNodoj.getFechaContrato().setAño(aux_intercambio.getFechaContrato().getAño());
-                auxNodoj.setMiLista(aux_intercambio.getMiLista());
+                auxNodoj.getFechaContrato().setAño(anio);
+                
+                //ListaProductos
+                miLista1=devolverNodoContratos(miLista, i).getMiLista();
+                auxNodoi=devolverNodoContratos(miLista, i);
+                auxNodoi.setMiListaProductos(auxNodoj.getMiLista());
+                auxNodoj.setMiListaProductos(miLista1);
+                
+//                auxNodoi.getFechaContrato().setDia(auxNodoj.getFechaContrato().getDia());
+//                auxNodoi.getFechaContrato().setMes(auxNodoj.getFechaContrato().getMes());
+//                auxNodoi.getFechaContrato().setAño(auxNodoj.getFechaContrato().getAño());
+//
+
+//                auxNodoj.setCiudadDestino(aux_intercambio.getCiudadDestino());
+//                auxNodoj.getFechaContrato().setDia(aux_intercambio.getFechaContrato().getDia());
+//                auxNodoj.getFechaContrato().setMes(aux_intercambio.getFechaContrato().getMes());
+//                auxNodoj.getFechaContrato().setAño(aux_intercambio.getFechaContrato().getAño());
+//                auxNodoj.setMiLista(aux_intercambio.getMiLista());
              }
         }
-        aux_intercambio=devolverNodoContratos(miLista, i+1);
+        //CiudadDestino
+        aux_intercambio=devolverNodoContratos(miLista, i+1).getCiudadDestino();
         auxNodoi1=devolverNodoContratos(miLista, i+1);
         auxNodoi1.setCiudadDestino(AuxNodoUltimo.getCiudadDestino());
+        AuxNodoUltimo.setCiudadDestino(aux_intercambio);
+        
+        //Cliente
+        miCliente=devolverNodoContratos(miLista, i+1).getCliente();
+        auxNodoi1=devolverNodoContratos(miLista, i+1);
+        auxNodoi1.setCliente(AuxNodoUltimo.getCliente());
+        AuxNodoUltimo.setCliente(miCliente);
+        
+        //DIA
+        dia=devolverNodoContratos(miLista, i+1).getFechaContrato().getDia();
+        auxNodoi1=devolverNodoContratos(miLista, i+1);
         auxNodoi1.getFechaContrato().setDia(AuxNodoUltimo.getFechaContrato().getDia());
+        AuxNodoUltimo.getFechaContrato().setDia(dia);
+        
+        //MES
+        mes=devolverNodoContratos(miLista, i+1).getFechaContrato().getMes();
+        auxNodoi1=devolverNodoContratos(miLista, i+1);
         auxNodoi1.getFechaContrato().setMes(AuxNodoUltimo.getFechaContrato().getMes());
+        AuxNodoUltimo.getFechaContrato().setMes(mes);
+        
+        //ANIO
+        anio=devolverNodoContratos(miLista, i+1).getFechaContrato().getAño();
+        auxNodoi1=devolverNodoContratos(miLista, i+1);
         auxNodoi1.getFechaContrato().setAño(AuxNodoUltimo.getFechaContrato().getAño());
+        AuxNodoUltimo.getFechaContrato().setAño(anio);
+        
+        //LstaProductos
+        miLista1=devolverNodoContratos(miLista, i+1).getMiLista();
+        auxNodoi1=devolverNodoContratos(miLista, i+1);
         auxNodoi1.setMiLista(AuxNodoUltimo.getMiLista());
-        AuxNodoUltimo.setCiudadDestino(aux_intercambio.getCiudadDestino());
-        AuxNodoUltimo.getFechaContrato().setDia(aux_intercambio.getFechaContrato().getDia());
-        AuxNodoUltimo.getFechaContrato().setMes(aux_intercambio.getFechaContrato().getMes());
-        AuxNodoUltimo.getFechaContrato().setAño(aux_intercambio.getFechaContrato().getAño());
-        AuxNodoUltimo.setMiLista(aux_intercambio.getMiLista());      
+        AuxNodoUltimo.setMiLista(miLista1);
+
+//        auxNodoi1.getFechaContrato().setDia(AuxNodoUltimo.getFechaContrato().getDia());
+//        auxNodoi1.getFechaContrato().setMes(AuxNodoUltimo.getFechaContrato().getMes());
+//        auxNodoi1.getFechaContrato().setAño(AuxNodoUltimo.getFechaContrato().getAño());
+//        auxNodoi1.setMiLista(AuxNodoUltimo.getMiLista());
+//        
+//
+//        AuxNodoUltimo.getFechaContrato().setDia(aux_intercambio.getFechaContrato().getDia());
+//        AuxNodoUltimo.getFechaContrato().setMes(aux_intercambio.getFechaContrato().getMes());
+//        AuxNodoUltimo.getFechaContrato().setAño(aux_intercambio.getFechaContrato().getAño());
+//        AuxNodoUltimo.setMiLista(aux_intercambio.getMiLista());      
         return(i+1);
     }
         //Fin QuickSort
@@ -876,6 +1157,7 @@ public class Ordenamientos {
     
 //Funcion paa devolver un Nodo de tipo vehiculos especifico de una lista
     public Vehiculos devolverNodo(ListaVehiculos miLista,int pos){//Va a recibir lista y la posicion del nodo que desea devolver
+      
       Vehiculos auxNodo=new Vehiculos();
       auxNodo=miLista.getHeadVehiculos();
       for(int i=0; i<pos; i++){
@@ -892,6 +1174,19 @@ public class Ordenamientos {
           auxNodo=auxNodo.getSiguienteContrato();
       }
       return auxNodo;
+
+    
+    }
+    
+    public void imprimirLista(ListaVehiculos miLista){
+        
+        Vehiculos nodAux=miLista.getHeadVehiculos();
+        while(nodAux!=null){
+            System.out.println(nodAux.getPlaca());
+            nodAux=nodAux.getSiguienteVehiculo();
+        }
+    
+
     }
     
     

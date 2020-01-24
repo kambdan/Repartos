@@ -54,8 +54,10 @@ public class BaseDatos {
         
         
         //****************para ciudades
-        miEmpresas.agregarCiudad("Cuenca", 10, 10, "Quito",100,100, 2);
-        miEmpresas.agregarCiudad("Quevedo", 400, 300, "Quito",300,100, 2);
+
+        miEmpresas.agregarCiudad("Cuenca", 10, 10, "quevedo",100,100, 2);
+        miEmpresas.agregarCiudad("Quevedo", 400, 300, "Quito",100,100, 2);
+
         miEmpresas.agregarCiudad("Manta", 150, 150, "Cuenca",10,10, 52);
         miEmpresas.agregarCiudad("Quito", 300, 100, "Guayaquil",500,200, 2);
         miEmpresas.agregarCiudad("Cuenca", 10, 10, "Azoguez",700,300, 2);
@@ -83,13 +85,13 @@ public class BaseDatos {
         //****************Vehiculos
         
        
-        miEmpresas.agregarVehiculo("ABD2", "Chevrolet", "#wf", 152, 1420,"Cuenca",miLista);
-        miEmpresas.agregarVehiculo("VSV2", "Hyndai", "#wf", 152, 1420,"quevedo",miLista);
-        miEmpresas.agregarVehiculo("SDD2", "Toyota", "#wf", 152, 1420,"quevedo",miLista);
-        miEmpresas.agregarVehiculo("SDS2", "Chevrolet", "#wf", 152, 1420,"quevedo",miLista);
-        miEmpresas.agregarVehiculo("XCS2", "Chevrolet", "#wf", 152, 1420,"quevedo",miLista);
-        miEmpresas.agregarVehiculo("BAD2", "Toyata", "#wf", 152, 1420,"quevedo",miLista);
-        miEmpresas.agregarVehiculo("DAS2", "Mazda", "#wf", 152, 1420,"quevedo",miLista);
+        miEmpresas.agregarVehiculo("ABD2", "Chevrolet", "#M1", 152, 1420,"Cuenca",miLista);
+        miEmpresas.agregarVehiculo("VSV2", "Hyndai", "#M6", 152, 1420,"quevedo",miLista);
+        miEmpresas.agregarVehiculo("SDD2", "Toyota", "#M4", 152, 1420,"quevedo",miLista);
+        miEmpresas.agregarVehiculo("SDS2", "Chevrolet", "#M5", 152, 1420,"quevedo",miLista);
+        miEmpresas.agregarVehiculo("XCS2", "Chevrolet", "#M7", 152, 1420,"quevedo",miLista);
+        miEmpresas.agregarVehiculo("BAD2", "Toyata", "#M2", 152, 1420,"quevedo",miLista);
+        miEmpresas.agregarVehiculo("DAS2", "Mazda", "#M3", 152, 1420,"quevedo",miLista);
         
         
         

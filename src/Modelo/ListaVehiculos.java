@@ -60,6 +60,7 @@ public class ListaVehiculos {
                 miListaVehic.setTailVehiculos(nuevoVehiculo);
                 
             }
+
              tamListaVehiculos++;
     }
     
@@ -95,4 +96,5 @@ public class ListaVehiculos {
     
     
     
+
     }

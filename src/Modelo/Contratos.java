@@ -119,7 +119,43 @@ public class Contratos {
     void alquilarViaje(){}
     void transportar(){}
     void solicitarProducto(){}
-    void calcular(){}   //calcula el peso y volumentootal del paquete
-    
+    void calcular(){}   
+    //calcula el peso y volumentootal del paquete
+    //Funcion para obtener el peso o el Volumen Total
+    /*//Crear una funcion para obtener el peso total de los productos
+            double pesoTotalContrato=0;
+            double VolumenTotalContrato=0;
+            pesoTotalContrato=miEmpresas.getMiListaContratos().getTailContratos().TotalContrato("Peso");
+            VolumenTotalContrato=miEmpresas.getMiListaContratos().getTailContratos().TotalContrato("Volumen");    */
+    public double TotalContrato(String tipo){
+        double Total=0;
+        Productos miProducto=new Productos();
+        miProducto=miListaProductos.getHeadProducto();
+        while(miProducto!=null){
+            if(tipo.equalsIgnoreCase("Peso")){//Aqui se calcula el peso maximo
+               Total=Total+(miProducto.getCantidad()*miProducto.getPeso());
+                miProducto=miProducto.getSiguienteProducto();
+                continue;
+            }
+            if(tipo.equalsIgnoreCase("Volumen")){//Aqui se calcula el volumen maximo
+               Total=Total+(miProducto.getCantidad()*miProducto.getVolumen());
+               miProducto=miProducto.getSiguienteProducto();
+               continue;
+            }
+        }
+        return Total;
+    }
+    //Esta funcion va a validar si existe un vehiculo capaz de transportar ese peso y volumen total
+    public int ValidarVehiculo(ListaVehiculos misVehiculos){
+        double pesoTotal=0;
+        double volumenTotal=0;
+        int bandera=0;
+        Vehiculos miVehiculo=new Vehiculos();
+        miVehiculo=misVehiculos.getHeadVehiculos();
+        while(miVehiculo!=null && miVehiculo.getPesoMaximo()<pesoTotal && miVehiculo.getVolumenMaximo()<volumenTotal){
+            
+        }
+        return bandera;
+    }
     
 }

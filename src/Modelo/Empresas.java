@@ -671,7 +671,6 @@ public class Empresas {
     
      public NodoCiudad consultarCiudad(String nombreCiudad){
         
-       
         NodoCiudad miNodo;
         miNodo=miListaCiudades.getHeadNodo();
         while(miNodo!=null && !miNodo.getNombre().equals(nombreCiudad)){
@@ -684,8 +683,7 @@ public class Empresas {
             return miNodo;
         }
     }
-     
-     
+          
      //aqui me recibe el nodo de la ciudad con la que se conecta
      public void ConectarCiudades(NodoCiudad miNodo){
          //String ciudadEnlace=miNodo.getDistanciaEnlace().getNodoCiudad().getNombre();

@@ -350,7 +350,6 @@ public void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {
                 String value =(String) tm.getValueAt(viewCrud.table.getSelectedRow(), 0);
                 //String value =(String) viewCrud.listCrud.getSelectedValue();//para obntener el string Sleleccionado
                 actualizarEnVentanaVehiculos(value);
-                
                 miViewVehiculos.btnOkVehiculo.setVisible(true);
                 miViewVehiculos.btnAceptarVehiculo.setVisible(false);
                 miViewVehiculos.btnCancelarVehiculo.setVisible(false);
@@ -521,8 +520,8 @@ public void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {
               Productos miProducto=new Productos();
               miProducto=miEmpresas.consultarProducto(viewCrud.txtBuscar.getText());
                 System.out.println("Feliz");
-              DefaultTableModel modelo=new DefaultTableModel();
-               modelo.addColumn("Nombre");
+                DefaultTableModel modelo=new DefaultTableModel();
+                modelo.addColumn("Nombre");
                 modelo.addColumn("Coordenada en X");
                 modelo.addColumn("Coordenada en Y");
                 modelo.addColumn("Conectada con");
@@ -785,8 +784,9 @@ public void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {
                                 //Ordenar HEAP POR PLACA
                                 miOrdenamiento.heapVehiculos();
                                 nuevalista=miOrdenamiento.getMiListaOrdenadaVehiculos();
-                                System.out.println("Mi lista Ordenada");
-                                miOrdenamiento.imprimirLista(nuevalista);
+                                mostrarReportes(miListaV);
+                                //System.out.println("Mi lista Ordenada");
+                                //miOrdenamiento.imprimirLista(nuevalista);
                                 //
                                 //mostrarReporteHeap(miOrdenamiento.getMiListaOrdenadaVehiculos());
                             }else if(miViewOrdenamientos.comboReportes.getSelectedItem().toString().equals("Contrato - Ciudad destino")){
@@ -801,6 +801,7 @@ public void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {
                                 if(miViewOrdenamientos.comboReportes.getSelectedItem().toString().equals("Placa")){
                                     //Ordenar QUICK POR PLACA
                                     miOrdenamiento.ordenarQuickSortVehiculos(miListaV, 0, miListaV.getTamListaVehiculos()-1);
+                                    mostrarReportes(nuevalista);
                                     //Obtener el valor de la tabla
                                     
                                     //miOrdenamiento.imprimirLista(miListaV);
@@ -827,7 +828,7 @@ public void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {
                             }
                         }
                         miViewReportes.setVisible(true);
-                        miViewReportes.txtxReportes.setEnabled(false);
+                        miViewReportes.table1.setEnabled(true);
                     }
             }else{ 
                 if(miViewOrdenamientos.btnAtras==e.getSource()){
@@ -903,9 +904,9 @@ public void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {
     }
   
 private void mostrarCaracteristicas(){
-      DefaultTableModel modelo=new DefaultTableModel();
-     modelo.addColumn("Nombre");
-     modelo.addColumn("Descripcion");
+    DefaultTableModel modelo=new DefaultTableModel();
+    modelo.addColumn("Nombre");
+    modelo.addColumn("Descripcion");
      
      this.viewCrud.table.setModel(modelo);
      CaracteristicasEspeciales miCar=new CaracteristicasEspeciales();
@@ -1522,6 +1523,38 @@ private void mostrarCiudades(){
     }
     
     
+    
+    
+private void mostrarReportes(ListaVehiculos miLista){
+    
+    DefaultTableModel modelo=new DefaultTableModel();
+    modelo.addColumn("Placa");
+    modelo.addColumn("Marca");
+    modelo.addColumn("Modelo");
+    modelo.addColumn("Peso max.");
+    modelo.addColumn("Volumen max.");
+    modelo.addColumn("Ciudad Residencia");
+    modelo.addColumn("Caracteristicas");
+    this.miViewReportes.table1.setModel(modelo);
+    
+    Vehiculos miVehiculo=new Vehiculos();
+    miVehiculo=miLista.getHeadVehiculos();
+    while(miVehiculo!=null){
+        String []info=new String[7];
+        info[0]=miVehiculo.getPlaca();
+        info[1]=miVehiculo.getMarca();
+        info[2]=miVehiculo.getModelo();
+        info[3]=String.valueOf(miVehiculo.getPesoMaximo());
+        info[4]=String.valueOf(miVehiculo.getVolumenMaximo());
+        info[5]=miVehiculo.getCiudad().getNombre();
+        info[6]=miVehiculo.getCaracteristicasVehiculo().getHeadCaracteristica().getCaracteristicas();
+        
+        modelo.addRow(info);
+        miVehiculo=miVehiculo.getSiguienteVehiculo();
+    }
+}
+
+
     
     
     //fin ComBobox
